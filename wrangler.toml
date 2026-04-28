@@ -1,0 +1,12 @@
+name = "companionscpas-platform"
+main = "src/index.js"
+compatibility_date = "2025-04-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[vars]
+APP_NAME = "Companions of CPAS"
+APP_DOMAIN = "companionscpas-platform.samprimeauxwork.workers.dev"
+ALLOWED_ORIGINS = "https://companionscpas-platform.samprimeauxwork.workers.dev"
