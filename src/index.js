@@ -32,7 +32,7 @@ export default {
       return env.ASSETS.fetch(new Request(new URL("/admin/login.html", url), request));
     }
 
-    if (url.pathname === "/dashboard" || url.pathname.startsWith("/dashboard/")) {
+    if (url.pathname === "/admin/dashboard" || url.pathname.startsWith("/admin/dashboard/") || url.pathname === "/dashboard" || url.pathname.startsWith("/dashboard/")) {
       return env.ASSETS.fetch(new Request(new URL("/admin/dashboard.html", url), request));
     }
 
