@@ -1,187 +1,175 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Companions of CPAS Admin Login</title>
-  <style>
-    body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:Inter,Arial,sans-serif;background:#fff7f8;color:#172033}
-    .card{width:min(420px,92vw);background:white;border:1px solid #f1d6dc;border-radius:24px;box-shadow:0 18px 50px rgba(231,37,53,.12);padding:32px}
-    img{width:92px;height:92px;object-fit:contain;display:block;margin:0 auto 18px}
-    h1{text-align:center;margin:0 0 8px;font-size:26px}
-    p{text-align:center;color:#60718f;margin:0 0 24px}
-    label{display:block;font-weight:700;margin:14px 0 6px}
-    input{width:100%;box-sizing:border-box;border:1px solid #f1d6dc;border-radius:14px;padding:14px;font-size:16px}
-    button{width:100%;margin-top:20px;border:0;border-radius:14px;padding:14px 16px;background:#e72535;color:white;font-weight:800;font-size:16px;cursor:pointer}
-    .error{display:none;margin-top:14px;color:#b91625;background:#fff1f2;border:1px solid #fecdd3;border-radius:12px;padding:10px}
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Companions of CPAS Admin Login</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  font-family:Inter,Arial,sans-serif;
+  color:#f8f7ff;
+  background:
+    radial-gradient(circle at 50% 22%,rgba(109,85,147,.22),transparent 34%),
+    radial-gradient(circle at 50% 80%,rgba(0,220,255,.16),transparent 32%),
+    linear-gradient(135deg,#0a1018,#172231 48%,#0a0e14);
+}
+.login-shell{
+  width:min(430px,92vw);
+  min-height:720px;
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(18,25,36,.58);
+  box-shadow:0 40px 120px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter:blur(26px) saturate(130%);
+}
+.inner{position:relative;z-index:2;padding:78px 52px 38px}
+.logo{
+  display:block;
+  width:235px;
+  max-width:82%;
+  margin:0 auto 72px;
+  filter:drop-shadow(0 16px 28px rgba(109,85,147,.45));
+}
+.field{
+  display:grid;
+  grid-template-columns:42px 1fr 32px;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid rgba(255,255,255,.38);
+  margin-bottom:28px;
+  padding-bottom:12px;
+}
+.icon{width:26px;height:26px;opacity:.92}
+input{
+  width:100%;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#fff;
+  font-size:18px;
+  font-weight:700;
+}
+input::placeholder{color:rgba(255,255,255,.72)}
+.eye{cursor:pointer;opacity:.9}
+button{
+  border:0;
+  background:transparent;
+  color:#a985ff;
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:.08em;
+  margin:26px 0 14px 74px;
+  cursor:pointer;
+}
+.forgot{
+  display:block;
+  margin-left:74px;
+  color:rgba(255,255,255,.46);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:.05em;
+}
+.error{
+  display:none;
+  margin:22px 0 0 74px;
+  color:#ff8ba0;
+  font-weight:800;
+  font-size:13px;
+}
+.waves{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:185px;
+  overflow:hidden;
+}
+.wave{
+  position:absolute;
+  left:-12%;
+  width:124%;
+  height:150px;
+  border-radius:50% 50% 0 0;
+  opacity:.78;
+  filter:blur(.2px);
+}
+.w1{bottom:44px;background:linear-gradient(90deg,rgba(139,92,246,.58),rgba(0,220,255,.48));transform:rotate(4deg)}
+.w2{bottom:18px;background:linear-gradient(90deg,rgba(120,80,220,.62),rgba(0,180,220,.55));transform:rotate(-7deg)}
+.w3{bottom:-24px;background:linear-gradient(90deg,rgba(152,87,231,.82),rgba(0,208,220,.75));transform:rotate(2deg)}
+.legal{
+  position:absolute;
+  left:42px;right:42px;bottom:34px;
+  z-index:3;
+  text-align:center;
+  color:#fff;
+  font-size:15px;
+  line-height:1.45;
+  font-weight:800;
+}
+.legal a{color:#fff;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:520px){
+  .login-shell{min-height:680px}
+  .inner{padding:62px 34px 38px}
+  .logo{width:220px;margin-bottom:64px}
+  button,.forgot,.error{margin-left:54px}
+}
+</style>
 </head>
 <body>
-  <main class="card">
-    <img src="/logo.png" alt="Companions of CPAS logo">
-    <h1>Admin Login</h1>
-    <p>Sign in to manage animals, applications, donations, and updates.</p>
-
-    <form id="loginForm">
-      <label>Email</label>
-      <input name="email" type="email" autocomplete="email" required>
-
-      <label>Password</label>
-      <input name="password" type="password" autocomplete="current-password" required>
-
-      <button type="submit">Sign In</button>
-      <div id="error" class="error"></div>
-    </form>
+  <main class="login-shell">
+    <section class="inner">
+      <img class="logo" src="/logo.png" alt="Companions of CPAS">
+      <form id="loginForm">
+        <label class="field">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.6-4 4.3-6 8-6s6.4 2 8 6"/></svg>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="email@example.com" required>
+          <span></span>
+        </label>
+        <label class="field">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Password" required>
+          <svg class="icon eye" id="togglePw" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+        </label>
+        <button type="submit">LOGIN</button>
+        <a class="forgot" href="#">FORGOT PASSWORD?</a>
+        <div class="error" id="error">Login failed. Check email/password.</div>
+      </form>
+    </section>
+    <div class="waves"><div class="wave w1"></div><div class="wave w2"></div><div class="wave w3"></div></div>
+    <div class="legal">By logging in you agree to our<br><a href="/privacy">privacy policy</a> &amp; <a href="/terms">terms of service</a></div>
   </main>
 
-  <script>
-    const form = document.getElementById('loginForm');
-    const errorBox = document.getElementById('error');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      errorBox.style.display = 'none';
-
-      const body = {
-        email: form.email.value.trim(),
-        password: form.password.value
-      };
-
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify(body)
-      });
-
-      if (!res.ok) {
-        let msg = 'Login failed. Check email/password.';
-        try { msg = (await res.json()).error || msg; } catch {}
-        errorBox.textContent = msg;
-        errorBox.style.display = 'block';
-        return;
-      }
-
-      window.location.href = '/dashboard';
-    });
-  </script>
+<script>
+const form=document.getElementById('loginForm');
+const error=document.getElementById('error');
+document.getElementById('togglePw').onclick=()=>{
+  const p=document.getElementById('password');
+  p.type=p.type==='password'?'text':'password';
+};
+form.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  error.style.display='none';
+  const res=await fetch('/api/auth/login',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      email:document.getElementById('email').value.trim(),
+      password:document.getElementById('password').value
+    })
+  });
+  const data=await res.json().catch(()=>({}));
+  if(res.ok && data.success){
+    location.href=data.redirect || '/admin/dashboard';
+  }else{
+    error.style.display='block';
+  }
+});
+</script>
 </body>
 </html>
-
-<style>
-:root {
-  --brand-primary: rgba(139, 92, 246, 0.88);
-  --brand-secondary: rgba(236, 72, 153, 0.42);
-  --brand-glass: rgba(255, 255, 255, 0.66);
-  --brand-border: rgba(139, 92, 246, 0.22);
-  --brand-shadow: rgba(139, 92, 246, 0.20);
-}
-
-body {
-  background:
-    radial-gradient(circle at 50% 28%, rgba(139, 92, 246, 0.18), transparent 32%),
-    radial-gradient(circle at 70% 65%, rgba(236, 72, 153, 0.14), transparent 34%),
-    linear-gradient(135deg, #fff7fb 0%, #f8f1ff 48%, #fffafd 100%) !important;
-}
-
-.login-card,
-.card,
-form {
-  background: var(--brand-glass) !important;
-  backdrop-filter: blur(24px) saturate(140%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
-  border: 1px solid var(--brand-border) !important;
-  box-shadow:
-    0 30px 90px var(--brand-shadow),
-    inset 0 1px 0 rgba(255,255,255,.75) !important;
-}
-
-button,
-button[type="submit"],
-.sign-in,
-.btn {
-  background: linear-gradient(135deg, rgba(139,92,246,.95), rgba(236,72,153,.82)) !important;
-  box-shadow: 0 18px 42px rgba(139,92,246,.28) !important;
-}
-
-input:focus {
-  border-color: rgba(139,92,246,.55) !important;
-  box-shadow: 0 0 0 4px rgba(139,92,246,.12) !important;
-}
-
-img {
-  filter: drop-shadow(0 12px 28px rgba(139,92,246,.22));
-}
-</style>
-
-<style id="companions-dark-glass-login-v2">
-:root {
-  --cpas-purple: #6D5593;
-  --cpas-purple-soft: rgba(109, 85, 147, .72);
-  --cpas-purple-glass: rgba(109, 85, 147, .18);
-  --cpas-border: rgba(255,255,255,.14);
-  --cpas-text: #F8F5FF;
-  --cpas-muted: rgba(248,245,255,.72);
-}
-
-body {
-  background:
-    radial-gradient(circle at 50% 34%, rgba(109,85,147,.34), transparent 28%),
-    radial-gradient(circle at 62% 61%, rgba(255,255,255,.05), transparent 24%),
-    linear-gradient(135deg, #07070B 0%, #12101A 48%, #050507 100%) !important;
-}
-
-.login-card,
-.card,
-form {
-  background: rgba(18, 16, 26, .72) !important;
-  border: 1px solid var(--cpas-border) !important;
-  color: var(--cpas-text) !important;
-  backdrop-filter: blur(28px) saturate(145%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(145%) !important;
-  box-shadow:
-    0 38px 120px rgba(109,85,147,.30),
-    inset 0 1px 0 rgba(255,255,255,.08) !important;
-}
-
-h1, h2, label {
-  color: var(--cpas-text) !important;
-}
-
-p, .subtitle, .muted {
-  color: var(--cpas-muted) !important;
-}
-
-input {
-  background: rgba(255,255,255,.08) !important;
-  border: 1px solid rgba(255,255,255,.16) !important;
-  color: var(--cpas-text) !important;
-}
-
-input:focus {
-  border-color: rgba(109,85,147,.95) !important;
-  box-shadow: 0 0 0 4px rgba(109,85,147,.25) !important;
-  outline: none !important;
-}
-
-button,
-button[type="submit"],
-.sign-in,
-.btn {
-  background: rgba(109,85,147,.92) !important;
-  border: 1px solid rgba(255,255,255,.14) !important;
-  color: #fff !important;
-  box-shadow:
-    0 18px 45px rgba(109,85,147,.34),
-    inset 0 1px 0 rgba(255,255,255,.18) !important;
-}
-
-button:hover,
-button[type="submit"]:hover {
-  background: #7B63A3 !important;
-}
-
-img {
-  filter: drop-shadow(0 18px 36px rgba(109,85,147,.45)) !important;
-}
-</style>
