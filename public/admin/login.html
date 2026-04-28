@@ -113,3 +113,75 @@ img {
   filter: drop-shadow(0 12px 28px rgba(139,92,246,.22));
 }
 </style>
+
+<style id="companions-dark-glass-login-v2">
+:root {
+  --cpas-purple: #6D5593;
+  --cpas-purple-soft: rgba(109, 85, 147, .72);
+  --cpas-purple-glass: rgba(109, 85, 147, .18);
+  --cpas-border: rgba(255,255,255,.14);
+  --cpas-text: #F8F5FF;
+  --cpas-muted: rgba(248,245,255,.72);
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 34%, rgba(109,85,147,.34), transparent 28%),
+    radial-gradient(circle at 62% 61%, rgba(255,255,255,.05), transparent 24%),
+    linear-gradient(135deg, #07070B 0%, #12101A 48%, #050507 100%) !important;
+}
+
+.login-card,
+.card,
+form {
+  background: rgba(18, 16, 26, .72) !important;
+  border: 1px solid var(--cpas-border) !important;
+  color: var(--cpas-text) !important;
+  backdrop-filter: blur(28px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(145%) !important;
+  box-shadow:
+    0 38px 120px rgba(109,85,147,.30),
+    inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+h1, h2, label {
+  color: var(--cpas-text) !important;
+}
+
+p, .subtitle, .muted {
+  color: var(--cpas-muted) !important;
+}
+
+input {
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  color: var(--cpas-text) !important;
+}
+
+input:focus {
+  border-color: rgba(109,85,147,.95) !important;
+  box-shadow: 0 0 0 4px rgba(109,85,147,.25) !important;
+  outline: none !important;
+}
+
+button,
+button[type="submit"],
+.sign-in,
+.btn {
+  background: rgba(109,85,147,.92) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  color: #fff !important;
+  box-shadow:
+    0 18px 45px rgba(109,85,147,.34),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+button:hover,
+button[type="submit"]:hover {
+  background: #7B63A3 !important;
+}
+
+img {
+  filter: drop-shadow(0 18px 36px rgba(109,85,147,.45)) !important;
+}
+</style>
