@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us • Companions of CPAS</title>
+    <meta name="description"
+        content="Meet the people and pets behind Companions of CPAS. Learn how we support your community families with spay/neuter, vaccinations, and compassionate pet care help.">
+    <link rel="stylesheet" href="/_shared.css?v=3" />
+    <style>
+        .about-hero {
+            padding: 60px 0 48px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 48px;
+            align-items: center;
+        }
+
+        .about-hero-kicker {
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 0.12em;
+            margin-bottom: 12px;
+        }
+
+        .about-hero h1 {
+            font-size: clamp(40px, 4vw, 56px);
+            line-height: 1.05;
+            margin-bottom: 18px;
+        }
+
+        .about-hero-lead {
+            font-size: 18px;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .about-hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .about-tag {
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #f8fafc;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .about-hero-meta {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .about-hero-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .about-hero-card {
+            border-radius: 24px;
+            overflow: hidden;
+            background: #f1f5f9;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+            position: relative;
+            min-height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-hero-card img {
+            width: 100%;
+            height: 100%;
+            min-height: 240px;
+            max-height: 320px;
+            object-fit: contain;
+            object-position: center center;
+            display: block;
+        }
+
+        .about-hero-label {
+            position: absolute;
+            left: 14px;
+            bottom: 14px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.85);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .about-section {
+            padding: 40px 0 24px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 48px;
+            align-items: flex-start;
+        }
+
+        .about-section h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .about-section p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .about-values-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .about-values-list li {
+            padding: 10px 14px;
+            border-radius: 14px;
+            background: #f8fafc;
+            font-size: 14px;
+        }
+
+        .about-values-list strong {
+            color: var(--ink);
+        }
+
+        .about-trust-grid {
+            margin-top: 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .about-trust-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 16px 18px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        }
+
+        .about-trust-card h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .about-trust-card p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .about-animals-section {
+            margin: 48px 0 24px;
+            padding: 32px 24px;
+            border-radius: 32px;
+            background: linear-gradient(135deg, #fef2f2 0%, #fffbeb 100%);
+            box-shadow: 0 18px 50px rgba(248, 113, 113, 0.18);
+        }
+
+        .about-animals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .about-animals-header h2 {
+            margin: 0;
+        }
+
+        .about-animals-subtitle {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .about-animals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .about-animal-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+        }
+
+        .about-animal-image {
+            min-height: 220px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+
+        .about-animal-image img {
+            max-width: 100%;
+            max-height: 260px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            object-position: center center;
+            display: block;
+        }
+
+        .about-animal-body {
+            padding: 14px 16px 16px;
+        }
+
+        .about-animal-name {
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .about-animal-meta {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .about-animal-story {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .about-help-section {
+            margin: 40px 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .about-help-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 20px 22px;
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+        }
+
+        .about-help-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .about-help-card p {
+            font-size: 14px;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        @media (max-width: 900px) {
+            .about-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .about-hero-gallery {
+                order: -1;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-animals-section {
+                padding: 24px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-wrap">
+        <nav class="nav">
+            <a class="brand" href="/admin/login" aria-label="Companions of CPAS – Dashboard login">
+                <img data-brand-logo alt="Companions of CPAS logo"
+                    src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/111a8e16-4a71-48a3-754b-2b950780a300/avatar" />
+                <div>
+                    <div class="name">Companions of CPAS</div>
+                    <div class="tag">Established 2025 · Saving Lives Since 2014</div>
+                </div>
+            </a>
+
+            <div class="links" aria-label="Primary navigation">
+                <a data-nav href="/">Home</a>
+                <a data-nav href="/about" class="active">About</a>
+                <a data-nav href="/adopt">Adopt</a>
+                <a data-nav href="/services">Services</a>
+                <a data-nav href="/donate">Donate</a>
+            </div>
+
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span class="icon-hamburger" aria-hidden="true">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </span>
+                <span class="icon-close" aria-hidden="true">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay"></div>
+    <nav class="mobile-nav">
+        <button class="mobile-nav-close" aria-label="Close menu">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <div class="mobile-nav-links">
+            <a data-nav-mobile href="/">Home</a>
+            <a data-nav-mobile href="/about">About</a>
+            <a data-nav-mobile href="/adopt">Adopt</a>
+            <a data-nav-mobile href="/services">Services</a>
+            <a data-nav-mobile href="/donate">Donate</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="about-hero">
+            <div>
+                <div class="about-hero-kicker">Warm · Trustworthy · Local · Hope-driven</div>
+                <h1>We’re a small rescue with big-heart impact.</h1>
+                <p class="about-hero-lead">
+                    Companions of CPAS walks alongside your community families with practical help, clear guidance,
+                    and deep compassion—so pets can stay healthy, safe, and at home where they belong.
+                </p>
+                <div class="about-hero-tags">
+                    <span class="about-tag">501(c)(3) nonprofit</span>
+                    <span class="about-tag">your community, Louisiana</span>
+                    <span class="about-tag">Spay/neuter, vaccines & food support</span>
+                </div>
+                <p class="about-hero-meta">
+                    Every dog you see here is a real Companions of CPAS animal or partner rescue dog. Their stories are why this
+                    work matters.
+                </p>
+            </div>
+            <div class="about-hero-gallery">
+                <div class="about-hero-card">
+                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/7290332f-2348-4ce3-a5c4-b8fceb2d6100/medium"
+                        alt="A person gently petting a dog, representing the compassionate care at Companions of CPAS">
+                    <div class="about-hero-label">Savannah · Heart of the program</div>
+                </div>
+                <div class="about-hero-card">
+                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/293577cc-2219-497a-ad86-709552f27100/public"
+                        alt="Bandit, a Companions of CPAS dog">
+                    <div class="about-hero-label">Bandit · Goofy best friend</div>
+                </div>
+                <div class="about-hero-card">
+                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/02930113-3440-49e9-7d32-21faf5497600/public"
+                        alt="Cayenne, a Companions of CPAS dog">
+                    <div class="about-hero-label">Cayenne · Gentle soul</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="about-grid">
+                <div>
+                    <h2>Our mission</h2>
+                    <p>
+                        Companions of CPAS exists to support pet owners in the your community community by
+                        providing access to spay and neuter services, vaccinations, and pet food assistance—helping
+                        families keep their pets healthy, at home, and out of shelters, while preventing unwanted
+                        litters.
+                    </p>
+                    <p>
+                        We are intentionally small, local, and relational. That means we know the roads, the families,
+                        and the stories behind each call for help.
+                    </p>
+                </div>
+                <div>
+                    <h2>Our values</h2>
+                    <ul class="about-values-list">
+                        <li><strong>Compassion first</strong> — No judgment, only support.</li>
+                        <li><strong>Prevention over crisis</strong> — Spay, neuter, vaccinate early.</li>
+                        <li><strong>Community roots</strong> — Local help for local families.</li>
+                        <li><strong>Dignity for all</strong> — Pets and people deserve respect.</li>
+                        <li><strong>Practical impact</strong> — Real help, not just promises.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="about-trust-grid">
+                <div class="about-trust-card">
+                    <h3>501(c)(3) you can verify</h3>
+                    <p>Companions of CPAS is a registered 501(c)(3) nonprofit (EIN: 93-2791656) focused on Grant
+                        Parish families.</p>
+                </div>
+                <div class="about-trust-card">
+                    <h3>Boots-on-the-ground support</h3>
+                    <p>We coordinate appointments, transport when possible, and help families navigate low-cost options
+                        instead of leaving them to figure it out alone.</p>
+                </div>
+                <div class="about-trust-card">
+                    <h3>Animals at the center</h3>
+                    <p>Every program decision is filtered through: “What does this mean for the actual dog or cat in
+                        this home?”</p>
+                </div>
+                <div class="about-trust-card">
+                    <h3>Transparent, relationship-based help</h3>
+                    <p>We don’t shame, lecture, or post people’s struggles online—ever. We simply show up, help, and
+                        follow through.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2>Our Impact in Photos</h2>
+            <p class="about-section-lead" style="font-size: 18px; color: var(--muted); line-height: 1.7; margin-bottom: 24px;">
+                Through our work, we create countless stories of hope, health, and happiness. These images capture just a few moments of the profound impact we have on the lives of pets and their families in your community.
+            </p>
+            <div class="about-hero-gallery" style="margin-bottom: 48px;">
+                <div class="about-hero-card">
+                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/7290332f-2348-4ce3-a5c4-b8fceb2d6100/medium"
+                        alt="A person gently petting a dog, representing the compassionate care at Companions of CPAS">
+                    <div class="about-hero-label">Savannah · Heart of the program</div>
+                </div>
+                <div class="about-hero-card">
+                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/293577cc-2219-497a-ad86-709552f27100/public"
+                        alt="Bandit, a Companions of CPAS dog">
+                    <div class="about-hero-label">Bandit · Goofy best friend</div>
+                </div>
+                <div class="about-hero-card">
+                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/02930113-3440-49e9-7d32-21faf5497600/public"
+                        alt="Cayenne, a Companions of CPAS dog">
+                    <div class="about-hero-label">Cayenne · Gentle soul</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-animals-section">
+            <div class="about-animals-header">
+                <div>
+                    <h2>The faces behind our mission</h2>
+                    <p class="about-animals-subtitle">
+                        A few of the real Companions of CPAS animals whose stories shape how we show up for every new family.
+                    </p>
+                </div>
+                <div>
+                    <a href="/adopt" class="button primary" style="padding: 10px 18px; font-size: 14px;">Meet all
+                        adoptable pets</a>
+                </div>
+            </div>
+            <div class="about-animals-grid" id="aboutAnimalsGrid">
+                <!-- Populated from /api/animals -->
+            </div>
+        </section>
+
+        <section class="about-help-section">
+            <div class="about-help-card">
+                <h3>For families</h3>
+                <p>If you need help with spay/neuter, vaccinations, or pet food, reach out. We’ll talk through options
+                    that fit your situation and connect you to concrete next steps.</p>
+            </div>
+            <div class="about-help-card">
+                <h3>For donors</h3>
+                <p>Your support turns into vet appointments, full food bowls, and fewer emergency surrenders. We are
+                    careful, transparent stewards of every dollar.</p>
+            </div>
+            <div class="about-help-card">
+                <h3>For partners</h3>
+                <p>We collaborate with other rescues, clinics, and community groups in your community to stretch limited
+                    resources as far as possible.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <!-- Footer (sitewide component injected by _shared.js) -->
+    <footer id="site-footer"></footer>
+
+    <script src="/_shared.js?v=4"></script>
+    <script>
+        const CLOUDFLARE_IMAGES_BASE = 'https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAboutAnimals();
+        });
+
+        async function loadAboutAnimals() {
+            try {
+                const res = await fetch('/api/animals');
+                if (!res.ok) return;
+                const animals = await res.json();
+                const grid = document.getElementById('aboutAnimalsGrid');
+                if (!Array.isArray(animals) || animals.length === 0 || !grid) return;
+
+                const featured = animals.filter(a => a.featured);
+                const rest = animals.filter(a => !a.featured);
+                const selection = [...featured, ...rest].slice(0, 4);
+
+                grid.innerHTML = selection.map(a => buildAboutAnimalCard(a)).join('');
+            } catch (e) {
+                console.error('Error loading about animals', e);
+            }
+        }
+
+        function buildAboutAnimalCard(animal) {
+            const imageUrl = animal.primary_image || animal.image_url ||
+                (animal.primary_image_id ? `${CLOUDFLARE_IMAGES_BASE}/${animal.primary_image_id}/medium` : '');
+
+            let storySource = animal.bio || animal.description || '';
+            let storyLine = '';
+            if (storySource) {
+                const firstSentence = storySource.split(/(?<=[.!?])\s+/)[0];
+                storyLine = firstSentence || storySource;
+            }
+
+            return `
+                <article class="about-animal-card">
+                    <div class="about-animal-image">
+                        <img src="${imageUrl}" alt="${animal.name}" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop&q=80'" />
+                    </div>
+                    <div class="about-animal-body">
+                        <div class="about-animal-name">${animal.name}</div>
+                        <div class="about-animal-meta">
+                            ${animal.species || 'Dog'} • ${animal.breed || 'Mixed Breed'}${animal.age ? ` • ${animal.age}` : ''}
+                        </div>
+                        ${storyLine ? `<p class="about-animal-story">${storyLine}</p>` : ''}
+                    </div>
+                </article>
+            `;
+        }
+    </script>
+</body>
+
+</html>

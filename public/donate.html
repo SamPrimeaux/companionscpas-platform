@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Support Companions of CPAS's mission to help your community families care for their pets. 501(c)(3) tax-deductible donations." />
+    <title>Donate • Companions of CPAS</title>
+    <link rel="stylesheet" href="/_shared.css?v=3" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* Donate modal: same width as homepage/adopt */
+        #donateModal .modal { max-width: 600px; width: 100%; }
+        /* Hero image - no crop, scaled appropriately */
+        .donate-hero-image { margin-top: 1.5rem; }
+        .donate-hero-image img {
+            width: 100%; max-width: 100%; height: auto; max-height: 420px;
+            object-fit: contain; object-position: center;
+            border-radius: 12px; display: block; background: #f8fafc;
+        }
+        /* Hero CTAs - below image */
+        .donate-hero-ctas {
+            display: flex; gap: 16px; flex-wrap: wrap; margin-top: 1.5rem;
+        }
+        .cta-glass {
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px; padding: 16px 32px; font-weight: 700; font-size: 16px;
+            cursor: pointer; transition: all 0.3s; flex: 1; min-width: 200px;
+            text-decoration: none; text-align: center; border: 1px solid; font-family: inherit;
+        }
+        .cta-glass-primary {
+            background: rgba(220, 38, 38, 0.4);
+            border-color: rgba(255,255,255,0.45);
+            color: #fff;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        .cta-glass-primary:hover { background: rgba(220, 38, 38, 0.6); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(220,38,38,0.35); }
+        .cta-glass-secondary {
+            background: rgba(15, 23, 42, 0.45);
+            border-color: rgba(255,255,255,0.35);
+            color: #fff;
+        }
+        .cta-glass-secondary:hover { background: rgba(15, 23, 42, 0.6); transform: translateY(-2px); }
+        /* Animals section */
+        .donate-animals-section { margin: 4rem 0; padding: 3rem 0; background: linear-gradient(180deg, rgba(254,242,242,0.6) 0%, transparent 100%); border-radius: 24px; }
+        .donate-section-head { text-align: center; max-width: 640px; margin: 0 auto 2rem; }
+        .donate-section-title { font-size: 2rem; margin-bottom: 0.75rem; color: var(--ink); }
+        .donate-section-lead { color: var(--muted); line-height: 1.6; margin: 0; }
+        .donate-animals-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.25rem; max-width: 1000px; margin: 0 auto;
+        }
+        .donate-animal-card {
+            background: #fff; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .donate-animal-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+        .donate-animal-card img { width: 100%; aspect-ratio: 1; object-fit: contain; display: block; background: #f8fafc; border-radius: 8px; }
+        .donate-animal-card .name { padding: 12px 14px; font-weight: 700; font-size: 1rem; color: var(--ink); }
+        .donate-animal-card .meta { padding: 0 14px 14px; font-size: 13px; color: var(--muted); }
+        .donate-animals-loading { text-align: center; color: var(--muted); padding: 2rem; }
+        .donate-animals-cta { text-align: center; margin-top: 2rem; }
+        .donate-cta-link { display: inline-block; text-decoration: none; color: inherit; }
+        .donate-impact-section { margin: 60px 0; }
+        .donate-impact-card .donate-card-img,
+        .donate-impact-section .donate-card-img { width: 100%; height: 300px; object-fit: contain; border-radius: 16px; margin-bottom: 20px; background: #f8fafc; }
+        .donate-impact-section .card img.donate-card-img { height: 200px; }
+        .donate-campaign-blocks-inner { display: grid; gap: 1.25rem; max-width: 640px; margin: 0 auto; }
+        .donate-campaign-block { background: linear-gradient(180deg, rgba(254,242,242,0.5) 0%, #fff 100%); border-radius: 16px; padding: 1.5rem 1.75rem; border: 1px solid rgba(220,38,38,0.12); }
+        .donate-campaign-block h3 { font-size: 1.25rem; margin: 0 0 0.5rem; color: var(--ink); }
+        .donate-campaign-block p { margin: 0 0 0.75rem; font-size: 0.9375rem; line-height: 1.6; color: var(--muted); }
+        .donate-campaign-block ul { margin: 0 0 1rem 1.25rem; font-size: 0.875rem; line-height: 1.5; color: var(--muted); }
+        .donate-campaign-block .cta { margin-top: 1rem; }
+        @media (max-width: 768px) {
+            .donate-hero-ctas { flex-direction: column; }
+            .donate-animals-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-wrap">
+        <nav class="nav">
+            <a class="brand" href="/admin/login" aria-label="Companions of CPAS – Dashboard login">
+                <img data-brand-logo alt="Companions of CPAS logo"
+                    src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/111a8e16-4a71-48a3-754b-2b950780a300/avatar" />
+                <div>
+                    <div class="name">Companions of CPAS</div>
+                    <div class="tag">Established 2025 · Saving Lives Since 2014</div>
+                </div>
+            </a>
+
+            <div class="links" aria-label="Primary navigation">
+                <a data-nav href="/">Home</a>
+                <a data-nav href="/about">About</a>
+                <a data-nav href="/adopt">Adopt</a>
+                <a data-nav href="/services">Services</a>
+                <a data-nav href="/donate" class="active">Donate</a>
+            </div>
+
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span class="icon-hamburger" aria-hidden="true">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </span>
+                <span class="icon-close" aria-hidden="true">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav-overlay"></div>
+    <nav class="mobile-nav">
+        <button class="mobile-nav-close" aria-label="Close menu">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <div class="mobile-nav-links">
+            <a data-nav-mobile href="/">Home</a>
+            <a data-nav-mobile href="/about">About</a>
+            <a data-nav-mobile href="/adopt">Adopt</a>
+            <a data-nav-mobile href="/services">Services</a>
+            <a data-nav-mobile href="/donate" class="active">Donate</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <div>
+                <div class="badge"><span class="dot"></span> 501(c)(3) • ID #93-2791656</div>
+                <h1 class="h1">Donate to Companions of CPAS</h1>
+                <p class="lead">
+                    Your support helps provide <strong>spay/neuter access</strong>, <strong>vaccinations</strong>,
+                    and <strong>pet food assistance</strong> for families in your community. Every donation keeps pets
+                    safe, healthy, and at home.
+                </p>
+            </div>
+            <div class="hero-image donate-hero-image">
+                <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/7290332f-2348-4ce3-a5c4-b8fceb2d6100/medium"
+                    alt="Bandit and Chere playing" loading="eager" />
+                <!-- Hero CTAs - below image -->
+                <div class="donate-hero-ctas">
+                    <button type="button" onclick="openDonateModal(); return false;" class="cta-glass cta-glass-primary">Donate Now</button>
+                    <button type="button" onclick="window.openContactModal && window.openContactModal('donation'); return false;" class="cta-glass cta-glass-secondary">Contact Us</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animals You're Helping - real rescue animals -->
+        <section class="donate-animals-section" aria-label="Animals you're helping">
+            <div class="donate-section-head">
+                <span class="kicker">Meet the faces you help</span>
+                <h2 class="donate-section-title">Animals You're Helping</h2>
+                <p class="donate-section-lead">Your donation supports these rescue pets and others like them—spay/neuter, vaccinations, food, and a path to a loving home.</p>
+            </div>
+            <div id="donateAnimalsGrid" class="donate-animals-grid">
+                <div id="donateAnimalsLoading" class="donate-animals-loading">Loading our animals…</div>
+            </div>
+            <p class="donate-animals-cta"><a href="/adopt" class="cta-glass cta-glass-primary donate-cta-link">Meet them on Adopt</a></p>
+        </section>
+
+        <!-- Heartfelt Impact Section -->
+        <section class="grid donate-impact-section">
+            <div class="card donate-impact-card">
+                <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=800&h=600&fit=crop&q=80"
+                    alt="Volunteer helping a dog"
+                    class="donate-card-img" />
+                <div class="kicker">Your Impact</div>
+                <h3 style="margin-top:10px">Every Dollar Makes a Difference</h3>
+                <p style="margin-bottom:12px; line-height: 1.7;">
+                    When you donate to Companions of CPAS, you're not just giving money—you're giving hope. Your
+                    generosity directly funds life-saving services that keep pets with their families, where they
+                    belong.
+                </p>
+                <p style="margin:0; color:var(--muted); line-height: 1.7;">
+                    <strong style="color:var(--ink)">$25</strong> provides a spay/neuter surgery<br>
+                    <strong style="color:var(--ink)">$50</strong> covers essential vaccinations for a pet<br>
+                    <strong style="color:var(--ink)">$100</strong> supplies a month of pet food assistance<br>
+                    <strong style="color:var(--ink)">$250</strong> helps with emergency veterinary care
+                </p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551717743-49959800b1f6?w=800&h=600&fit=crop&q=80"
+                    alt="Happy family with their pet"
+                    class="donate-card-img" style="height: 200px;" />
+                <div class="kicker">Why We Need You</div>
+                <h3 style="margin-top:10px">Keeping Families Together</h3>
+                <p style="margin:0; line-height: 1.7;">
+                    Many families in your community face difficult choices when their pets need care. Your donation
+                    ensures that financial hardship doesn't force families to surrender their beloved companions.
+                    Together, we're building a community where every pet is cared for and every family has support.
+                </p>
+            </div>
+        </section>
+
+        <!-- Published campaign blocks (from admin-approved drafts) -->
+        <section id="donateCampaignBlocksSection" class="donate-campaign-blocks" aria-label="Active campaigns" style="display: none; margin-bottom: 2rem;">
+            <div id="donateCampaignBlocks" class="donate-campaign-blocks-inner"></div>
+        </section>
+
+        <section class="grid">
+            <div class="card">
+                <div class="kicker">Secure Online Donation</div>
+                <h3 style="margin-top:10px">Support Our Work</h3>
+                <p style="margin-bottom:12px">
+                    Make a secure, tax-deductible donation using your credit or debit card. All donations are processed
+                    securely through Stripe. Your information is safe and your contribution is immediately put to work.
+                </p>
+                <button type="button" onclick="openDonateModal(); return false;" class="cta-glass cta-glass-primary" style="width: 100%; margin-top: 12px;">
+                    Donate Securely Online
+                </button>
+                <p style="margin-top: 12px; font-size: 14px; color: var(--muted); text-align: center;">
+                    Secure & Encrypted<br>
+                    Tax-Deductible Receipt<br>
+                    One-time or Monthly Options
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="kicker">Mail a Check</div>
+                <h3 style="margin-top:10px">Donate by Check</h3>
+                <p style="margin-bottom:12px">
+                    Make payable to: <strong>Paw Love Rescue &amp; Services</strong>
+                </p>
+                <p style="margin:0; font-size:14px; color:var(--muted)">
+                    Mail to:<br />
+                    <strong style="color:var(--ink)">P.O. Box 102<br />Dry Prong, LA 71423</strong>
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="kicker">Partner With Us</div>
+                <h3 style="margin-top:10px">Corporate Partnerships</h3>
+                <p style="margin-bottom:12px">
+                    Interested in corporate partnerships, larger donations, or volunteer opportunities? We'd love to
+                    discuss how your organization can make an even bigger impact.
+                </p>
+                <p style="margin:0">
+                    Email: <a href="mailto:hey@companionscpas.org"
+                        style="color:var(--accent); font-weight:600">hey@companionscpas.org</a>
+                </p>
+            </div>
+        </section>
+
+        <section class="glass" style="margin:40px auto; text-align:center">
+            <div class="kicker">Thank You</div>
+            <h2 style="margin:10px 0 12px; font-size:24px">Your generosity changes lives</h2>
+            <p style="color:var(--muted); line-height:1.7; margin:0">
+                Thanks for helping us keep pets safe, healthy, and at home. Together, we're building a healthier Grant
+                Parish where every pet is cared for and every family has support.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <!-- Footer (sitewide component injected by _shared.js) -->
+    <footer id="site-footer"></footer>
+
+    <!-- Donate Modal - same as homepage/adopt/services -->
+    <div class="modal-overlay" id="donateModal">
+        <div class="modal">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closeDonateModal()">&times;</button>
+                <h3>Support Our Mission</h3>
+                <p>Your donation helps your community pets in need</p>
+            </div>
+            <div class="modal-body">
+                <form id="donateForm">
+                    <div class="form-group">
+                        <label>Donation Type</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                            <button type="button" id="donationTypeOneTime" class="donation-type-btn active" onclick="selectDonationType('one-time')">
+                                <div style="font-weight: 600; margin-bottom: 4px;">One-Time</div>
+                                <div style="font-size: 12px; opacity: 0.8;">Single donation</div>
+                            </button>
+                            <button type="button" id="donationTypeRecurring" class="donation-type-btn" onclick="selectDonationType('recurring')">
+                                <div style="font-weight: 600; margin-bottom: 4px;">Monthly</div>
+                                <div style="font-size: 12px; opacity: 0.8;">Recurring support</div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Amount</label>
+                        <div class="payment-amount">
+                            <div class="amount-option" data-amount="25" onclick="selectAmount(25)">$25</div>
+                            <div class="amount-option" data-amount="50" onclick="selectAmount(50)">$50</div>
+                            <div class="amount-option" data-amount="100" onclick="selectAmount(100)">$100</div>
+                            <div class="amount-option" data-amount="250" onclick="selectAmount(250)">$250</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 12px;">
+                            <label for="donationAmountOther" style="margin: 0; font-size: 14px; color: #64748b;">Or enter amount:</label>
+                            <span style="font-weight: 600; color: var(--dark);">$</span>
+                            <input type="number" id="donationAmountOther" min="1" max="99999" step="1" placeholder="Any amount" autocomplete="off"
+                                style="width: 120px; padding: 10px 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; font-weight: 600;"
+                                oninput="onHomeDonationOtherAmount()">
+                        </div>
+                        <input type="hidden" id="donationAmount" value="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="donorName">Your Name *</label>
+                        <input type="text" id="donorName" required placeholder="John Doe" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="donorEmail">Email Address *</label>
+                        <input type="email" id="donorEmail" required placeholder="john@example.com" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Card Information *</label>
+                        <div id="card-element"></div>
+                        <div id="card-errors" role="alert" style="color: #dc2626; font-size: 14px; margin-top: 8px;"></div>
+                    </div>
+                    <button type="submit" class="submit-btn" id="donateBtn">
+                        <span id="donateBtnText">Donate Now</span>
+                    </button>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; padding: 12px; background: #f8fafc; border-radius: 8px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#635BFF" />
+                            <path d="M2 17L12 22L22 17" stroke="#635BFF" stroke-width="2" />
+                            <path d="M2 12L12 17L22 12" stroke="#635BFF" stroke-width="2" />
+                        </svg>
+                        <span style="font-size: 12px; color: #64748b; font-weight: 500;">Secured by Stripe</span>
+                    </div>
+                </form>
+                <div class="success-message" id="donateSuccessMessage">
+                    <div class="success-icon">✓</div>
+                    <h3>Thank You!</h3>
+                    <p>Your generous donation will help pets in need. A receipt has been sent to your email.</p>
+                    <button class="btn btn-primary" onclick="closeDonateModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/_shared.js?v=4"></script>
+    <script>
+        // Stripe initialization
+        const stripe = Stripe('pk_live_51SuGjiRi9zMPk3BPrxYMelFIUFUKfaAyB4AyihsoX4JtVQcOahYLkq7r9fqOc9L36bj4qZLzA3MojyVSsWdu7LKh008ImEpNvR');
+        let cardElement;
+        let selectedAmount = 50;
+        let donationType = 'one-time'; // 'one-time' or 'recurring'
+
+        // Initialize Stripe Elements when donate modal opens
+        function initializeStripe() {
+            if (!cardElement) {
+                const elements = stripe.elements();
+                cardElement = elements.create('card', {
+                    style: {
+                        base: { fontSize: '16px', color: '#1e293b', '::placeholder': { color: '#64748b' } },
+                    },
+                });
+                cardElement.mount('#card-element');
+                cardElement.on('change', ({ error }) => {
+                    const displayError = document.getElementById('card-errors');
+                    if (displayError) displayError.textContent = error ? error.message : '';
+                });
+            }
+        }
+
+        function openDonateModal() {
+            document.getElementById('donateModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            initializeStripe();
+            selectAmount(50);
+            const otherEl = document.getElementById('donationAmountOther');
+            if (otherEl) otherEl.value = '';
+        }
+
+        function closeDonateModal() {
+            document.getElementById('donateModal').classList.remove('active');
+            document.body.style.overflow = '';
+            resetDonateForm();
+        }
+
+        function resetDonateForm() {
+            document.getElementById('donateForm').reset();
+            document.getElementById('donateForm').style.display = 'block';
+            document.getElementById('donateSuccessMessage').classList.remove('active');
+        }
+
+        function getDonationAmountCents() {
+            const otherEl = document.getElementById('donationAmountOther');
+            if (otherEl && otherEl.value.trim() !== '') {
+                const v = parseFloat(otherEl.value);
+                if (!isNaN(v) && v >= 1) return Math.round(v * 100);
+            }
+            return Math.round(selectedAmount * 100);
+        }
+
+        function onHomeDonationOtherAmount() {
+            const otherEl = document.getElementById('donationAmountOther');
+            if (!otherEl) return;
+            const v = parseFloat(otherEl.value);
+            if (!isNaN(v) && v >= 1) {
+                selectedAmount = v;
+                document.getElementById('donationAmount').value = v;
+                document.querySelectorAll('.amount-option').forEach(opt => opt.classList.remove('selected'));
+            }
+        }
+
+        function selectAmount(amount) {
+            selectedAmount = amount;
+            document.getElementById('donationAmount').value = amount;
+            const otherEl = document.getElementById('donationAmountOther');
+            if (otherEl) otherEl.value = '';
+            document.querySelectorAll('.amount-option').forEach(opt => opt.classList.remove('selected'));
+            const selectedOption = document.querySelector(`[data-amount="${amount}"]`);
+            if (selectedOption) selectedOption.classList.add('selected');
+        }
+
+        function selectDonationType(type) {
+            donationType = type;
+            document.getElementById('donationTypeOneTime').classList.toggle('active', type === 'one-time');
+            document.getElementById('donationTypeRecurring').classList.toggle('active', type === 'recurring');
+
+            // Update button text
+            const btnText = document.getElementById('donateBtnText');
+            if (type === 'recurring') {
+                btnText.textContent = 'Start Monthly Donation';
+            } else {
+                btnText.textContent = 'Donate Now';
+            }
+        }
+
+        // Donate Form Submission
+        document.getElementById('donateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const donateBtn = document.getElementById('donateBtn');
+            const btnText = document.getElementById('donateBtnText');
+            const cardErrors = document.getElementById('card-errors');
+            if (cardErrors) cardErrors.textContent = '';
+            donateBtn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span>';
+            const cents = getDonationAmountCents();
+            if (cents < 100) {
+                if (cardErrors) cardErrors.textContent = 'Please enter at least $1.';
+                donateBtn.disabled = false;
+                btnText.textContent = donationType === 'recurring' ? 'Start Monthly Donation' : 'Donate Now';
+                return;
+            }
+            try {
+                const response = await fetch('/api/create-payment-intent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: cents,
+                        name: document.getElementById('donorName').value,
+                        email: document.getElementById('donorEmail').value,
+                        type: donationType
+                    })
+                });
+                const result = await response.json();
+                if (!response.ok) {
+                    if (cardErrors) cardErrors.textContent = result.error || 'Failed to create payment intent. Please check your connection and try again.';
+                    donateBtn.disabled = false;
+                    btnText.textContent = donationType === 'recurring' ? 'Start Monthly Donation' : 'Donate Now';
+                    return;
+                }
+                const { clientSecret } = result;
+                const { error } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: {
+                            name: document.getElementById('donorName').value,
+                            email: document.getElementById('donorEmail').value,
+                        },
+                    },
+                });
+                if (error) {
+                    if (cardErrors) cardErrors.textContent = error.message;
+                    donateBtn.disabled = false;
+                    btnText.textContent = donationType === 'recurring' ? 'Start Monthly Donation' : 'Donate Now';
+                } else {
+                    document.getElementById('donateForm').style.display = 'none';
+                    document.getElementById('donateSuccessMessage').classList.add('active');
+                }
+            } catch (error) {
+                console.error('Payment error:', error);
+                if (cardErrors) cardErrors.textContent = error.message || 'Payment failed. Please try again.';
+                donateBtn.disabled = false;
+                btnText.textContent = donationType === 'recurring' ? 'Start Monthly Donation' : 'Donate Now';
+            }
+        });
+
+        document.getElementById('donateModal').addEventListener('click', (e) => {
+            if (e.target.id === 'donateModal') closeDonateModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeDonateModal();
+        });
+
+        // Animals You're Helping - load from API
+        const CLOUDFLARE_IMAGES_BASE = 'https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw';
+        const FALLBACK_ANIMAL_IMG = 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&h=600&fit=crop&q=80';
+        async function loadDonateAnimals() {
+            const grid = document.getElementById('donateAnimalsGrid');
+            const loading = document.getElementById('donateAnimalsLoading');
+            if (!grid || !loading) return;
+            try {
+                const res = await fetch('/api/animals');
+                const animals = await res.json();
+                loading.remove();
+                if (!animals || !animals.length) {
+                    grid.innerHTML = '<p class="donate-animals-loading">No animals listed yet. Your donation still helps future rescues!</p>';
+                    return;
+                }
+                const slice = animals.slice(0, 6);
+                slice.forEach(function(animal) {
+                    const imgUrl = animal.primary_image || animal.image_url ||
+                        (animal.primary_image_id ? CLOUDFLARE_IMAGES_BASE + '/' + animal.primary_image_id + '/public' : '') || FALLBACK_ANIMAL_IMG;
+                    const name = animal.name || 'Rescue pet';
+                    const meta = [animal.species || 'Pet', animal.breed || '', animal.age || ''].filter(Boolean).join(' · ') || 'Rescue';
+                    const card = document.createElement('div');
+                    card.className = 'donate-animal-card';
+                    card.innerHTML = '<img src="' + imgUrl + '" alt="' + (name.replace(/"/g, '&quot;')) + '" loading="lazy" onerror="this.src=\'' + FALLBACK_ANIMAL_IMG + '\'">' +
+                        '<div class="name">' + (name.replace(/</g, '&lt;')) + '</div>' +
+                        '<div class="meta">' + (meta.replace(/</g, '&lt;')) + '</div>';
+                    grid.appendChild(card);
+                });
+            } catch (e) {
+                loading.textContent = 'Our animals are safe and sound. Your donation still helps!';
+            }
+        }
+
+        async function loadCampaignBlocks() {
+            const section = document.getElementById('donateCampaignBlocksSection');
+            const container = document.getElementById('donateCampaignBlocks');
+            if (!section || !container) return;
+            try {
+                const res = await fetch('/api/campaign-blocks');
+                const blocks = await res.json();
+                if (!blocks || !blocks.length) {
+                    section.style.display = 'none';
+                    return;
+                }
+                section.style.display = 'block';
+                container.innerHTML = blocks.map(function(b) {
+                    const headline = (b.headline || b.event_title || 'Support our campaign').replace(/</g, '&lt;');
+                    const body = (b.body_plaintext || '').replace(/</g, '&lt;').replace(/\n/g, '<br>');
+                    const bullets = Array.isArray(b.impact_bullets) ? b.impact_bullets : [];
+                    const bulletsHtml = bullets.length ? '<ul>' + bullets.map(function(x) { return '<li>' + (x || '').replace(/</g, '&lt;') + '</li>'; }).join('') + '</ul>' : '';
+                    const cta = (b.cta_label || 'Donate').replace(/</g, '&lt;');
+                    return '<div class="donate-campaign-block">' +
+                        '<h3>' + headline + '</h3>' +
+                        (body ? '<p>' + body + '</p>' : '') +
+                        bulletsHtml +
+                        '<div class="cta"><button type="button" onclick="openDonateModal(); return false;" class="cta-glass cta-glass-primary">' + cta + '</button></div>' +
+                        '</div>';
+                }).join('');
+            } catch (e) {
+                section.style.display = 'none';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDonateAnimals();
+            loadCampaignBlocks();
+        });
+
+        // Amount option styling
+        const style = document.createElement('style');
+        style.textContent = `
+            .amount-option {
+                padding: 12px;
+                border: 2px solid rgba(20,20,30,.12);
+                border-radius: 8px;
+                background: white;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.2s;
+                font-size: 14px;
+            }
+            .amount-option:hover {
+                border-color: #dc2626;
+                background: #fef2f2;
+            }
+            .amount-option.selected {
+                border-color: #dc2626;
+                background: #dc2626;
+                color: white;
+            }
+            .donation-type-btn {
+                padding: 16px;
+                border: 2px solid rgba(20,20,30,.12);
+                border-radius: 12px;
+                background: white;
+                cursor: pointer;
+                transition: all 0.2s;
+                text-align: center;
+            }
+            .donation-type-btn:hover {
+                border-color: #dc2626;
+                background: #fef2f2;
+            }
+            .donation-type-btn.active {
+                border-color: #dc2626;
+                background: #dc2626;
+                color: white;
+            }
+            .payment-amount {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 0.75rem;
+                margin-bottom: 1.5rem;
+            }
+            .success-message {
+                display: none;
+                text-align: center;
+                padding: 3rem 2rem;
+            }
+            .success-message.active {
+                display: block;
+            }
+            .success-icon {
+                width: 80px;
+                height: 80px;
+                background: var(--success);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 1.5rem;
+                font-size: 3rem;
+                color: white;
+            }
+            #card-element {
+                min-height: 44px;
+                padding: 1rem;
+                border: 2px solid var(--border);
+                border-radius: 12px;
+                background: white;
+            }
+            #donationAmountOther:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+            }
+            .btn.btn-primary {
+                padding: 1rem 2rem;
+                background: var(--primary);
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-weight: 600;
+                cursor: pointer;
+            }
+            .spinner {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                border: 2px solid rgba(255,255,255,.3);
+                border-radius: 50%;
+                border-top-color: white;
+                animation: spin 0.6s linear infinite;
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            @media (max-width: 768px) {
+                .hero-image > div {
+                    flex-direction: column;
+                }
+                .hero-image button {
+                    width: 100% !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>

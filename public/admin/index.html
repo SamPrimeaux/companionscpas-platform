@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Paw Love Rescue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/admin/admin.css?v=4">
+    <link rel="stylesheet" href="/admin/icons.svg">
+    <style>
+    .logo-option:has(input:checked) { border-color: var(--primary, #dc2626) !important; box-shadow: 0 0 0 1px var(--primary, #dc2626); }
+    </style>
+</head>
+
+<body>
+    <!-- SVG Icons Sprite -->
+    <svg style="display: none;">
+        <symbol id="icon-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+        </symbol>
+        <symbol id="icon-animals" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+            <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+        </symbol>
+        <symbol id="icon-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            <path d="M8 10h.01M12 10h.01M16 10h.01" />
+        </symbol>
+        <symbol id="icon-applications" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="9" y1="15" x2="15" y2="15" />
+            <line x1="12" y1="12" x2="12" y2="18" />
+        </symbol>
+        <symbol id="icon-analytics" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10" />
+            <line x1="12" y1="20" x2="12" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="14" />
+        </symbol>
+        <symbol id="icon-donations" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+        </symbol>
+        <symbol id="icon-events" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+        </symbol>
+        <symbol id="icon-question" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+        </symbol>
+        <symbol id="icon-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <polyline points="21 15 16 10 5 21" />
+        </symbol>
+        <symbol id="icon-add" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+        </symbol>
+        <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+        </symbol>
+        <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+        </symbol>
+        <symbol id="icon-delete" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+        </symbol>
+        <symbol id="icon-email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+        </symbol>
+        <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </symbol>
+        <symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10" />
+            <line x1="12" y1="20" x2="12" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="14" />
+        </symbol>
+        <symbol id="icon-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+        </symbol>
+        <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </symbol>
+    </svg>
+    <div class="dashboard-wrapper">
+        <!-- Glassmorphic unified top header -->
+        <header class="dashboard-unified-header">
+            <a href="/dashboard" class="unified-logo" aria-label="Companions of CPAS Dashboard">
+                <img id="headerLogoImg" src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/111a8e16-4a71-48a3-754b-2b950780a300/avatar"
+                    alt="Companions of CPAS" class="unified-logo-img" data-logo-current="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/111a8e16-4a71-48a3-754b-2b950780a300/avatar" data-logo-new="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/1d38f6a1-d4d9-40b4-8cd6-5d8713c92400/avatar">
+                <div class="unified-logo-text">
+                    <span class="unified-brand">Companions of CPAS</span>
+                    <span class="unified-context">Admin</span>
+                </div>
+            </a>
+            <div class="unified-nav-context" id="unifiedPageTitle">Dashboard</div>
+            <div class="unified-user">
+                <div class="unified-user-info">
+                    <div class="unified-avatar" id="headerUserAvatar">A</div>
+                    <div class="unified-user-meta">
+                        <span class="unified-user-name" id="headerUserName">Loading...</span>
+                        <span class="unified-user-email" id="headerUserEmail">—</span>
+                    </div>
+                </div>
+                <button type="button" class="unified-logout" onclick="handleLogout()" aria-label="Sign out">Sign
+                    out</button>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav" aria-label="Dashboard navigation">
+                    <div class="nav-section">
+                        <div class="nav-section-title">Main</div>
+                        <a href="javascript:void(0)" class="nav-item active" data-page="dashboard">
+                            <svg class="nav-icon" width="20" height="20">
+                                <use href="#icon-dashboard"></use>
+                            </svg>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="javascript:void(0)" class="nav-item" data-page="animals">
+                            <svg class="nav-icon" width="20" height="20">
+                                <use href="#icon-animals"></use>
+                            </svg>
+                            <span>Animals</span>
+                        </a>
+                        <a href="javascript:void(0)" class="nav-item" data-page="analytics">
+                            <svg class="nav-icon" width="20" height="20">
+                                <use href="#icon-analytics"></use>
+                            </svg>
+                            <span>Analytics</span>
+                        </a>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-section-title">Requests</div>
+                        <a href="javascript:void(0)" class="nav-item" data-page="help-requests">
+                            <svg class="nav-icon" width="20" height="20">
+                                <use href="#icon-help"></use>
+                            </svg>
+                            <span>Help Requests</span>
+                            <span class="nav-badge" id="requestsBadge">0</span>
+                        </a>
+                        <a href="javascript:void(0)" class="nav-item" data-page="applications">
+                            <svg class="nav-icon" width="20" height="20">
+                                <use href="#icon-applications"></use>
+                            </svg>
+                            <span>Applications</span>
+                            <span class="nav-badge" id="appsBadge">0</span>
+                        </a>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-section-title">Content</div>
+                        <a href="javascript:void(0)" class="nav-item" data-page="gallery">
+                            <svg class="nav-icon" width="20" height="20">
+                                <use href="#icon-image"></use>
+                            </svg>
+                            <span>Image Gallery</span>
+                        </a>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-section-title">Fundraising</div>
+                        <a href="javascript:void(0)" class="nav-item" data-page="donations">
+                            <svg class="nav-icon" width="20" height="20">
+                                <use href="#icon-donations"></use>
+                            </svg>
+                            <span>Donations</span>
+                        </a>
+                        <a href="javascript:void(0)" class="nav-item" data-page="events">
+                            <svg class="nav-icon" width="20" height="20">
+                                <use href="#icon-events"></use>
+                            </svg>
+                            <span>Events</span>
+                        </a>
+                    </div>
+
+                    <div class="nav-section">
+                        <div class="nav-section-title">Account</div>
+                        <a href="javascript:void(0)" class="nav-item" data-page="settings">
+                            <svg class="nav-icon" width="20" height="20">
+                                <use href="#icon-settings"></use>
+                            </svg>
+                            <span>Settings</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <div class="user-info">
+                        <div class="user-avatar" id="userAvatar">A</div>
+                        <div class="user-details">
+                            <h4 id="userName">Loading...</h4>
+                            <p id="userEmail">Loading...</p>
+                        </div>
+                    </div>
+                    <button class="logout-btn" onclick="handleLogout()">
+                        Sign Out
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Dashboard Page -->
+                <div id="dashboardPage" class="page">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Dashboard</h1>
+                            <p class="page-subtitle">Welcome back! Here's what's happening.</p>
+                        </div>
+                        <button class="help-btn" onclick="openHelpModal()" aria-label="Get Help">
+                            <svg width="20" height="20">
+                                <use href="#icon-question"></use>
+                            </svg>
+                            <span>Help</span>
+                        </button>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="availableCount">0</div>
+                                    <div class="stat-label">Available Animals</div>
+                                    <div class="stat-trend" id="availableTrend"
+                                        style="font-size: 0.75rem; color: var(--gray); margin-top: 0.5rem;"></div>
+                                </div>
+                                <div class="stat-icon primary">
+                                    <svg width="28" height="28">
+                                        <use href="#icon-animals"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="adoptedCount">0</div>
+                                    <div class="stat-label">Adopted Animals</div>
+                                    <div class="stat-trend" id="adoptedTrend"
+                                        style="font-size: 0.75rem; color: var(--gray); margin-top: 0.5rem;"></div>
+                                </div>
+                                <div class="stat-icon success">
+                                    <svg width="28" height="28">
+                                        <use href="#icon-heart"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="pendingRequestsCount">0</div>
+                                    <div class="stat-label">Pending Requests</div>
+                                    <div class="stat-trend" id="requestsTrend"
+                                        style="font-size: 0.75rem; color: var(--gray); margin-top: 0.5rem;"></div>
+                                </div>
+                                <div class="stat-icon warning">
+                                    <svg width="28" height="28">
+                                        <use href="#icon-help"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="pendingAppsCount">0</div>
+                                    <div class="stat-label">Pending Applications</div>
+                                    <div class="stat-trend" id="appsTrend"
+                                        style="font-size: 0.75rem; color: var(--gray); margin-top: 0.5rem;"></div>
+                                </div>
+                                <div class="stat-icon danger">
+                                    <svg width="28" height="28">
+                                        <use href="#icon-applications"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card" style="margin-top: 2rem;">
+                        <div class="card-header">
+                            <h3 class="card-title">Recent Activity</h3>
+                            <button class="btn btn-secondary" onclick="refreshActivity()" title="Refresh">
+                                <svg width="18" height="18">
+                                    <use href="#icon-applications"></use>
+                                </svg>
+                                <span>Refresh</span>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div id="activityFeed" style="max-height: 400px; overflow-y: auto;">
+                                <div class="loading" style="padding: 2rem; text-align: center;">
+                                    <div class="spinner"></div>
+                                    <p>Loading activity...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card" style="margin-top: 2rem;">
+                        <div class="card-header">
+                            <h3 class="card-title">Quick Actions</h3>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <button class="btn btn-primary" onclick="showPage('animals'); openAnimalModal()">
+                                    <svg width="18" height="18">
+                                        <use href="#icon-add"></use>
+                                    </svg>
+                                    <span>Add New Animal</span>
+                                </button>
+                                <button class="btn btn-secondary" onclick="showPage('help-requests')">
+                                    <svg width="18" height="18">
+                                        <use href="#icon-help"></use>
+                                    </svg>
+                                    <span>View Help Requests</span>
+                                </button>
+                                <button class="btn btn-secondary" onclick="showPage('applications')">
+                                    <svg width="18" height="18">
+                                        <use href="#icon-applications"></use>
+                                    </svg>
+                                    <span>View Applications</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="settingsPage" class="page" style="display: none;">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Settings</h1>
+                            <p class="page-subtitle">Manage your profile, password, website logo, and team members.</p>
+                        </div>
+                        <button class="help-btn" onclick="openHelpModal()" aria-label="Get Help">
+                            <svg width="20" height="20"><use href="#icon-question"></use></svg>
+                            <span>Help</span>
+                        </button>
+                    </div>
+
+                    <!-- Profile -->
+                    <div class="content-card" style="margin-top: 0;">
+                        <div class="card-header">
+                            <h3 class="card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <svg width="20" height="20"><use href="#icon-user"></use></svg>
+                                Profile
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid" style="grid-template-columns: auto 1fr; align-items: start; gap: 1.5rem;">
+                                <div>
+                                    <label class="form-label">Profile picture</label>
+                                    <div style="display: flex; align-items: center; gap: 1rem;">
+                                        <div id="settingsProfilePhotoWrap" style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; background: var(--border); display: flex; align-items: center; justify-content: center;">
+                                            <img id="settingsProfilePhoto" src="" alt="" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                                            <span id="settingsProfilePhotoLetter" style="font-size: 2rem; font-weight: 600; color: #fff;">A</span>
+                                        </div>
+                                        <div>
+                                            <input type="file" id="settingsProfilePhotoInput" accept="image/*" style="display: none;">
+                                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('settingsProfilePhotoInput').click()">Change photo</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                    <div class="form-group">
+                                        <label class="form-label" for="settingsName">Display name</label>
+                                        <input type="text" id="settingsName" class="form-input" placeholder="Your name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="settingsEmail">Email</label>
+                                        <input type="email" id="settingsEmail" class="form-input" placeholder="you@example.com">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" onclick="saveSettingsProfile()">Save profile</button>
+                                    <p id="settingsProfileStatus" style="font-size: 0.875rem; color: var(--gray); min-height: 1.25rem;"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="content-card" style="margin-top: 2rem;">
+                        <div class="card-header">
+                            <h3 class="card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <svg width="20" height="20"><use href="#icon-lock"></use></svg>
+                                Password
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid" style="max-width: 400px;">
+                                <div class="form-group full-width">
+                                    <label class="form-label" for="settingsCurrentPassword">Current password</label>
+                                    <input type="password" id="settingsCurrentPassword" class="form-input" placeholder="••••••••" autocomplete="current-password">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label class="form-label" for="settingsNewPassword">New password</label>
+                                    <input type="password" id="settingsNewPassword" class="form-input" placeholder="••••••••" autocomplete="new-password">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label class="form-label" for="settingsConfirmPassword">Confirm new password</label>
+                                    <input type="password" id="settingsConfirmPassword" class="form-input" placeholder="••••••••" autocomplete="new-password">
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary" style="margin-top: 0.5rem;" onclick="saveSettingsPassword()">Update password</button>
+                            <p id="settingsPasswordStatus" style="font-size: 0.875rem; color: var(--gray); margin-top: 0.5rem; min-height: 1.25rem;"></p>
+                        </div>
+                    </div>
+
+                    <!-- Website logo -->
+                    <div class="content-card" style="margin-top: 2rem;">
+                        <div class="card-header">
+                            <h3 class="card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <svg width="20" height="20"><use href="#icon-image"></use></svg>
+                                Website logo
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="page-subtitle" style="margin-bottom: 1rem;">Choose which logo appears in the dashboard header. Your choice is saved and will persist across sessions.</p>
+                            <div class="logo-switcher-options" style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start;">
+                                <label class="logo-option" style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.75rem 1rem; border: 2px solid var(--border, #e5e7eb); border-radius: 12px; transition: border-color 0.2s, box-shadow 0.2s;">
+                                    <input type="radio" name="brandLogo" value="current" id="logoOptionCurrent" onchange="saveLogoPreference('current')">
+                                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/111a8e16-4a71-48a3-754b-2b950780a300/avatar" alt="Current logo" style="height: 48px; width: auto; border-radius: 8px; object-fit: contain;">
+                                    <span>Current logo</span>
+                                </label>
+                                <label class="logo-option" style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.75rem 1rem; border: 2px solid var(--border, #e5e7eb); border-radius: 12px; transition: border-color 0.2s, box-shadow 0.2s;">
+                                    <input type="radio" name="brandLogo" value="new" id="logoOptionNew" onchange="saveLogoPreference('new')">
+                                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/1d38f6a1-d4d9-40b4-8cd6-5d8713c92400/avatar" alt="New logo" style="height: 48px; width: auto; border-radius: 8px; object-fit: contain;">
+                                    <span>New logo</span>
+                                </label>
+                            </div>
+                            <p id="logoSwitcherStatus" style="font-size: 0.875rem; color: var(--gray); margin-top: 0.75rem; min-height: 1.25rem;"></p>
+                        </div>
+                    </div>
+
+                    <!-- Team members -->
+                    <div class="content-card" style="margin-top: 2rem;">
+                        <div class="card-header">
+                            <h3 class="card-title" style="display: flex; align-items: center; gap: 0.5rem;">
+                                <svg width="20" height="20"><use href="#icon-users"></use></svg>
+                                Team members
+                            </h3>
+                            <button type="button" class="btn btn-primary" onclick="openAddTeamMemberModal()">
+                                <svg width="18" height="18"><use href="#icon-add"></use></svg>
+                                <span>Add member</span>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <p class="page-subtitle" style="margin-bottom: 1rem;">Invite people to access the dashboard. They will receive an email to set their password.</p>
+                            <div id="settingsTeamList" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <p style="color: var(--gray); font-size: 0.875rem;">Loading team…</p>
+                            </div>
+                            <p id="settingsTeamStatus" style="font-size: 0.875rem; color: var(--gray); margin-top: 0.75rem; min-height: 1.25rem;"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animals Page -->
+                <div id="animalsPage" class="page" style="display: none;">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Animals Management</h1>
+                            <p class="page-subtitle">Manage all animals in the rescue</p>
+                        </div>
+                        <button class="help-btn" onclick="openHelpModal()" aria-label="Get Help">
+                            <svg width="20" height="20">
+                                <use href="#icon-question"></use>
+                            </svg>
+                            <span>Help</span>
+                        </button>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">All Animals</h3>
+                            <button class="btn btn-primary" onclick="openAnimalModal()">
+                                <svg width="18" height="18">
+                                    <use href="#icon-add"></use>
+                                </svg>
+                                <span>Add Animal</span>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>Species</th>
+                                            <th>Age</th>
+                                            <th>Status</th>
+                                            <th>Fee</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="animalsTableBody">
+                                        <tr>
+                                            <td colspan="7" class="loading">
+                                                <div class="spinner"></div>
+                                                <p>Loading animals...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Page -->
+                <div id="analyticsPage" class="page" style="display: none;">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Analytics & Donations</h1>
+                            <p class="page-subtitle">Track donations, communicate with donors, and manage fundraising. <strong>Live from Stripe</strong> — amounts sync from your Stripe account.
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <button class="help-btn" onclick="openHelpModal()" aria-label="Get Help">
+                                <svg width="20" height="20">
+                                    <use href="#icon-question"></use>
+                                </svg>
+                                <span>Help</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="totalDonations">$0</div>
+                                    <div class="stat-label">Total Donations</div>
+                                </div>
+                                <div class="stat-icon primary">
+                                    <svg width="28" height="28">
+                                        <use href="#icon-donations"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="totalDonors">0</div>
+                                    <div class="stat-label">Total Donors</div>
+                                </div>
+                                <div class="stat-icon success">
+                                    <svg width="28" height="28">
+                                        <use href="#icon-heart"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="monthDonations">$0</div>
+                                    <div class="stat-label">This Month</div>
+                                </div>
+                                <div class="stat-icon warning">
+                                    <svg width="28" height="28">
+                                        <use href="#icon-chart"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="upcomingEvents">0</div>
+                                    <div class="stat-label">Upcoming Events</div>
+                                </div>
+                                <div class="stat-icon danger">
+                                    <svg width="28" height="28">
+                                        <use href="#icon-events"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Donation Trends</h3>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-secondary" onclick="exportDonations('csv')" title="Export CSV">
+                                    <svg width="18" height="18">
+                                        <use href="#icon-applications"></use>
+                                    </svg>
+                                    <span>Export CSV</span>
+                                </button>
+                                <button class="btn btn-primary" onclick="openDonorModal()">
+                                    <svg width="18" height="18">
+                                        <use href="#icon-email"></use>
+                                    </svg>
+                                    <span>Email Donors</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="donationChart"
+                                style="height: 300px; margin-bottom: 2rem; background: var(--light); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; justify-content: center; color: var(--gray);">
+                                <div style="text-align: center;">
+                                    <svg width="48" height="48" style="margin-bottom: 1rem; opacity: 0.5;">
+                                        <use href="#icon-chart"></use>
+                                    </svg>
+                                    <p>Donation trends chart will appear here</p>
+                                </div>
+                            </div>
+                            <div class="table-container">
+                                <div style="display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center;">
+                                    <input type="text" id="donationSearch" placeholder="Search donations..."
+                                        style="flex: 1; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.875rem;"
+                                        onkeyup="filterDonations()">
+                                    <select id="donationFilter" onchange="filterDonations()"
+                                        style="padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.875rem;">
+                                        <option value="all">All Types</option>
+                                        <option value="one-time">One-time</option>
+                                        <option value="recurring">Recurring</option>
+                                    </select>
+                                </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Donor</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>Type</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="donationsTableBody">
+                                        <tr>
+                                            <td colspan="5" class="loading">
+                                                <div class="spinner"></div>
+                                                <p>Loading donations...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Help Requests Page -->
+                <div id="helpRequestsPage" class="page" style="display: none;">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Help Requests</h1>
+                            <p class="page-subtitle">Manage incoming help requests</p>
+                        </div>
+                        <button class="help-btn" onclick="openHelpModal()" aria-label="Get Help">
+                            <svg width="20" height="20">
+                                <use href="#icon-question"></use>
+                            </svg>
+                            <span>Help</span>
+                        </button>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">All Requests</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                            <th>Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="requestsTableBody">
+                                        <tr>
+                                            <td colspan="6" class="loading">
+                                                <div class="spinner"></div>
+                                                <p>Loading requests...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Page -->
+                <div id="applicationsPage" class="page" style="display: none;">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Adoption Applications</h1>
+                            <p class="page-subtitle">Review adoption applications</p>
+                        </div>
+                        <button class="help-btn" onclick="openHelpModal()" aria-label="Get Help">
+                            <svg width="20" height="20">
+                                <use href="#icon-question"></use>
+                            </svg>
+                            <span>Help</span>
+                        </button>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">All Applications</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Applicant</th>
+                                            <th>Animal</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Status</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="appsTableBody">
+                                        <tr>
+                                            <td colspan="6" class="loading">
+                                                <div class="spinner"></div>
+                                                <p>Loading applications...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Donations Page -->
+                <div id="donationsPage" class="page" style="display: none;">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Donations Management</h1>
+                            <p class="page-subtitle">Manage and communicate with your donors</p>
+                        </div>
+                        <button class="help-btn" onclick="openHelpModal()" aria-label="Get Help">
+                            <svg width="20" height="20">
+                                <use href="#icon-question"></use>
+                            </svg>
+                            <span>Help</span>
+                        </button>
+                    </div>
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">All Donations</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Donor</th>
+                                            <th>Email</th>
+                                            <th>Amount</th>
+                                            <th>Type</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="donationsPageTableBody">
+                                        <tr>
+                                            <td colspan="7" class="loading">
+                                                <div class="spinner"></div>
+                                                <p>Loading donations...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Page -->
+                <div id="galleryPage" class="page" style="display: none;">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Image Gallery</h1>
+                            <p class="page-subtitle">Quickly upload images and manage animal photos</p>
+                        </div>
+                        <button class="help-btn" onclick="openHelpModal()" aria-label="Get Help">
+                            <svg width="20" height="20">
+                                <use href="#icon-question"></use>
+                            </svg>
+                            <span>Help</span>
+                        </button>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Upload Images</h3>
+                            <p style="color: var(--gray); font-size: 0.875rem; margin-top: 0.5rem;">Drag & drop images
+                                here
+                                or click to browse. Click any image to edit animal details.</p>
+                        </div>
+                        <div class="card-body">
+                            <div id="dropZone"
+                                style="border: 2px dashed var(--border); border-radius: 12px; padding: 3rem; text-align: center; background: var(--light); cursor: pointer; transition: all 0.3s;"
+                                ondrop="handleDrop(event)" ondragover="handleDragOver(event)"
+                                ondragleave="handleDragLeave(event)"
+                                onclick="document.getElementById('galleryFileInput').click()">
+                                <svg width="64" height="64" style="color: var(--gray); margin: 0 auto 1rem;">
+                                    <use href="#icon-image"></use>
+                                </svg>
+                                <p style="color: var(--gray); font-size: 1rem; margin-bottom: 0.5rem;">Drag images here
+                                    or
+                                    click to upload</p>
+                                <p style="color: var(--gray-light); font-size: 0.875rem;">Upload multiple images at once
+                                </p>
+                                <input type="file" id="galleryFileInput" multiple accept="image/*"
+                                    style="display: none;" onchange="handleGalleryFiles(event)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card" style="margin-top: 2rem;">
+                        <div class="card-header">
+                            <h3 class="card-title">Gallery</h3>
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <input type="text" id="gallerySearch" placeholder="Search images..."
+                                    style="padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.875rem; width: 200px;"
+                                    onkeyup="filterGallery()">
+                                <select id="galleryFilter" onchange="filterGallery()"
+                                    style="padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.875rem;">
+                                    <option value="all">All Images</option>
+                                    <option value="with-animal">With Animal Info</option>
+                                    <option value="orphaned">Orphaned Images</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="galleryGrid"
+                                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; min-height: 200px;">
+                                <div class="loading" style="grid-column: 1 / -1; padding: 3rem; text-align: center;">
+                                    <div class="spinner"></div>
+                                    <p>Loading gallery...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events Page -->
+                <div id="eventsPage" class="page" style="display: none;">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Fundraising Events</h1>
+                            <p class="page-subtitle">Plan and manage your fundraising events</p>
+                        </div>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <button class="help-btn" onclick="openHelpModal()" aria-label="Get Help">
+                                <svg width="20" height="20">
+                                    <use href="#icon-question"></use>
+                                </svg>
+                                <span>Help</span>
+                            </button>
+                            <button class="btn btn-primary" onclick="openEventModal()">
+                                <svg width="18" height="18">
+                                    <use href="#icon-add"></use>
+                                </svg>
+                                <span>Create Event</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Campaign templates: single row, swipeable on mobile, click to preview -->
+                    <section class="event-templates-section" aria-label="Campaign templates">
+                        <div class="event-templates-header">
+                            <h3 class="event-templates-title">Campaign templates</h3>
+                            <p class="event-templates-subtitle">Preview a template, use it for a new event, or optimize with Agent Sam. You or Agent Sam can post once drafts are approved.</p>
+                        </div>
+                        <div id="eventTemplatesRow" class="event-templates-row" role="list">
+                            <div class="event-templates-loading" id="eventTemplatesLoading">Loading templates...</div>
+                        </div>
+                    </section>
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">All Events</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Event</th>
+                                            <th>Date</th>
+                                            <th>Location</th>
+                                            <th>Target</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="eventsTableBody">
+                                        <tr>
+                                            <td colspan="6" class="loading">
+                                                <div class="spinner"></div>
+                                                <p>Loading events...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Help Request Detail Modal (view + reply) -->
+    <div class="modal-overlay" id="helpRequestModal" onclick="if(event.target.id === 'helpRequestModal') closeHelpRequestModal()">
+        <div class="modal" style="max-width: 520px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Request details</h3>
+                <button type="button" class="close-modal" onclick="closeHelpRequestModal()" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body" id="helpRequestModalBody">
+                <p style="color: var(--gray);">Loading…</p>
+            </div>
+            <div class="modal-footer" style="display: flex; gap: 0.75rem; flex-wrap: wrap; padding: 1rem 1.5rem; border-top: 1px solid var(--border);">
+                <a id="helpRequestReplyMailto" href="#" class="btn btn-primary" target="_blank" rel="noopener">Reply via email (@companionscpas.org)</a>
+                <button type="button" class="btn btn-secondary" id="helpRequestMarkContacted" onclick="markRequestContacted()">Mark as contacted</button>
+                <button type="button" class="btn btn-secondary" onclick="closeHelpRequestModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Request Detail Modal -->
+    <div class="modal-overlay" id="helpRequestModal" onclick="if(event.target.id === 'helpRequestModal') closeHelpRequestModal()">
+        <div class="modal" style="max-width: 520px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Request details</h3>
+                <button type="button" class="close-modal" onclick="closeHelpRequestModal()" aria-label="Close">&#215;</button>
+            </div>
+            <div class="modal-body" id="helpRequestModalBody">
+                <p style="color: var(--gray);">Loading...</p>
+            </div>
+            <div class="modal-footer" style="flex-direction: column; gap: 1rem; padding: 1rem 1.5rem; border-top: 1px solid var(--border);">
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                    <a id="helpRequestReplyMailto" href="#" class="btn btn-primary" target="_blank" rel="noopener">Reply via email (opens mail client)</a>
+                    <button type="button" class="btn btn-secondary" id="helpRequestMarkContacted" onclick="markRequestContacted()">Mark as contacted</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeHelpRequestModal()">Close</button>
+                </div>
+                <div style="padding-top: 0.75rem; border-top: 1px solid var(--border);">
+                    <p style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">Send from dashboard (Resend · hey@companionscpas.org)</p>
+                    <input type="text" id="helpRequestReplySubject" placeholder="Subject" style="width: 100%; margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; border: 1px solid var(--border); border-radius: 8px;">
+                    <textarea id="helpRequestReplyBody" rows="3" placeholder="Your reply…" style="width: 100%; margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; border: 1px solid var(--border); border-radius: 8px; resize: vertical;"></textarea>
+                    <button type="button" class="btn btn-primary" onclick="sendHelpRequestReplyFromDashboard()">Send email</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Team Member Modal -->
+    <div class="modal-overlay" id="addTeamMemberModal" onclick="if(event.target.id === 'addTeamMemberModal') closeAddTeamMemberModal()" style="display: none;">
+        <div class="modal" style="max-width: 420px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Add team member</h3>
+                <button type="button" class="close-modal" onclick="closeAddTeamMemberModal()" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: var(--gray); font-size: 0.875rem; margin-bottom: 1rem;">They will receive an email to set their password and access the dashboard.</p>
+                <div class="form-group">
+                    <label class="form-label" for="addTeamMemberEmail">Email *</label>
+                    <input type="email" id="addTeamMemberEmail" class="form-input" placeholder="teammate@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="addTeamMemberName">Name (optional)</label>
+                    <input type="text" id="addTeamMemberName" class="form-input" placeholder="Display name">
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; gap: 0.75rem; padding: 1rem 1.5rem; border-top: 1px solid var(--border);">
+                <button type="button" class="btn btn-primary" onclick="submitAddTeamMember()">Send invite</button>
+                <button type="button" class="btn btn-secondary" onclick="closeAddTeamMemberModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal-overlay" id="helpModal" onclick="if(event.target.id === 'helpModal') closeHelpModal()">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Help & Support</h3>
+                <button class="close-modal" onclick="closeHelpModal()">
+                    <svg width="20" height="20">
+                        <use href="#icon-close"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 2rem;">
+                    <h4 style="margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="20" height="20" style="color: var(--primary);">
+                            <use href="#icon-image"></use>
+                        </svg>
+                        Adding Images
+                    </h4>
+                    <ol style="padding-left: 1.5rem; line-height: 2; color: var(--gray);">
+                        <li>Click "Add New Animal" or "Edit" on an existing animal</li>
+                        <li>Click on the image upload area</li>
+                        <li>Select your image file (JPG, PNG, or WebP)</li>
+                        <li>The image will upload automatically to our secure storage</li>
+                        <li>Add any context or notes in the description field for website refinement</li>
+                    </ol>
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <h4 style="margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="20" height="20" style="color: var(--primary);">
+                            <use href="#icon-help"></use>
+                        </svg>
+                        Collaboration Features
+                    </h4>
+                    <p style="color: var(--gray); margin-bottom: 1rem; line-height: 1.8;">
+                        Use the description and notes fields to add context about each animal's story, special needs, or
+                        presentation preferences.
+                        This information helps ensure the best presentation on the public website. Any context you
+                        provide will be reviewed and
+                        refined to create compelling animal profiles.
+                    </p>
+                    <div
+                        style="background: rgba(220, 38, 38, 0.05); padding: 1rem; border-radius: 12px; border: 1px solid rgba(220, 38, 38, 0.2);">
+                        <p style="color: var(--primary); font-weight: 600; margin: 0; font-size: 0.9rem;">
+                            💡 Pro Tip: The more context you provide, the better we can showcase each animal's unique
+                            personality and story!
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="20" height="20" style="color: var(--primary);">
+                            <use href="#icon-email"></use>
+                        </svg>
+                        Need More Help?
+                    </h4>
+                    <p style="color: var(--gray); line-height: 1.8;">
+                        Contact technical support at <a href="mailto:tech@companionscpas.org"
+                            style="color: var(--primary); font-weight: 600; text-decoration: none;">tech@companionscpas.org</a><br>
+                        For administrative questions: <a href="mailto:admin@companionscpas.org"
+                            style="color: var(--primary); font-weight: 600; text-decoration: none;">admin@companionscpas.org</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Animal Modal -->
+    <div class="modal-overlay" id="animalModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="animalModalTitle">Add New Animal</h3>
+                <button class="close-modal" onclick="closeAnimalModal()">
+                    <svg width="20" height="20">
+                        <use href="#icon-close"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="animalForm">
+                    <input type="hidden" id="animalId">
+
+                    <div class="form-group full-width">
+                        <label>Animal Photo</label>
+                        <div class="image-upload" id="imageUpload"
+                            onclick="document.getElementById('imageInput').click()">
+                            <input type="file" id="imageInput" accept="image/*" style="display: none;"
+                                onchange="handleImageSelect(event)">
+                            <input type="hidden" id="imageUrl">
+                            <input type="hidden" id="primaryImageId">
+                            <div id="uploadPlaceholder">
+                                <svg class="upload-icon" width="48" height="48"
+                                    style="margin: 0 auto 1rem; color: var(--gray-light);">
+                                    <use href="#icon-image"></use>
+                                </svg>
+                                <p>Click to upload image</p>
+                                <p style="font-size: 0.85rem; color: var(--gray); margin-top: 0.5rem;">Add context in
+                                    description field for website refinement</p>
+                            </div>
+                            <img id="imagePreview" class="upload-preview" style="display: none;">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="species">Species *</label>
+                            <select id="species" required>
+                                <option value="">Select...</option>
+                                <option value="Dog">Dog</option>
+                                <option value="Cat">Cat</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="breed">Breed</label>
+                            <input type="text" id="breed">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="text" id="age" placeholder="e.g., ~2 years, ~6-7 months">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="weight">Weight</label>
+                            <input type="text" id="weight" placeholder="e.g., 60 lbs, ~35 lbs">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender">
+                                <option value="">Select...</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="size">Size</label>
+                            <select id="size">
+                                <option value="">Select...</option>
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="color">Color</label>
+                            <input type="text" id="color">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adoptionFee">Adoption Fee ($)</label>
+                            <input type="number" id="adoptionFee" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="description">Description</label>
+                        <textarea id="description" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="personality">Personality</label>
+                        <textarea id="personality" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="medicalNotes">Medical Notes</label>
+                        <textarea id="medicalNotes" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="goodWithKids">
+                                <label for="goodWithKids">Good with Kids</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="goodWithDogs">
+                                <label for="goodWithDogs">Good with Dogs</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="goodWithCats">
+                                <label for="goodWithCats">Good with Cats</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="featured">
+                                <label for="featured">Featured</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="availableForFoster">
+                                <label for="availableForFoster">Available for Foster</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status">
+                            <option value="available">Available</option>
+                            <option value="pending">Pending</option>
+                            <option value="adopted">Adopted</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width"
+                        style="background: rgba(220, 38, 38, 0.05); padding: 1rem; border-radius: 12px; margin-top: 1rem; border: 1px solid rgba(220, 38, 38, 0.2);">
+                        <label style="color: var(--primary); font-weight: 700; margin-bottom: 0.5rem;">
+                            <svg width="18" height="18" style="vertical-align: middle; margin-right: 0.5rem;">
+                                <use href="#icon-help"></use>
+                            </svg>
+                            Collaboration Note
+                        </label>
+                        <p style="font-size: 0.875rem; color: var(--gray); margin: 0;">
+                            Add context in the description field about the animal's story, special needs, or any notes
+                            for website presentation. This helps ensure the best presentation on the public site.
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">
+                            <span id="saveAnimalText">Save Animal</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeAnimalModal()">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agent Chat (AI Assistant) -->
+    <button type="button" class="agent-sam-fab" id="agentSamFab" onclick="toggleAgentSam()" aria-label="Open chat">
+        <svg class="agent-sam-fab-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    </button>
+    <div class="agent-sam-panel" id="agentSamPanel" style="display: none;">
+        <div class="agent-sam-header">
+            <h3>Chat</h3>
+            <p class="agent-sam-subtitle">How can we help?</p>
+            <button type="button" class="agent-sam-close" onclick="toggleAgentSam()" aria-label="Close">×</button>
+        </div>
+        <div class="agent-sam-messages" id="agentSamMessages"></div>
+        <div class="agent-sam-input-wrap">
+            <textarea id="agentSamInput" rows="2" placeholder="How can we help?"></textarea>
+            <input type="hidden" id="agentSamContext" value="">
+            <button type="button" class="btn btn-primary" id="agentSamSend" onclick="sendAgentSamMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var KV_KEY = 'brand_logo';
+        var LOGO_URLS = {
+            current: 'https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/111a8e16-4a71-48a3-754b-2b950780a300/avatar',
+            new: 'https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/1d38f6a1-d4d9-40b4-8cd6-5d8713c92400/avatar'
+        };
+        function getHeaderImg() { return document.getElementById('headerLogoImg'); }
+        function setHeaderLogo(url) { var el = getHeaderImg(); if (el) el.src = url; }
+        function setLogoRadio(variant) {
+            var current = document.getElementById('logoOptionCurrent');
+            var newOpt = document.getElementById('logoOptionNew');
+            if (current) current.checked = (variant === 'current');
+            if (newOpt) newOpt.checked = (variant === 'new');
+        }
+        function showLogoStatus(msg, isError) {
+            var el = document.getElementById('logoSwitcherStatus');
+            if (el) { el.textContent = msg; el.style.color = isError ? 'var(--primary)' : 'var(--gray)'; }
+        }
+        function applyLogoVariant(variant) {
+            variant = variant === 'new' ? 'new' : 'current';
+            var url = LOGO_URLS[variant];
+            setHeaderLogo(url);
+            setLogoRadio(variant);
+            try { localStorage.setItem(KV_KEY, variant); } catch (e) {}
+        }
+        window.saveLogoPreference = function(variant) {
+            variant = variant === 'new' ? 'new' : 'current';
+            var statusEl = document.getElementById('logoSwitcherStatus');
+            showLogoStatus('Saving…');
+            fetch('/api/settings/logo', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ logo: variant })
+            }).then(function(r) {
+                if (r.ok) {
+                    applyLogoVariant(variant);
+                    showLogoStatus('Logo updated. It will stay this way across devices.');
+                } else {
+                    applyLogoVariant(variant);
+                    showLogoStatus('Logo updated for this browser. (Server save unavailable.)');
+                }
+            }).catch(function() {
+                applyLogoVariant(variant);
+                showLogoStatus('Logo updated for this browser. (Server save unavailable.)');
+            });
+        };
+        function loadLogoPreference() {
+            fetch('/api/settings/logo').then(function(r) {
+                if (r.ok) return r.json();
+                throw new Error('skip');
+            }).then(function(data) {
+                var v = (data && data.logo) ? data.logo : null;
+                if (v === 'new' || v === 'current') {
+                    applyLogoVariant(v);
+                    return;
+                }
+                var local = null;
+                try { local = localStorage.getItem(KV_KEY); } catch (e) {}
+                applyLogoVariant(local === 'new' ? 'new' : 'current');
+            }).catch(function() {
+                var local = null;
+                try { local = localStorage.getItem(KV_KEY); } catch (e) {}
+                applyLogoVariant(local === 'new' ? 'new' : 'current');
+            });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadLogoPreference);
+        } else {
+            loadLogoPreference();
+        }
+    })();
+    </script>
+    <script src="/admin/admin.js?v=6" nonce="MTY3ODU0ODExLDQwNzE2Nzc4Nzk="></script>
+    <script src="/admin/dashboard.js?v=6" nonce="MTY3ODU0ODExLDQwNzE2Nzc4Nzk="></script>
+    <script>
+    (function() {
+        function fillSettingsFromUser() {
+            var nameEl = document.getElementById('headerUserName');
+            var emailEl = document.getElementById('headerUserEmail');
+            var nameInput = document.getElementById('settingsName');
+            var emailInput = document.getElementById('settingsEmail');
+            if (nameEl && nameInput) nameInput.value = (nameEl.textContent || '').trim();
+            if (emailEl && emailInput) emailInput.value = (emailEl.textContent || '').trim();
+            var avatarEl = document.getElementById('headerUserAvatar');
+            var photoImg = document.getElementById('settingsProfilePhoto');
+            var photoLetter = document.getElementById('settingsProfilePhotoLetter');
+            if (avatarEl) {
+                var letter = (avatarEl.textContent || 'A').trim().charAt(0).toUpperCase();
+                if (photoLetter) photoLetter.textContent = letter;
+                if (photoImg) { photoImg.style.display = 'none'; photoImg.src = ''; }
+            }
+        }
+        window.saveSettingsProfile = function() {
+            var name = (document.getElementById('settingsName') && document.getElementById('settingsName').value) || '';
+            var email = (document.getElementById('settingsEmail') && document.getElementById('settingsEmail').value) || '';
+            var statusEl = document.getElementById('settingsProfileStatus');
+            if (statusEl) statusEl.textContent = 'Saving…';
+            var formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            var fileInput = document.getElementById('settingsProfilePhotoInput');
+            if (fileInput && fileInput.files && fileInput.files[0]) formData.append('photo', fileInput.files[0]);
+            fetch('/api/settings/profile', {
+                method: 'PUT',
+                body: formData
+            }).then(function(r) {
+                if (r.ok) {
+                    if (statusEl) statusEl.textContent = 'Profile saved.';
+                    var headerName = document.getElementById('headerUserName');
+                    var headerEmail = document.getElementById('headerUserEmail');
+                    if (headerName) headerName.textContent = name || 'Admin';
+                    if (headerEmail) headerEmail.textContent = email || '—';
+                } else {
+                    if (statusEl) statusEl.textContent = 'Could not save. Try again or contact support.';
+                }
+            }).catch(function() {
+                if (statusEl) statusEl.textContent = 'Could not save. Try again or contact support.';
+            });
+        };
+        window.saveSettingsPassword = function() {
+            var current = document.getElementById('settingsCurrentPassword') && document.getElementById('settingsCurrentPassword').value;
+            var newPw = document.getElementById('settingsNewPassword') && document.getElementById('settingsNewPassword').value;
+            var confirm = document.getElementById('settingsConfirmPassword') && document.getElementById('settingsConfirmPassword').value;
+            var statusEl = document.getElementById('settingsPasswordStatus');
+            if (!newPw || newPw.length < 8) {
+                if (statusEl) statusEl.textContent = 'New password must be at least 8 characters.';
+                return;
+            }
+            if (newPw !== confirm) {
+                if (statusEl) statusEl.textContent = 'New password and confirm do not match.';
+                return;
+            }
+            if (statusEl) statusEl.textContent = 'Updating…';
+            fetch('/api/settings/password', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ currentPassword: current, newPassword: newPw })
+            }).then(function(r) {
+                if (r.ok) {
+                    if (statusEl) statusEl.textContent = 'Password updated.';
+                    if (document.getElementById('settingsCurrentPassword')) document.getElementById('settingsCurrentPassword').value = '';
+                    if (document.getElementById('settingsNewPassword')) document.getElementById('settingsNewPassword').value = '';
+                    if (document.getElementById('settingsConfirmPassword')) document.getElementById('settingsConfirmPassword').value = '';
+                } else {
+                    if (statusEl) statusEl.textContent = 'Update failed. Check current password.';
+                }
+            }).catch(function() {
+                if (statusEl) statusEl.textContent = 'Update failed. Try again.';
+            });
+        };
+        function loadSettingsTeam() {
+            var listEl = document.getElementById('settingsTeamList');
+            if (!listEl) return;
+            listEl.innerHTML = '<p style="color: var(--gray);">Loading…</p>';
+            fetch('/api/settings/team').then(function(r) {
+                if (r.ok) return r.json();
+                throw new Error('skip');
+            }).then(function(data) {
+                var members = (data && data.members) ? data.members : [];
+                if (members.length === 0) {
+                    listEl.innerHTML = '<p style="color: var(--gray); font-size: 0.875rem;">No team members yet. Click Add member to invite someone.</p>';
+                    return;
+                }
+                listEl.innerHTML = members.map(function(m) {
+                    return '<div style="display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border);"><span>' + (m.name || m.email || '—') + ' <small style="color: var(--gray);">' + (m.email || '') + '</small></span><span style="font-size: 0.75rem; color: var(--gray);">' + (m.role || 'Member') + '</span></div>';
+                }).join('');
+            }).catch(function() {
+                listEl.innerHTML = '<p style="color: var(--gray); font-size: 0.875rem;">Team list unavailable. You can still invite via Add member.</p>';
+            });
+        }
+        window.openAddTeamMemberModal = function() {
+            var modal = document.getElementById('addTeamMemberModal');
+            if (document.getElementById('addTeamMemberEmail')) document.getElementById('addTeamMemberEmail').value = '';
+            if (document.getElementById('addTeamMemberName')) document.getElementById('addTeamMemberName').value = '';
+            if (modal) modal.style.display = 'flex';
+        };
+        window.closeAddTeamMemberModal = function() {
+            var modal = document.getElementById('addTeamMemberModal');
+            if (modal) modal.style.display = 'none';
+        };
+        window.submitAddTeamMember = function() {
+            var email = document.getElementById('addTeamMemberEmail') && document.getElementById('addTeamMemberEmail').value.trim();
+            var name = document.getElementById('addTeamMemberName') && document.getElementById('addTeamMemberName').value.trim();
+            if (!email) return;
+            var statusEl = document.getElementById('settingsTeamStatus');
+            if (statusEl) statusEl.textContent = 'Sending invite…';
+            fetch('/api/settings/team', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, name: name || email })
+            }).then(function(r) {
+                if (r.ok) {
+                    closeAddTeamMemberModal();
+                    loadSettingsTeam();
+                    if (statusEl) statusEl.textContent = 'Invite sent to ' + email;
+                } else {
+                    if (statusEl) statusEl.textContent = 'Invite failed. Try again or contact support.';
+                }
+            }).catch(function() {
+                if (statusEl) statusEl.textContent = 'Invite failed. Try again.';
+            });
+        };
+        document.getElementById('settingsProfilePhotoInput').addEventListener('change', function(e) {
+            var file = e.target && e.target.files && e.target.files[0];
+            var img = document.getElementById('settingsProfilePhoto');
+            var letter = document.getElementById('settingsProfilePhotoLetter');
+            if (!file || !img || !letter) return;
+            var url = URL.createObjectURL(file);
+            img.src = url;
+            img.style.display = 'block';
+            letter.style.display = 'none';
+        });
+        var origShowPage = window.showPage;
+        if (typeof origShowPage === 'function') {
+            window.showPage = function(page) {
+                origShowPage(page);
+                var titleEl = document.getElementById('unifiedPageTitle');
+                if (titleEl && page === 'settings') titleEl.textContent = 'Settings';
+                if (page === 'settings') {
+                    fillSettingsFromUser();
+                    loadSettingsTeam();
+                }
+            };
+        }
+        var settingsNav = document.querySelector('.nav-item[data-page="settings"]');
+        if (settingsNav) {
+            settingsNav.addEventListener('click', function() {
+                setTimeout(function() {
+                    fillSettingsFromUser();
+                    loadSettingsTeam();
+                }, 50);
+            });
+        }
+    })();
+    </script>
+</body>
+
+</html>
