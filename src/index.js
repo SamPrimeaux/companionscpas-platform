@@ -1,3 +1,4 @@
+import { authRoutes } from "./api/auth_login.js";
 import { socialRoutes } from "./api/social.js";
 
 import { paymentsEmailRoutes } from "./api/payments_email.js";
@@ -5,6 +6,11 @@ import { paymentsEmailRoutes } from "./api/payments_email.js";
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (url.pathname.startsWith("/api/auth/")) {
+      const res = await authRoutes(request, env, url);
+      if (res) return res;
+    }
 
     if (url.pathname.startsWith("/api/donations/") ||
         url.pathname.startsWith("/api/webhooks/stripe") ||
