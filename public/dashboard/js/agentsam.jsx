@@ -9,6 +9,13 @@ function AgentSamDrawer() {
   const [steps, setSteps] = React.useState([]);
   const [busy, setBusy] = React.useState(false);
   const [sessionId, setSessionId] = React.useState(null);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const openDrawer = () => setOpen(true);
+    window.addEventListener("agentsam:open", openDrawer);
+    return () => window.removeEventListener("agentsam:open", openDrawer);
+  }, []);
 
   async function sendPrompt() {
     const text = prompt.trim();
@@ -118,29 +125,101 @@ function AgentSamDrawer() {
     ),
 
     React.createElement("div", { style:{ padding:12, borderTop:`1px solid ${C.border}` } },
-      React.createElement("div", { style:{ display:"flex", gap:8, marginBottom:8 } },
-        React.createElement("button", { title:"Attach file", style:{ width:34, height:34, borderRadius:10, border:`1px solid ${C.border}`, background:C.raised, color:C.textSec } },
-          React.createElement(Icon, { name:"paperclip", size:15 })
+      React.createElement("div", {
+        style:{
+          position:"relative",
+          display:"flex",
+          alignItems:"flex-end",
+          gap:8,
+          border:`1px solid ${C.border}`,
+          background:C.bg,
+          borderRadius:24,
+          padding:"8px 8px 8px 10px",
+          boxShadow:"0 12px 30px rgba(0,0,0,.18)"
+        }
+      },
+        React.createElement("button", {
+          type:"button",
+          title:"Add files, images, or tools",
+          onClick:()=>setMenuOpen(v=>!v),
+          style:{
+            width:34, height:34, borderRadius:17, border:`1px solid ${C.border}`,
+            background:C.raised, color:C.textSec, display:"grid", placeItems:"center",
+            cursor:"pointer", flexShrink:0
+          }
+        }, React.createElement(Icon, { name:"plus", size:17 })),
+
+        menuOpen && React.createElement("div", {
+          style:{
+            position:"absolute",
+            left:8,
+            bottom:54,
+            width:210,
+            border:`1px solid ${C.border}`,
+            background:C.bg2,
+            borderRadius:16,
+            padding:8,
+            boxShadow:"0 18px 55px rgba(0,0,0,.35)",
+            zIndex:20
+          }
+        },
+          [
+            ["paperclip", "Add file"],
+            ["image", "Add image"],
+            ["edit", "Website edit"],
+            ["sparkles", "Generate campaign"],
+            ["mail", "Draft response"]
+          ].map(([icon,label]) =>
+            React.createElement("button", {
+              key:label,
+              type:"button",
+              onClick:()=>setMenuOpen(false),
+              style:{
+                width:"100%", display:"flex", alignItems:"center", gap:10,
+                padding:"10px 11px", border:"none", borderRadius:12,
+                background:"transparent", color:C.text, cursor:"pointer", textAlign:"left",
+                fontWeight:700
+              }
+            }, React.createElement(Icon, { name:icon, size:15 }), React.createElement("span", null, label))
+          )
         ),
-        React.createElement("button", { title:"Image tools", style:{ width:34, height:34, borderRadius:10, border:`1px solid ${C.border}`, background:C.raised, color:C.textSec } },
-          React.createElement(Icon, { name:"image", size:15 })
-        ),
-        React.createElement("button", { title:"Website edit", style:{ width:34, height:34, borderRadius:10, border:`1px solid ${C.border}`, background:C.raised, color:C.textSec } },
-          React.createElement(Icon, { name:"edit", size:15 })
-        )
-      ),
-      React.createElement("textarea", {
-        value:prompt,
-        onChange:e=>setPrompt(e.target.value),
-        onKeyDown:e=>{ if(e.key==="Enter" && (e.metaKey || e.ctrlKey)) sendPrompt(); },
-        placeholder:"Ask Agent Sam to review applications, write a campaign, improve bios...",
-        style:{ width:"100%", minHeight:74, resize:"vertical", borderRadius:14, border:`1px solid ${C.border}`, background:C.bg, color:C.text, padding:10, outline:"none", fontFamily:"inherit" }
-      }),
-      React.createElement("button", {
-        onClick:sendPrompt,
-        disabled:busy || !prompt.trim(),
-        style:{ marginTop:8, width:"100%", height:38, borderRadius:12, border:"none", background:busy ? C.raised : "linear-gradient(135deg,#7c3aed,#a78bfa)", color:"#fff", fontWeight:800, cursor:busy ? "not-allowed" : "pointer" }
-      }, busy ? "Agent Sam is working..." : "Send to Agent Sam")
+
+        React.createElement("textarea", {
+          value:prompt,
+          onChange:e=>setPrompt(e.target.value),
+          onKeyDown:e=>{ if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); sendPrompt(); } },
+          placeholder:"Ask Agent Sam anything",
+          rows:1,
+          style:{
+            flex:1,
+            minHeight:34,
+            maxHeight:110,
+            resize:"none",
+            border:"none",
+            background:"transparent",
+            color:C.text,
+            padding:"8px 2px",
+            outline:"none",
+            fontFamily:"inherit",
+            fontSize:13,
+            lineHeight:1.35
+          }
+        }),
+
+        React.createElement("button", {
+          type:"button",
+          title:"Send",
+          onClick:sendPrompt,
+          disabled:busy || !prompt.trim(),
+          style:{
+            width:36, height:36, borderRadius:18, border:"none",
+            background:busy || !prompt.trim() ? C.raised : "linear-gradient(135deg,#7c3aed,#a78bfa)",
+            color:"#fff", display:"grid", placeItems:"center",
+            cursor:busy || !prompt.trim() ? "not-allowed" : "pointer",
+            flexShrink:0
+          }
+        }, React.createElement(Icon, { name:"arrow-up", size:17 }))
+      )
     )
   );
 }
