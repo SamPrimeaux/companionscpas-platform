@@ -201,8 +201,7 @@ function OverviewView({ onNavigate }) {
       )
     ),
 
-    // Right panel
-    React.createElement(AgentSamDrawer, null)
+    // AgentSam is mounted globally in App
   );
 }
 

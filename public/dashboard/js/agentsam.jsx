@@ -1,6 +1,18 @@
 
+if (!document.getElementById("agentsam-global-style")) {
+  const style = document.createElement("style");
+  style.id = "agentsam-global-style";
+  style.textContent = `
+    body.agentsam-open .agentsam-launcher {
+      color: #a78bfa !important;
+      filter: drop-shadow(0 0 8px rgba(167,139,250,.45));
+    }
+  `;
+  document.head.appendChild(style);
+}
+
 function AgentSamDrawer() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [mode] = React.useState("auto");
   const [prompt, setPrompt] = React.useState("");
   const [messages, setMessages] = React.useState([
@@ -14,9 +26,21 @@ function AgentSamDrawer() {
 
   React.useEffect(() => {
     const openDrawer = () => setOpen(true);
+    const closeDrawer = () => setOpen(false);
+    const toggleDrawer = () => setOpen(v => !v);
     window.addEventListener("agentsam:open", openDrawer);
-    return () => window.removeEventListener("agentsam:open", openDrawer);
+    window.addEventListener("agentsam:close", closeDrawer);
+    window.addEventListener("agentsam:toggle", toggleDrawer);
+    return () => {
+      window.removeEventListener("agentsam:open", openDrawer);
+      window.removeEventListener("agentsam:close", closeDrawer);
+      window.removeEventListener("agentsam:toggle", toggleDrawer);
+    };
   }, []);
+
+  React.useEffect(() => {
+    document.body.classList.toggle("agentsam-open", open);
+  }, [open]);
 
   function stopPrompt() {
     if (abortRef.current) {
@@ -88,15 +112,7 @@ function AgentSamDrawer() {
     }
   }
 
-  if (!open) {
-    return React.createElement("aside", { style:{ width:56, borderLeft:`1px solid ${C.border}`, background:C.bg2, display:"flex", alignItems:"flex-start", justifyContent:"center", paddingTop:18 } },
-      React.createElement("button", {
-        onClick:()=>setOpen(true),
-        title:"Open Agent Sam",
-        style:{ width:38, height:38, borderRadius:12, border:`1px solid ${C.border}`, background:C.raised, color:C.purple, cursor:"pointer" }
-      }, React.createElement(Icon, { name:"sparkles", size:18 }))
-    );
-  }
+  if (!open) return null;
 
   return React.createElement("aside", { style:{ width:330, borderLeft:`1px solid ${C.border}`, background:C.bg2, display:"flex", flexDirection:"column", minHeight:0 } },
     React.createElement("div", { style:{ padding:16, borderBottom:`1px solid ${C.border}`, display:"flex", alignItems:"center", justifyContent:"space-between", gap:10 } },
@@ -177,7 +193,7 @@ function AgentSamDrawer() {
             ["paperclip", "Add file"],
             ["image", "Add image"],
             ["edit", "Website edit"],
-            ["sparkles", "Generate campaign"],
+            ["edit", "Generate campaign"],
             ["mail", "Draft response"]
           ].map(([icon,label]) =>
             React.createElement("button", {
