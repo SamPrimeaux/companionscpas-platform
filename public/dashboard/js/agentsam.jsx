@@ -10,12 +10,22 @@ function AgentSamDrawer() {
   const [busy, setBusy] = React.useState(false);
   const [sessionId, setSessionId] = React.useState(null);
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const abortRef = React.useRef(null);
 
   React.useEffect(() => {
     const openDrawer = () => setOpen(true);
     window.addEventListener("agentsam:open", openDrawer);
     return () => window.removeEventListener("agentsam:open", openDrawer);
   }, []);
+
+  function stopPrompt() {
+    if (abortRef.current) {
+      abortRef.current.abort();
+      abortRef.current = null;
+    }
+    setBusy(false);
+    setSteps(s => [...s, { title:"Stopped by user", status:"stopped" }]);
+  }
 
   async function sendPrompt() {
     const text = prompt.trim();
@@ -26,11 +36,14 @@ function AgentSamDrawer() {
     setSteps([]);
 
     try {
+      const controller = new AbortController();
+      abortRef.current = controller;
       const res = await fetch("/api/agentsam/chat", {
         method:"POST",
         credentials:"include",
         headers:{ "Content-Type":"application/json" },
-        body:JSON.stringify({ prompt:text, mode, session_id:sessionId, route_path:location.pathname + location.search })
+        body:JSON.stringify({ prompt:text, mode, session_id:sessionId, route_path:location.pathname + location.search }),
+        signal:controller.signal
       });
 
       if (!res.ok || !res.body) throw new Error("Agent Sam request failed.");
@@ -64,8 +77,13 @@ function AgentSamDrawer() {
         }
       }
     } catch (err) {
-      setMessages(m => [...m, { role:"assistant", content:String(err.message || err) }]);
+      if (err && err.name === "AbortError") {
+        setMessages(m => [...m, { role:"assistant", content:"Stopped. I paused the current Agent Sam run." }]);
+      } else {
+        setMessages(m => [...m, { role:"assistant", content:String(err.message || err) }]);
+      }
     } finally {
+      abortRef.current = null;
       setBusy(false);
     }
   }
@@ -208,17 +226,23 @@ function AgentSamDrawer() {
 
         React.createElement("button", {
           type:"button",
-          title:"Send",
-          onClick:sendPrompt,
-          disabled:busy || !prompt.trim(),
+          title: busy ? "Stop Agent Sam" : "Send",
+          onClick: busy ? stopPrompt : sendPrompt,
+          disabled:!busy && !prompt.trim(),
           style:{
-            width:36, height:36, borderRadius:18, border:"none",
-            background:busy || !prompt.trim() ? C.raised : "linear-gradient(135deg,#7c3aed,#a78bfa)",
-            color:"#fff", display:"grid", placeItems:"center",
-            cursor:busy || !prompt.trim() ? "not-allowed" : "pointer",
-            flexShrink:0
+            width:38,
+            height:38,
+            borderRadius:19,
+            border:"none",
+            background:busy ? "linear-gradient(135deg,#ef4444,#f87171)" : (!prompt.trim() ? C.raised : "linear-gradient(135deg,#7c3aed,#a78bfa)"),
+            color:"#fff",
+            display:"grid",
+            placeItems:"center",
+            cursor:(!busy && !prompt.trim()) ? "not-allowed" : "pointer",
+            flexShrink:0,
+            boxShadow: busy || prompt.trim() ? "0 10px 24px rgba(124,58,237,.25)" : "none"
           }
-        }, React.createElement(Icon, { name:"arrow-up", size:17 }))
+        }, React.createElement(Icon, { name:busy ? "stop" : "arrow-up", size:17 }))
       )
     )
   );

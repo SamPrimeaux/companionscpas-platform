@@ -62,11 +62,20 @@ const ICONS = {
   arrowR:    `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12M10 4l6 6-6 6"/></svg>`,
   check2:    `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l4 4 8-8"/></svg>`,
   warning:   `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L2 17h16L10 3z"/><path d="M10 8v4M10 14v.5"/></svg>`,
+  bot:       `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="12" height="10" rx="3"/><path d="M10 3v3"/><circle cx="8" cy="11" r="1"/><circle cx="12" cy="11" r="1"/><path d="M7.5 14h5"/></svg>`,
+  sparkles:  `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2l1.6 4.4L16 8l-4.4 1.6L10 14l-1.6-4.4L4 8l4.4-1.6L10 2z"/><path d="M16 12l.8 2.2L19 15l-2.2.8L16 18l-.8-2.2L13 15l2.2-.8L16 12z"/></svg>`,
+  arrowUp:   `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4"/><path d="M5 9l5-5 5 5"/></svg>`,
+  stop:      `<svg viewBox="0 0 20 20" fill="currentColor"><rect x="6" y="6" width="8" height="8" rx="1.5"/></svg>`,
+  panelRightClose:`<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M13 3v14"/><path d="M9 7l-3 3 3 3"/></svg>`,
+  paperclip: `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9l-7 7a4 4 0 0 1-5.7-5.7l8-8a3 3 0 0 1 4.2 4.2l-8 8a2 2 0 0 1-2.8-2.8l7-7"/></svg>`,
+  image:     `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="12" rx="2"/><circle cx="8" cy="9" r="1.5"/><path d="M17 13l-3.5-3.5L6 16"/></svg>`,
 };
 
 // ── Icon component ────────────────────────────────────────────────────────────
 function Icon({ name, size = 16, style = {} }) {
-  const svg = ICONS[name] || ICONS.docs;
+  const aliases = { "arrow-up":"arrowUp", "panel-right-close":"panelRightClose" };
+  const key = aliases[name] || name;
+  const svg = ICONS[key] || ICONS.docs;
   return React.createElement("span", {
     style: { display:"inline-flex", alignItems:"center", justifyContent:"center", width:size, height:size, flexShrink:0, ...style },
     dangerouslySetInnerHTML: { __html: svg }
@@ -396,7 +405,22 @@ function TopBar({ onNavigate, notifCount }) {
         onClick:()=>onNavigate("notifications"),
         style:{ background:"none", border:"none", color:C.textSec, cursor:"pointer", display:"flex", padding:8, borderRadius:8 }
       }, React.createElement(Icon, { name:"mail", size:20 })),
-      React.createElement(Btn, { icon:"plus", onClick:()=>{} }, "Add New")
+      React.createElement("button", {
+        onClick: () => window.dispatchEvent(new Event("agentsam:open")),
+        title: "Open Agent Sam",
+        style: {
+          width:40,
+          height:40,
+          borderRadius:14,
+          border:`1px solid ${C.border}`,
+          background:"linear-gradient(135deg,#7c3aed,#a78bfa)",
+          color:"#fff",
+          display:"grid",
+          placeItems:"center",
+          cursor:"pointer",
+          boxShadow:"0 10px 26px rgba(124,58,237,.24)"
+        }
+      }, React.createElement(Icon, { name:"bot", size:19 }))
     )
   );
 }
