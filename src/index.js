@@ -85,7 +85,10 @@ export default {
           return Response.redirect(`${url.origin}/admin/login`, 302);
         }
       }
-      // Serve from ASSETS (public/dashboard.html or public/dashboard/js/*)
+      // Serve dashboard shell for route, but allow JS/CSS/image assets through
+      if (!isAsset) {
+        return asset(env, request, "/dashboard.html");
+      }
       return env.ASSETS.fetch(request);
     }
 
