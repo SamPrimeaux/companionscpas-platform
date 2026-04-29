@@ -17,6 +17,7 @@
 
 
 
+
 <style>
     :root {
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
@@ -263,6 +264,30 @@ code, pre, kbd, samp, .mono, .id, [data-mono] {
 }
 
 </style>
+
+<style id="about-schema-remaster-v2">
+main.about-page{padding-top:var(--nav-h);background:linear-gradient(180deg,#f7f1ea 0%,#fbf7f1 33%,#07111d 33%,#050a12 76%,#f7f1ea 76%,#fbf7f1 100%)}
+.about-hero{padding:54px 0 86px}
+.about-hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:34px;align-items:stretch}
+.about-photo,.about-copy,.about-card,.quote-card,.org-box,.cta-box{border-radius:var(--radius-xl);border:1px solid rgba(23,32,51,.12);box-shadow:var(--shadow-soft)}
+.about-photo{overflow:hidden;background:#fff}.about-photo img{width:100%;height:100%;min-height:570px;object-fit:cover;display:block}
+.about-copy{padding:clamp(30px,5vw,62px);background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(255,255,255,.62));display:flex;flex-direction:column;justify-content:center}
+.about-copy h1{color:#172033;font-size:clamp(48px,6vw,86px)}.about-copy p{color:rgba(23,32,51,.78);font-weight:650}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}.about-stat{border-radius:20px;background:#fff;padding:18px;border:1px solid rgba(23,32,51,.1)}.about-stat b{display:block;font-size:30px;color:#172033}.about-stat span{color:var(--muted);font-weight:800;font-size:13px}
+.about-dark{color:#f6f2ec;padding:88px 0}.about-dark p{color:#c8d1df}.about-narrative{max-width:980px}.about-narrative h2{max-width:900px}
+.impact-paths,.campaign-mini-grid,.testimonial-grid,.org-cta-grid{display:grid;gap:22px}.impact-paths{grid-template-columns:repeat(2,1fr);margin-top:34px}.impact-card{border-radius:var(--radius-xl);padding:32px;background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.14);box-shadow:var(--shadow-dark)}.impact-card h3{color:#fff}
+.story-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}.story-tile{position:relative;min-height:320px;border-radius:28px;overflow:hidden;background:#08111d;border:1px solid rgba(255,255,255,.12)}.story-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.story-tile:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.78))}.story-tile div{position:absolute;z-index:1;left:20px;right:20px;bottom:20px}.story-tile strong{display:block;color:#fff;font-size:20px}.story-tile span{color:rgba(255,255,255,.72)}
+.campaign-panel{margin-top:42px;border-radius:var(--radius-xl);padding:34px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13)}.progress-line{height:12px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden;margin:18px 0 10px}.progress-line span{display:block;height:100%;width:5%;background:linear-gradient(90deg,var(--rose),var(--gold))}
+.campaign-mini-grid{grid-template-columns:repeat(2,1fr);margin-top:24px}.campaign-mini{border-radius:24px;overflow:hidden;background:#08111d;border:1px solid rgba(255,255,255,.12)}.campaign-mini img{width:100%;height:260px;object-fit:cover;display:block}.campaign-mini div{padding:24px}
+.about-light{padding:88px 0;color:#172033}.testimonial-grid{grid-template-columns:repeat(2,1fr);margin-top:34px}.quote-card{background:rgba(255,255,255,.88);padding:28px}.quote-card p{font-size:16px;color:rgba(23,32,51,.76)}.quote-card strong{display:block;margin-top:16px;color:#172033}
+.gallery-grid{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:18px;margin:48px 0}.gallery-grid img{width:100%;height:300px;object-fit:cover;border-radius:28px;box-shadow:var(--shadow-soft)}.gallery-grid img:first-child{height:420px;grid-row:span 2}
+.org-cta-grid{grid-template-columns:.9fr 1.1fr;margin-top:56px}.org-box,.cta-box{background:#fff;padding:30px}.org-row{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid rgba(23,32,51,.1);font-weight:800}.org-row span:first-child{color:var(--muted)}
+.cta-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}.schema-note{margin-top:18px;font-size:13px;color:var(--muted);font-weight:800}
+.newsletter-box{margin-top:22px;padding:22px;border-radius:24px;background:#f6f1fb;border:1px solid rgba(134,100,183,.18)}.newsletter-box input{min-height:54px;border-radius:16px;border:1px solid rgba(23,32,51,.14);padding:0 16px;background:#fff;color:#172033}
+footer{background:#f7f1ea;color:#172033;border-top:1px solid rgba(23,32,51,.1)}footer p,footer a,footer span{color:rgba(23,32,51,.72)!important}footer h3{color:#172033}
+@media(max-width:860px){.about-hero-grid,.impact-paths,.testimonial-grid,.org-cta-grid,.campaign-mini-grid,.story-strip,.gallery-grid{grid-template-columns:1fr}.about-photo img{min-height:360px}.about-stats{grid-template-columns:1fr}.gallery-grid img,.gallery-grid img:first-child{height:280px}}
+</style>
+
 </head>
 
 <body>
@@ -281,163 +306,110 @@ code, pre, kbd, samp, .mono, .id, [data-mono] {
     </div>
   </header>
 
-    
+<main class="about-page" id="top">
+  <section class="about-hero">
+    <div class="container about-hero-grid">
+      <div class="about-photo"><img src="/assets/animals/theteam.webp" alt="Companions of CPAS volunteer team"></div>
+      <div class="about-copy">
+        <div class="eyebrow">Caddo Parish • 100% Volunteer-Based</div>
+        <h1>Giving Caddo dogs the second chance they might not get otherwise.</h1>
+        <p>Companions of CPAS helps dogs at Caddo Parish Animal Services leave uncertainty behind through medical care, transport pathways, rescue partnerships, and community support.</p>
+        <div class="about-stats">
+          <div class="about-stat"><b>$465</b><span>raised by 7 donors</span></div>
+          <div class="about-stat"><b>5%</b><span>toward $10,000 goal</span></div>
+          <div class="about-stat"><b>100%</b><span>volunteer-based</span></div>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/donate" data-open-donation="true">Support the Mission</a>
+          <a class="btn btn-secondary" href="/adopt">Meet Adoptable Dogs</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Mobile Navigation -->
+  <section class="about-dark">
+    <div class="container">
+      <div class="about-narrative">
+        <div class="eyebrow">Why Companions Exists</div>
+        <h2>When space is limited, support becomes the difference between fear and a future.</h2>
+        <p>Caddo Parish Animal Services is an open-intake shelter, where dogs can be at risk simply because there is not enough space. Companions of CPAS is not here to compete with rescues or claim animals as our own. We step in where support matters most.</p>
+      </div>
 
-    <main class="container">
-        <section class="about-hero">
-            <div>
-                <div class="about-hero-kicker">Warm · Trustworthy · Local · Hope-driven</div>
-                <h1>We’re a small rescue with big-heart impact.</h1>
-                <p class="about-hero-lead">
-                    Companions of CPAS walks alongside your community families with practical help, clear guidance,
-                    and deep compassion—so pets can stay healthy, safe, and at home where they belong.
-                </p>
-                <div class="about-hero-tags">
-                    <span class="about-tag">501(c)(3) nonprofit</span>
-                    <span class="about-tag">your community, Louisiana</span>
-                    <span class="about-tag">Spay/neuter, vaccines & food support</span>
-                </div>
-                <p class="about-hero-meta">
-                    Every dog you see here is a real Companions of CPAS animal or partner rescue dog. Their stories are why this
-                    work matters.
-                </p>
-            </div>
-            <div class="about-hero-gallery">
-                <div class="about-hero-card">
-                    <img src="/assets/animals/bigsmiles.webp"
-                        alt="A person gently petting a dog, representing the compassionate care at Companions of CPAS">
-                    <div class="about-hero-label">Savannah · Heart of the program</div>
-                </div>
-                <div class="about-hero-card">
-                    <img src="/assets/animals/skinnyman.webp"
-                        alt="Bandit, a Companions of CPAS dog">
-                    <div class="about-hero-label">Bandit · Goofy best friend</div>
-                </div>
-                <div class="about-hero-card">
-                    <img src="/assets/animals/theteam.webp"
-                        alt="Cayenne, a Companions of CPAS dog">
-                    <div class="about-hero-label">Cayenne · Gentle soul</div>
-                </div>
-            </div>
-        </section>
+      <div class="story-strip">
+        <article class="story-tile"><img src="/assets/animals/bigsmiles.webp" alt="Happy rescue dog smiling"><div><strong>Joy worth fighting for</strong><span>Every adoption story starts with a chance.</span></div></article>
+        <article class="story-tile"><img src="/assets/animals/brindle.jpg" alt="Brindle rescue dog"><div><strong>Visibility saves lives</strong><span>Support helps overlooked dogs be seen.</span></div></article>
+        <article class="story-tile"><img src="/assets/animals/happyboy.webp" alt="Happy rescue dog"><div><strong>More time, more hope</strong><span>Medical and transport support create options.</span></div></article>
+      </div>
 
-        <section class="about-section">
-            <div class="about-grid">
-                <div>
-                    <h2>Our mission</h2>
-                    <p>
-                        Companions of CPAS exists to support pet owners in the your community community by
-                        providing access to spay and neuter services, vaccinations, and pet food assistance—helping
-                        families keep their pets healthy, at home, and out of shelters, while preventing unwanted
-                        litters.
-                    </p>
-                    <p>
-                        We are intentionally small, local, and relational. That means we know the roads, the families,
-                        and the stories behind each call for help.
-                    </p>
-                </div>
-                <div>
-                    <h2>Our values</h2>
-                    <ul class="about-values-list">
-                        <li><strong>Compassion first</strong> — No judgment, only support.</li>
-                        <li><strong>Prevention over crisis</strong> — Spay, neuter, vaccinate early.</li>
-                        <li><strong>Community roots</strong> — Local help for local families.</li>
-                        <li><strong>Dignity for all</strong> — Pets and people deserve respect.</li>
-                        <li><strong>Practical impact</strong> — Real help, not just promises.</li>
-                    </ul>
-                </div>
-            </div>
+      <div class="impact-paths">
+        <article class="impact-card"><div class="eyebrow">Path One</div><h3>Funding critical medical care</h3><p>We help fund surgery, diagnostics, urgent treatment, and heartworm care for dogs whose medical needs would otherwise keep them stuck.</p></article>
+        <article class="impact-card"><div class="eyebrow">Path Two</div><h3>Transporting dogs to no-kill rescue partners</h3><p>When local options are limited, transport connects Caddo dogs with rescue partners and communities where adoption demand is higher.</p></article>
+      </div>
 
-            <div class="about-trust-grid">
-                <div class="about-trust-card">
-                    <h3>501(c)(3) you can verify</h3>
-                    <p>Companions of CPAS is a registered 501(c)(3) nonprofit (EIN: 88-4156327) focused on Grant
-                        Parish families.</p>
-                </div>
-                <div class="about-trust-card">
-                    <h3>Boots-on-the-ground support</h3>
-                    <p>We coordinate appointments, transport when possible, and help families navigate low-cost options
-                        instead of leaving them to figure it out alone.</p>
-                </div>
-                <div class="about-trust-card">
-                    <h3>Animals at the center</h3>
-                    <p>Every program decision is filtered through: “What does this mean for the actual dog or cat in
-                        this home?”</p>
-                </div>
-                <div class="about-trust-card">
-                    <h3>Transparent, relationship-based help</h3>
-                    <p>We don’t shame, lecture, or post people’s struggles online—ever. We simply show up, help, and
-                        follow through.</p>
-                </div>
-            </div>
-        </section>
+      <div class="campaign-panel" data-cms-section="about_campaign_progress">
+        <div class="eyebrow">Featured Campaigns</div>
+        <h2>$10,000 lifesaving goal</h2>
+        <p>$465 raised by 7 donors. Every gift fuels medical support, transport, and second chances.</p>
+        <div class="progress-line"><span></span></div><strong>5% complete</strong>
+        <div class="campaign-mini-grid">
+          <article class="campaign-mini"><img src="/assets/animals/skinnyman.webp" alt="Dog needing medical support"><div><h3>Medical Support</h3><p>Heartworm treatment, surgery, diagnostics, and urgent care.</p><strong>$0 raised</strong></div></article>
+          <article class="campaign-mini"><img src="/assets/animals/redeye.webp" alt="Rescue dog needing care"><div><h3>Transport Costs</h3><p>Fuel, travel, and rescue-partner coordination for dogs leaving Caddo.</p><strong>$0 raised</strong></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <section class="about-section">
-            <h2>Our Impact in Photos</h2>
-            <p class="about-section-lead" style="font-size: 18px; color: var(--muted); line-height: 1.7; margin-bottom: 24px;">
-                Through our work, we create countless stories of hope, health, and happiness. These images capture just a few moments of the profound impact we have on the lives of pets and their families in your community.
-            </p>
-            <div class="about-hero-gallery" style="margin-bottom: 48px;">
-                <div class="about-hero-card">
-                    <img src="/assets/animals/brindle.jpg"
-                        alt="A person gently petting a dog, representing the compassionate care at Companions of CPAS">
-                    <div class="about-hero-label">Savannah · Heart of the program</div>
-                </div>
-                <div class="about-hero-card">
-                    <img src="/assets/animals/redeye.webp"
-                        alt="Bandit, a Companions of CPAS dog">
-                    <div class="about-hero-label">Bandit · Goofy best friend</div>
-                </div>
-                <div class="about-hero-card">
-                    <img src="/assets/animals/happyboy.webp"
-                        alt="Cayenne, a Companions of CPAS dog">
-                    <div class="about-hero-label">Cayenne · Gentle soul</div>
-                </div>
-            </div>
-        </section>
+  <section class="about-light">
+    <div class="container">
+      <div class="eyebrow">Testimonials</div>
+      <h2>Second chances become real stories.</h2>
+      <div class="testimonial-grid">
+        <article class="quote-card"><p>“Daisy came to me just hours from euthanasia. Companions covered her surgery and lifesaving treatment, giving her the second chance she never would have had.”</p><strong>— Brittany Ramsey</strong></article>
+        <article class="quote-card"><p>“Because of their dedicated team, deserving dogs are given a second chance and continue their journey to safe, loving homes.”</p><strong>— MADE New Dog Rescue</strong></article>
+        <article class="quote-card"><p>“Onyx changed me. Because of him, I became a volunteer with Companions of CPAS.”</p><strong>— Michelle Miller, President</strong></article>
+        <article class="quote-card"><p>“Companions became a critical partner in expanding rescue partnerships that provide lifesaving opportunities.”</p><strong>— Suzanne Zortman</strong></article>
+      </div>
 
-        <section class="about-animals-section">
-            <div class="about-animals-header">
-                <div>
-                    <h2>The faces behind our mission</h2>
-                    <p class="about-animals-subtitle">
-                        A few of the real Companions of CPAS animals whose stories shape how we show up for every new family.
-                    </p>
-                </div>
-                <div>
-                    <a href="/adopt" class="button primary" style="padding: 10px 18px; font-size: 14px;">Meet all
-                        adoptable pets</a>
-                </div>
-            </div>
-            <div class="about-animals-grid" id="aboutAnimalsGrid">
-                <!-- Populated from /api/animals -->
-            </div>
-        </section>
+      <div class="gallery-grid" data-cms-section="about_gallery">
+        <img src="/assets/animals/theteam.webp" alt="Companions team">
+        <img src="/assets/animals/bigsmiles.webp" alt="Smiling rescue dog">
+        <img src="/assets/animals/brindle.jpg" alt="Brindle rescue dog">
+        <img src="/assets/animals/happyboy.webp" alt="Happy rescue dog">
+        <img src="/assets/animals/redeye.webp" alt="Rescue dog closeup">
+      </div>
 
-        <section class="about-help-section">
-            <div class="about-help-card">
-                <h3>For families</h3>
-                <p>If you need help with spay/neuter, vaccinations, or pet food, reach out. We’ll talk through options
-                    that fit your situation and connect you to concrete next steps.</p>
-            </div>
-            <div class="about-help-card">
-                <h3>For donors</h3>
-                <p>Your support turns into vet appointments, full food bowls, and fewer emergency surrenders. We are
-                    careful, transparent stewards of every dollar.</p>
-            </div>
-            <div class="about-help-card">
-                <h3>For partners</h3>
-                <p>We collaborate with other rescues, clinics, and community groups in your community to stretch limited
-                    resources as far as possible.</p>
-            </div>
-        </section>
-    </main>
+      <div class="org-cta-grid">
+        <div class="org-box">
+          <div class="eyebrow">Organization Data</div><h3>Companions of CPAS</h3>
+          <div class="org-row"><span>Tax status</span><strong>501(c)(3)</strong></div>
+          <div class="org-row"><span>EIN</span><strong>88-4156327</strong></div>
+          <div class="org-row"><span>Parish served</span><strong>Caddo</strong></div>
+          <div class="org-row"><span>Operating budget</span><strong>Under $100,000</strong></div>
+          <div class="org-row"><span>Email</span><strong>companionsCPAS@gmail.com</strong></div>
+        </div>
 
-    <!-- Footer -->
-    <!-- Footer (sitewide component injected by _shared.js) -->
-    <footer><div class="container footer-grid"><div><img class="footer-logo" src="https://companionscpas-platform.samprimeauxwork.workers.dev/logo.png" alt="Companions of CPAS logo" /><p>Companions of CPAS is a volunteer-run nonprofit helping dogs at Caddo Parish Animal Services receive medical care, transport support, and second chances.</p></div><nav class="footer-links" aria-label="Footer pages">
+        <div class="cta-box" data-cms-section="about_modular_ctas">
+          <div class="eyebrow">Donation + Contact Ready</div>
+          <h3>Built for one-time gifts, monthly support, contact requests, and newsletter growth.</h3>
+          <p>This demo is structured so Stripe, Resend, donor records, campaign tracking, and newsletter subscriptions can be fully wired after project approval.</p>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="/donate" data-open-donation="true">One-Time Donation</a>
+            <a class="btn btn-secondary" href="/donate?recurring=true" data-open-donation="monthly">Monthly Giving</a>
+            <a class="btn btn-secondary" href="mailto:companionsCPAS@gmail.com" data-open-contact="true">Contact CPAS</a>
+          </div>
+          <div class="newsletter-box" data-cms-section="newsletter_signup">
+            <strong>Newsletter subscription ready</strong>
+            <p>Mailchimp replacement path: store subscriber intent now, migrate to owned Resend/email workflow later.</p>
+            <input type="email" placeholder="Email address for rescue updates">
+          </div>
+          <div class="schema-note">Hooks: donation_intents, donation_campaigns, contact_requests, newsletter_subscribers, cms_assets.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="container footer-grid"><div><img class="footer-logo" src="https://companionscpas-platform.samprimeauxwork.workers.dev/logo.png" alt="Companions of CPAS logo" /><p>Companions of CPAS is a volunteer-run nonprofit helping dogs at Caddo Parish Animal Services receive medical care, transport support, and second chances.</p></div><nav class="footer-links" aria-label="Footer pages">
           <h3>Pages</h3>
           <a href="/">Home</a>
           <a href="/about">About</a>
@@ -447,141 +419,6 @@ code, pre, kbd, samp, .mono, .id, [data-mono] {
           
           <a href="/admin/dashboard">Admin Dashboard</a>
         </nav><div><h3>Nonprofit Info</h3><p>501(c)(3) Tax-Exempt<br/>EIN: 88-4156327<br/>Shreveport, LA 71106</p></div><div class="developer"><span>Developed by</span><img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/238de9d1-a470-4fe5-5424-9182f4bc0500/small" alt="InnerAnimalMedia" /></div></div></footer>
-
-    <script src="/_shared.js?v=4"></script>
-    <script>
-        const CLOUDFLARE_IMAGES_BASE = 'https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw';
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadAboutAnimals();
-        });
-
-        async function loadAboutAnimals() {
-            try {
-                const res = await fetch('/api/animals');
-                if (!res.ok) return;
-                const animals = await res.json();
-                const grid = document.getElementById('aboutAnimalsGrid');
-                if (!Array.isArray(animals) || animals.length === 0 || !grid) return;
-
-                const featured = animals.filter(a => a.featured);
-                const rest = animals.filter(a => !a.featured);
-                const selection = [...featured, ...rest].slice(0, 4);
-
-                grid.innerHTML = selection.map(a => buildAboutAnimalCard(a)).join('');
-            } catch (e) {
-                console.error('Error loading about animals', e);
-            }
-        }
-
-        function buildAboutAnimalCard(animal) {
-            const imageUrl = animal.primary_image || animal.image_url ||
-                (animal.primary_image_id ? `${CLOUDFLARE_IMAGES_BASE}/${animal.primary_image_id}/medium` : '');
-
-            let storySource = animal.bio || animal.description || '';
-            let storyLine = '';
-            if (storySource) {
-                const firstSentence = storySource.split(/(?<=[.!?])\s+/)[0];
-                storyLine = firstSentence || storySource;
-            }
-
-            return `
-                <article class="about-animal-card">
-                    <div class="about-animal-image">
-                        <img src="${imageUrl}" alt="${animal.name}" loading="lazy"
-                             onerror="this.src='/assets/animals/gimmieabite.webp'" />
-                    </div>
-                    <div class="about-animal-body">
-                        <div class="about-animal-name">${animal.name}</div>
-                        <div class="about-animal-meta">
-                            ${animal.species || 'Dog'} • ${animal.breed || 'Mixed Breed'}${animal.age ? ` • ${animal.age}` : ''}
-                        </div>
-                        ${storyLine ? `<p class="about-animal-story">${storyLine}</p>` : ''}
-                    </div>
-                </article>
-            `;
-        }
-    </script>
-
-<script id="cpas-public-contact-v2">
-(function(){
-  function setActiveNav(){
-    const path = location.pathname === "/" ? "/" : location.pathname.replace(/\/$/,"");
-    document.querySelectorAll("nav a,.nav a,.mobile-nav a").forEach(a=>{
-      const href = a.getAttribute("href");
-      if(!href) return;
-      const normalized = href === "/" ? "/" : href.replace(/\/$/,"");
-      if(normalized === path){ a.classList.add("active"); a.setAttribute("aria-current","page"); }
-    });
-  }
-  function setParallax(){
-    const y = Math.round(window.scrollY * 0.08);
-    document.documentElement.style.setProperty("--scrollY", y + "px");
-  }
-  function modalHtml(){
-    return `<div class="cpas-contact-modal" id="cpasContactModal" aria-hidden="true">
-      <div class="cpas-contact-panel" role="dialog" aria-modal="true" aria-labelledby="cpasContactTitle">
-        <div class="cpas-contact-head">
-          <div>
-            <h2 id="cpasContactTitle">Get Connected</h2>
-            <p>Tell Companions of CPAS how we can help. This is wired for D1 logging and demo-safe email prep.</p>
-          </div>
-          <button class="cpas-close" type="button" data-cpas-close>Close</button>
-        </div>
-        <form class="cpas-contact-form" id="cpasContactForm">
-          <div class="cpas-contact-grid">
-            <input name="name" placeholder="Full name" required>
-            <input name="email" type="email" placeholder="Email address" required>
-            <input name="phone" placeholder="Phone">
-            <select name="request_type">
-              <option value="general">General Help</option>
-              <option value="adoption">Adoption</option>
-              <option value="foster">Foster / Volunteer</option>
-              <option value="donation">Donation / Fundraising</option>
-              <option value="medical_support">Medical Support</option>
-            </select>
-            <textarea class="full" name="message" placeholder="How can we help?" required></textarea>
-          </div>
-          <button class="cpas-submit" type="submit">Send Request</button>
-          <div class="cpas-form-msg" id="cpasContactMsg"></div>
-        </form>
-      </div>
-    </div>`;
-  }
-  function openModal(){
-    document.getElementById("cpasContactModal").classList.add("open");
-    document.getElementById("cpasContactModal").setAttribute("aria-hidden","false");
-  }
-  function closeModal(){
-    document.getElementById("cpasContactModal").classList.remove("open");
-    document.getElementById("cpasContactModal").setAttribute("aria-hidden","true");
-  }
-  document.addEventListener("DOMContentLoaded",()=>{
-    setActiveNav(); setParallax();
-    if(!document.getElementById("cpasContactModal")) document.body.insertAdjacentHTML("beforeend", modalHtml());
-    window.addEventListener("scroll", setParallax, {passive:true});
-    document.querySelectorAll('a[href="#contact"],button[data-contact],.hero-cta-primary,.btn-primary').forEach(el=>{
-      if((el.textContent||"").toLowerCase().includes("get connected") || el.getAttribute("href")==="#contact"){
-        el.addEventListener("click", e=>{e.preventDefault(); openModal();});
-      }
-    });
-    document.addEventListener("click",e=>{
-      if(e.target.matches("[data-cpas-close]") || e.target.id==="cpasContactModal") closeModal();
-    });
-    document.getElementById("cpasContactForm").addEventListener("submit",async e=>{
-      e.preventDefault();
-      const msg=document.getElementById("cpasContactMsg");
-      msg.textContent="Sending...";
-      const payload=Object.fromEntries(new FormData(e.currentTarget).entries());
-      const res=await fetch("/api/contact/request",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-      const data=await res.json().catch(()=>({}));
-      msg.textContent=data.message || (res.ok ? "Request saved. We will follow up soon." : "Could not send request.");
-      if(res.ok) e.currentTarget.reset();
-    });
-  });
-})();
-</script>
-
 </body>
 
 </html>
