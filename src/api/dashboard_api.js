@@ -15,7 +15,18 @@ export async function dashboardApiRoutes(request, env, url) {
 
   if (path === "/api/dashboard/overview") {
     const animals = await env.DB.prepare("SELECT * FROM animal_profiles ORDER BY created_at DESC").all();
-    const apps = await env.DB.prepare("SELECT * FROM adoption_applications_demo ORDER BY submitted_at DESC").all();
+    const apps = await env.DB.prepare(`
+      SELECT
+        id,
+        first_name || ' ' || last_name AS applicant_name,
+        email AS applicant_email,
+        review_status AS status,
+        submitted_at,
+        answers_json
+      FROM cpas_foster_applications
+      WHERE tenant_id = 'companions_cpas'
+      ORDER BY submitted_at DESC
+    `).all();
     const campaigns = await env.DB.prepare("SELECT * FROM fundraising_campaigns_demo ORDER BY created_at DESC").all();
     const volunteers = await env.DB.prepare("SELECT * FROM volunteer_records ORDER BY hours_month DESC").all();
     const events = await env.DB.prepare("SELECT * FROM dashboard_calendar_events ORDER BY starts_at ASC").all();
@@ -90,8 +101,29 @@ export async function dashboardApiRoutes(request, env, url) {
   }
 
   if (path === "/api/dashboard/applications") {
-    const rows = await env.DB.prepare("SELECT * FROM adoption_applications_demo ORDER BY submitted_at DESC").all();
-    return json({ applications: rows.results || [] });
+    const rows = await env.DB.prepare(`
+      SELECT
+        id,
+        first_name || ' ' || last_name AS applicant_name,
+        email AS applicant_email,
+        phone AS applicant_phone,
+        review_status AS status,
+        source,
+        submitted_at,
+        assigned_to,
+        internal_notes,
+        answers_json
+      FROM cpas_foster_applications
+      WHERE tenant_id = 'companions_cpas'
+      ORDER BY submitted_at DESC
+    `).all().catch(() => ({ results: [] }));
+
+    return json({
+      applications: (rows.results || []).map(a => ({
+        ...a,
+        answers: safeJson(a.answers_json, {})
+      }))
+    });
   }
 
   if (path === "/api/dashboard/fundraising") {
