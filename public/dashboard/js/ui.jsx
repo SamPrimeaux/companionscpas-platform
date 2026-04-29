@@ -147,16 +147,9 @@ function Sparkline({ data, color = C.purple, width = 80, height = 28 }) {
 
 // ── StatCard ──────────────────────────────────────────────────────────────────
 function SafeIcon({ icon, size = 18, color }) {
-  const map = {
-    "🐾":"paw", "💜":"heart", "🏠":"home", "🩺":"medical", "💵":"dollar", "💰":"dollar", "💸":"dollar",
-    "⚠️":"alert", "✅":"check", "❌":"close", "📋":"clipboard", "📊":"chart", "👤":"user", "💉":"medical",
-    "📥":"intake", "📧":"mail", "💳":"card", "🎯":"target", "🏆":"award", "🏷":"tag", "👥":"people",
-    "📅":"calendar", "🔁":"refresh", "☁️":"cloud", "☁":"cloud", "🍽":"utensils", "💊":"pill",
-    "🔴":"circle", "🟡":"circle", "🛣":"route", "🤝":"handshake", "🦮":"dog", "🔍":"search", "☰":"menu"
-  };
-  const key = map[icon] || icon;
-  if (typeof Icon === "function") return React.createElement(Icon, { name:key, size, color });
-  return React.createElement("span", { style:{ fontSize:size, color } }, icon || "");
+  const key = icon || "docs";
+  if (typeof Icon === "function") return React.createElement(Icon, { name:key, size, style:{ color } });
+  return React.createElement("span", { style:{ fontSize:size, color } }, "");
 }
 
 function StatCard({ icon, iconColor, label, value, sub, subPositive, sparkData, sparkColor, onClick }) {
@@ -299,7 +292,7 @@ function Card({ children, style: extra = {}, onClick, hover = false }) {
 // ── Input ─────────────────────────────────────────────────────────────────────
 function Input({ value, onChange, placeholder, icon, style: extra = {} }) {
   const [focus, setFocus] = useState(false);
-  return React.createElement("div", { style:{ position:"relative", ...extra } },
+  return React.createElement("div", { style:{ position:"relative", overflow:"hidden", ...extra } },
     icon && React.createElement("span", { style:{ position:"absolute", left:10, top:"50%", transform:"translateY(-50%)", color:C.textMut, pointerEvents:"none", display:"flex" } }, React.createElement(Icon, { name:icon, size:15 })),
     React.createElement("input", {
       value, onChange: e => onChange(e.target.value),
@@ -394,7 +387,7 @@ function TopBar({ onNavigate, notifCount }) {
     React.createElement("div", { style:{ display:"flex", alignItems:"center", gap:8, marginLeft:"auto" } },
       React.createElement("button", {
         onClick:()=>onNavigate("notifications"),
-        style:{ position:"relative", background:"none", border:"none", color:C.textSec, cursor:"pointer", display:"flex", padding:8, borderRadius:8 }
+        style:{ position:"relative", overflow:"hidden", background:"none", border:"none", color:C.textSec, cursor:"pointer", display:"flex", padding:8, borderRadius:8 }
       },
         React.createElement(Icon, { name:"bell", size:20 }),
         notifCount > 0 && React.createElement("span", { style:{ position:"absolute", top:4, right:4, width:8, height:8, borderRadius:"50%", background:C.red, border:`2px solid ${C.surface}` } })
