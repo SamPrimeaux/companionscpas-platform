@@ -876,6 +876,84 @@
             will-change: transform;
         }
     </style>
+
+<style id="cpas-public-dark-glass-theme">
+:root{
+  --cpas-bg:#05080D;
+  --cpas-bg-alt:#101927;
+  --cpas-surface:rgba(18,25,36,.72);
+  --cpas-surface-soft:rgba(255,255,255,.055);
+  --cpas-border:rgba(255,255,255,.12);
+  --cpas-text:#F8F7FF;
+  --cpas-muted:rgba(248,247,255,.68);
+  --cpas-purple:#6D5593;
+  --cpas-purple-2:#8B74B7;
+  --cpas-cyan:#16BFD6;
+}
+body{
+  background:
+    radial-gradient(circle at 20% 0%,rgba(109,85,147,.24),transparent 32%),
+    radial-gradient(circle at 86% 18%,rgba(22,191,214,.15),transparent 34%),
+    linear-gradient(135deg,var(--cpas-bg),var(--cpas-bg-alt) 52%,#04060A) !important;
+  color:var(--cpas-text) !important;
+}
+.header-wrap,
+.nav,
+header{
+  background:rgba(5,8,13,.72) !important;
+  border-bottom:1px solid var(--cpas-border) !important;
+  backdrop-filter:blur(22px) saturate(135%) !important;
+}
+section,
+.home-section,
+.about-section,
+.services-section,
+.donate-section,
+.adopt-section{
+  background:transparent !important;
+}
+.card,
+.service-card,
+.animal-card,
+.donation-card,
+.story-card,
+.value-card,
+.form-card,
+.info-card{
+  background:var(--cpas-surface) !important;
+  border:1px solid var(--cpas-border) !important;
+  box-shadow:0 24px 80px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.07) !important;
+  backdrop-filter:blur(18px) saturate(130%) !important;
+}
+h1,h2,h3,h4,p,li,label{color:inherit}
+p,.subheadline,.muted{color:var(--cpas-muted) !important}
+a{color:inherit}
+.btn,
+button,
+.btn-primary,
+.hero-cta-primary{
+  background:linear-gradient(135deg,var(--cpas-purple),var(--cpas-purple-2)) !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  color:white !important;
+  box-shadow:0 18px 42px rgba(109,85,147,.30) !important;
+}
+.btn-secondary,
+.hero-cta-secondary{
+  background:rgba(255,255,255,.055) !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  color:white !important;
+}
+img{
+  border-radius:18px;
+}
+.logo,
+.footer-logo,
+.brand img,
+header img{
+  border-radius:0 !important;
+}
+</style>
+
 </head>
 
 <body>
@@ -955,7 +1033,7 @@
             <div class="hero-right">
                 <div class="hero-images-wrap">
                     <div class="hero-image hero-image-1" data-parallax="0.15">
-                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/8b18c136-c1d8-43cf-08a1-e2ab9ddb4100/public"
+                    <img src="/assets/animals/goinhome.webp"
                         alt="Savannah - Super sweet dog-friendly girl ready for adoption" loading="eager" />
                     <div class="hero-glass-cta">
                         <span class="hero-glass-label">Savannah</span>
@@ -1726,9 +1804,9 @@
             const imageUrl = animal.primary_image || animal.image_url ||
                 (animal.images && animal.images[0] ? animal.images[0].large : '') ||
                 (animal.primary_image_id ? CLOUDFLARE_IMAGES_BASE + '/' + animal.primary_image_id + '/medium' : '') ||
-                'https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&h=600&fit=crop&q=80';
+                '/assets/animals/thisismysweater.webp';
             const meta = [animal.age || '', animal.weight || ''].filter(Boolean).join(' \u2022 ');
-            div.innerHTML = '<div class="pet-card-image-wrap"><img src="' + imageUrl.replace(/"/g, '&quot;') + '" alt="' + (animal.name || '').replace(/"/g, '&quot;') + '" loading="' + (index < 4 ? 'eager' : 'lazy') + '" onerror="this.src=\'https://images.unsplash.com/photo-1552053831-71594a27632d?w=600&h=600&fit=crop&q=80\'"></div>' +
+            div.innerHTML = '<div class="pet-card-image-wrap"><img src="' + imageUrl.replace(/"/g, '&quot;') + '" alt="' + (animal.name || '').replace(/"/g, '&quot;') + '" loading="' + (index < 4 ? 'eager' : 'lazy') + '" onerror="this.src=\'/assets/animals/thefounders.webp'"></div>' +
                 '<div class="pet-card-body">' +
                 '<h3 class="pet-card-name">' + (animal.name || 'Pet').replace(/</g, '&lt;') + '</h3>' +
                 '<p class="pet-card-meta">' + (meta || 'Available').replace(/</g, '&lt;') + '</p>' +
@@ -1760,7 +1838,7 @@
                 images = [{ large: animal.primary_image }];
             }
 
-            var primaryUrl = (images[0] && images[0].large) || animal.primary_image || 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&h=600&fit=crop&q=80';
+            var primaryUrl = (images[0] && images[0].large) || animal.primary_image || '/assets/animals/hungryboy.webp';
             currentModalImageIndex = 0;
             window.currentModalImages = images;
             window.currentAnimalId = animalId;

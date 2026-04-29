@@ -286,6 +286,84 @@
             }
         }
     </style>
+
+<style id="cpas-public-dark-glass-theme">
+:root{
+  --cpas-bg:#05080D;
+  --cpas-bg-alt:#101927;
+  --cpas-surface:rgba(18,25,36,.72);
+  --cpas-surface-soft:rgba(255,255,255,.055);
+  --cpas-border:rgba(255,255,255,.12);
+  --cpas-text:#F8F7FF;
+  --cpas-muted:rgba(248,247,255,.68);
+  --cpas-purple:#6D5593;
+  --cpas-purple-2:#8B74B7;
+  --cpas-cyan:#16BFD6;
+}
+body{
+  background:
+    radial-gradient(circle at 20% 0%,rgba(109,85,147,.24),transparent 32%),
+    radial-gradient(circle at 86% 18%,rgba(22,191,214,.15),transparent 34%),
+    linear-gradient(135deg,var(--cpas-bg),var(--cpas-bg-alt) 52%,#04060A) !important;
+  color:var(--cpas-text) !important;
+}
+.header-wrap,
+.nav,
+header{
+  background:rgba(5,8,13,.72) !important;
+  border-bottom:1px solid var(--cpas-border) !important;
+  backdrop-filter:blur(22px) saturate(135%) !important;
+}
+section,
+.home-section,
+.about-section,
+.services-section,
+.donate-section,
+.adopt-section{
+  background:transparent !important;
+}
+.card,
+.service-card,
+.animal-card,
+.donation-card,
+.story-card,
+.value-card,
+.form-card,
+.info-card{
+  background:var(--cpas-surface) !important;
+  border:1px solid var(--cpas-border) !important;
+  box-shadow:0 24px 80px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.07) !important;
+  backdrop-filter:blur(18px) saturate(130%) !important;
+}
+h1,h2,h3,h4,p,li,label{color:inherit}
+p,.subheadline,.muted{color:var(--cpas-muted) !important}
+a{color:inherit}
+.btn,
+button,
+.btn-primary,
+.hero-cta-primary{
+  background:linear-gradient(135deg,var(--cpas-purple),var(--cpas-purple-2)) !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  color:white !important;
+  box-shadow:0 18px 42px rgba(109,85,147,.30) !important;
+}
+.btn-secondary,
+.hero-cta-secondary{
+  background:rgba(255,255,255,.055) !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  color:white !important;
+}
+img{
+  border-radius:18px;
+}
+.logo,
+.footer-logo,
+.brand img,
+header img{
+  border-radius:0 !important;
+}
+</style>
+
 </head>
 
 <body>
@@ -363,17 +441,17 @@
             </div>
             <div class="about-hero-gallery">
                 <div class="about-hero-card">
-                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/7290332f-2348-4ce3-a5c4-b8fceb2d6100/medium"
+                    <img src="/assets/animals/bigsmiles.webp"
                         alt="A person gently petting a dog, representing the compassionate care at Companions of CPAS">
                     <div class="about-hero-label">Savannah · Heart of the program</div>
                 </div>
                 <div class="about-hero-card">
-                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/293577cc-2219-497a-ad86-709552f27100/public"
+                    <img src="/assets/animals/skinnyman.webp"
                         alt="Bandit, a Companions of CPAS dog">
                     <div class="about-hero-label">Bandit · Goofy best friend</div>
                 </div>
                 <div class="about-hero-card">
-                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/02930113-3440-49e9-7d32-21faf5497600/public"
+                    <img src="/assets/animals/theteam.webp"
                         alt="Cayenne, a Companions of CPAS dog">
                     <div class="about-hero-label">Cayenne · Gentle soul</div>
                 </div>
@@ -438,17 +516,17 @@
             </p>
             <div class="about-hero-gallery" style="margin-bottom: 48px;">
                 <div class="about-hero-card">
-                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/7290332f-2348-4ce3-a5c4-b8fceb2d6100/medium"
+                    <img src="/assets/animals/brindle.jpg"
                         alt="A person gently petting a dog, representing the compassionate care at Companions of CPAS">
                     <div class="about-hero-label">Savannah · Heart of the program</div>
                 </div>
                 <div class="about-hero-card">
-                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/293577cc-2219-497a-ad86-709552f27100/public"
+                    <img src="/assets/animals/redeye.webp"
                         alt="Bandit, a Companions of CPAS dog">
                     <div class="about-hero-label">Bandit · Goofy best friend</div>
                 </div>
                 <div class="about-hero-card">
-                    <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/02930113-3440-49e9-7d32-21faf5497600/public"
+                    <img src="/assets/animals/happyboy.webp"
                         alt="Cayenne, a Companions of CPAS dog">
                     <div class="about-hero-label">Cayenne · Gentle soul</div>
                 </div>
@@ -537,7 +615,7 @@
                 <article class="about-animal-card">
                     <div class="about-animal-image">
                         <img src="${imageUrl}" alt="${animal.name}" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop&q=80'" />
+                             onerror="this.src='/assets/animals/gimmieabite.webp'" />
                     </div>
                     <div class="about-animal-body">
                         <div class="about-animal-name">${animal.name}</div>
