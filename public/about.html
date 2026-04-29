@@ -285,10 +285,43 @@
                 padding: 24px 18px;
             }
         }
-    </style>
+    
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -.055em;
+}
+
+
+
+/* === CPAS Font Tokens === */
+:root {
+  --font-display: "Satoshi", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+/* === Global CPAS Font Normalization === */
+html, body,
+body, p, a, button, input, select, textarea, label, li, span, small, strong, em, td, th, dd, dt {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, .hero-title, .section-title {
+  font-family: var(--font-display);
+  letter-spacing: -0.055em;
+}
+
+code, pre, kbd, samp, .mono, .id, [data-mono] {
+  font-family: var(--font-mono);
+}
+
+</style>
 
 <style id="cpas-public-dark-glass-theme">
-:root{
+:root {
+
+
+
   --cpas-bg:#05080D;
   --cpas-bg-alt:#101927;
   --cpas-surface:rgba(18,25,36,.72);
@@ -361,6 +394,11 @@ img{
 .brand img,
 header img{
   border-radius:0 !important;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -.055em;
 }
 </style>
 
@@ -457,6 +495,11 @@ section{
 .cpas-form-msg{margin-top:12px;color:#C7A7FF;font-weight:800}
 @media(max-width:720px){.cpas-contact-grid{grid-template-columns:1fr}.hero-split{background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(16,25,39,.25),rgba(5,8,13,.92))!important}}
 @media(prefers-reduced-motion:reduce){body::before{transition:none}}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -.055em;
+}
 </style>
 
 
@@ -555,6 +598,11 @@ section{
 
 .cpas-donate-msg {
   color: #6D5593 !important;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -.055em;
 }
 </style>
 
@@ -682,7 +730,7 @@ section{
             <div class="about-trust-grid">
                 <div class="about-trust-card">
                     <h3>501(c)(3) you can verify</h3>
-                    <p>Companions of CPAS is a registered 501(c)(3) nonprofit (EIN: 93-2791656) focused on Grant
+                    <p>Companions of CPAS is a registered 501(c)(3) nonprofit (EIN: 88-4156327) focused on Grant
                         Parish families.</p>
                 </div>
                 <div class="about-trust-card">
