@@ -62,7 +62,7 @@ function OverviewView({ onNavigate }) {
     { label:"Vaccinations",completed:3,  total:12,  color:"#f59e0b" },
   ];
 
-  const activityIcon = { adoption:"🐾", donation:"💸", volunteer:"👤", medical:"💉", intake:"📥" };
+  const activityIcon = { adoption:"home", donation:"dollar", volunteer:"user", medical:"medical", intake:"download" };
 
   return React.createElement("div", { style:{ display:"flex", gap:0, minHeight:0, flex:1 } },
     // Main content
@@ -76,18 +76,16 @@ function OverviewView({ onNavigate }) {
         React.createElement("div", { style:{ display:"flex", alignItems:"center", gap:8 } },
           React.createElement("span", { style:{ fontSize:12, color:C.textSec } },
             new Date().toLocaleDateString(undefined, { month:"long", day:"numeric", year:"numeric" })
-          ),
-          React.createElement(Btn, { variant:"secondary", size:"sm", icon:"gear" }, "Customize")
-        )
+          ),)
       ),
 
       // Stat cards
       React.createElement("div", { style:{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))", gap:12, marginBottom:24 } },
-        React.createElement(StatCard, { icon:"🐾", label:"Total Animals",    value:stats.totalAnimals, sub:`+${stats.animalsDelta} this week`,  subPositive:true,  sparkData:[108,112,115,118,120,128], sparkColor:"#7c3aed" }),
-        React.createElement(StatCard, { icon:"💜", label:"In Foster Care",   value:stats.inFoster,     sub:`+${stats.fosterDelta} this week`,   subPositive:true,  sparkData:[28,29,31,30,32,34],       sparkColor:"#a78bfa" }),
-        React.createElement(StatCard, { icon:"🏠", label:"Adoptions (MTD)",  value:stats.adoptionsMTD, sub:`+${stats.adoptionsDelta} this week`,subPositive:true,  sparkData:[12,14,15,15,17,18],       sparkColor:"#10b981" }),
-        React.createElement(StatCard, { icon:"🩺", label:"Medical Due",      value:stats.medicalDue,   sub:`${stats.medicalOverdue} overdue`,    subPositive:false, sparkData:[5,7,6,8,9,9],             sparkColor:"#ef4444" }),
-        React.createElement(StatCard, { icon:"💵", label:"Donations (MTD)",  value:`$${stats.donationsMTD.toLocaleString()}`, sub:`+${stats.donationsDeltaPct}% vs last month`, subPositive:true, sparkData:[4200,5800,6100,7200,9800,8432], sparkColor:"#10b981" })
+        React.createElement(StatCard, { icon:"paw", label:"Total Animals",    value:stats.totalAnimals, sub:`+${stats.animalsDelta} this week`,  subPositive:true,  sparkData:[108,112,115,118,120,128], sparkColor:"#7c3aed" }),
+        React.createElement(StatCard, { icon:"heart", label:"In Foster Care",   value:stats.inFoster,     sub:`+${stats.fosterDelta} this week`,   subPositive:true,  sparkData:[28,29,31,30,32,34],       sparkColor:"#a78bfa" }),
+        React.createElement(StatCard, { icon:"home", label:"Adoptions (MTD)",  value:stats.adoptionsMTD, sub:`+${stats.adoptionsDelta} this week`,subPositive:true,  sparkData:[12,14,15,15,17,18],       sparkColor:"#10b981" }),
+        React.createElement(StatCard, { icon:"medical", label:"Medical Due",      value:stats.medicalDue,   sub:`${stats.medicalOverdue} overdue`,    subPositive:false, sparkData:[5,7,6,8,9,9],             sparkColor:"#ef4444" }),
+        React.createElement(StatCard, { icon:"dollar", label:"Donations (MTD)",  value:`$${stats.donationsMTD.toLocaleString()}`, sub:`+${stats.donationsDeltaPct}% vs last month`, subPositive:true, sparkData:[4200,5800,6100,7200,9800,8432], sparkColor:"#10b981" })
       ),
 
       // Middle row
@@ -236,7 +234,7 @@ function OverviewView({ onNavigate }) {
         ),
         recentActivity.map(a =>
           React.createElement("div", { key:a.id, style:{ display:"flex", alignItems:"flex-start", gap:10, padding:"8px 0", borderBottom:`1px solid ${C.border}` } },
-            React.createElement("div", { style:{ width:28, height:28, borderRadius:"50%", background:C.raised, border:`1px solid ${C.border}`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, flexShrink:0 } }, activityIcon[a.type] || "•"),
+            React.createElement("div", { style:{ width:28, height:28, borderRadius:"50%", background:C.raised, border:`1px solid ${C.border}`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, flexShrink:0 } }, React.createElement(Icon, { name: activityIcon[a.type] || "dot", size:12 })),
             React.createElement("div", { style:{ flex:1 } },
               React.createElement("div", { style:{ fontSize:11, color:C.text } }, a.text),
               React.createElement("div", { style:{ fontSize:10, color:C.textMut, marginTop:2 } }, a.time)
