@@ -194,7 +194,9 @@ window.__loadDashboardData = async function() {
   try {
     const [overviewRes, teamsRes] = await Promise.all([
       fetch("/api/dashboard/overview", { credentials: "include" }),
-      fetch("/api/dashboard/team",     { credentials: "include" })
+      fetch("/api/dashboard/team",     { credentials: "include" }),
+      fetch("/api/dashboard/fosters",  { credentials: "include" }),
+      fetch("/api/dashboard/adoptions",{ credentials: "include" })
     ]);
 
     if (!overviewRes.ok) return; // stay on mock

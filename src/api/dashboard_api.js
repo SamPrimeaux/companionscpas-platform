@@ -156,7 +156,23 @@ export async function dashboardApiRoutes(request, env, url) {
   }
 
   if (path === "/api/dashboard/fosters") {
-    const rows = await env.DB.prepare("SELECT * FROM foster_records ORDER BY created_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    const rows = await env.DB.prepare(`
+      SELECT
+        f.*,
+        a.name AS animal_name,
+        a.species,
+        a.breed,
+        a.sex,
+        a.age_label,
+        a.status AS animal_status,
+        a.photo_url
+      FROM foster_records f
+      LEFT JOIN animal_profiles a ON a.id = f.animal_id
+      WHERE f.tenant_id = 'tenant_companionscpas'
+      ORDER BY f.created_at DESC
+      LIMIT 100
+    `).all().catch(() => ({ results: [] }));
+
     return json({ fosters: rows.results || [] });
   }
 
