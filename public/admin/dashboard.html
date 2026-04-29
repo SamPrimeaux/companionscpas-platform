@@ -7,52 +7,153 @@
 <link rel="icon" href="/logo.png"/>
 <style>
 :root{
-  --bg:#070b12;--panel:rgba(17,24,39,.76);--panel2:rgba(255,255,255,.055);
-  --line:rgba(255,255,255,.12);--text:#f8f7ff;--muted:rgba(248,247,255,.62);
-  --purple:#6D5593;--purple2:#8b74b7;--cyan:#16bfd6;--green:#10b981;--amber:#f59e0b;--danger:#fb7185;
-  --shadow:0 28px 90px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.07);
+  --bg:#050812;--panel:#0b1220;--panel2:#111827;--card:rgba(17,24,39,.78);
+  --line:rgba(255,255,255,.1);--text:#f8f7ff;--muted:#a8b0c2;
+  --purple:#8b5cf6;--purple2:#5b21b6;--cyan:#16bfd6;--green:#39d98a;
+  --red:#ff5b6e;--orange:#ff9f43;--blue:#48a8ff;--radius:22px;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
 }
-*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 22% 12%,rgba(109,85,147,.28),transparent 28%),radial-gradient(circle at 82% 78%,rgba(22,191,214,.16),transparent 32%),linear-gradient(135deg,#05070b,#101927 48%,#04060a);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,Arial}
-.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);background:rgba(8,12,20,.74);backdrop-filter:blur(24px);padding:22px;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:14px;margin-bottom:26px}.brand img{width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 12px 22px rgba(109,85,147,.55))}.brand b{font-size:15px}.brand span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.nav{display:grid;gap:6px}.nav a{padding:12px 14px;border-radius:16px;color:var(--muted);text-decoration:none;font-weight:850;display:flex;justify-content:space-between}.nav a.active,.nav a:hover{background:rgba(109,85,147,.22);color:white;border:1px solid rgba(255,255,255,.08)}.main{padding:26px 30px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.top h1{font-size:34px;margin:0}.top p{margin:7px 0 0;color:var(--muted)}.actions{display:flex;gap:10px}.btn{border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:11px 14px;background:rgba(109,85,147,.82);color:white;font-weight:900;cursor:pointer}.btn.secondary{background:rgba(255,255,255,.06)}.grid{display:grid;gap:18px}.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.two{grid-template-columns:1.2fr .8fr}.three{grid-template-columns:repeat(3,1fr)}.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--shadow);backdrop-filter:blur(22px)}.card h2{margin:0 0 14px}.kpi b{font-size:32px}.kpi span{display:block;color:var(--muted);font-weight:850;text-transform:uppercase;letter-spacing:.08em;font-size:11px;margin-top:7px}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:13px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left}.table th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.badge{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(109,85,147,.24);color:#e9ddff;font-weight:900;font-size:12px}.chart{height:230px;display:flex;align-items:end;gap:10px;padding-top:20px}.bar{flex:1;min-height:20px;border-radius:14px 14px 6px 6px;background:linear-gradient(180deg,var(--purple2),var(--cyan));box-shadow:0 10px 30px rgba(109,85,147,.18)}.progress{height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--purple2),var(--cyan));border-radius:999px}.row{display:flex;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.08)}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}.day{min-height:92px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(255,255,255,.04);padding:10px}.event{margin-top:8px;padding:6px 8px;border-radius:10px;background:rgba(22,191,214,.18);font-size:11px;font-weight:800}.modal{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:center;justify-content:center;padding:20px;z-index:9}.modal.open{display:flex}.modalbox{width:min(1100px,96vw);max-height:90vh;overflow:auto;border-radius:28px;background:#0d1421;border:1px solid var(--line);box-shadow:0 40px 140px #000;padding:26px}input,select,textarea{width:100%;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.07);padding:12px;color:white;font:inherit}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:920px){.app{grid-template-columns:1fr}.side{height:auto;position:relative}.kpis,.two,.three{grid-template-columns:1fr}.main{padding:18px}.calendar{grid-template-columns:repeat(2,1fr)}}
+*{box-sizing:border-box} body{margin:0;background:
+radial-gradient(circle at 20% 0%,rgba(139,92,246,.25),transparent 30%),
+radial-gradient(circle at 85% 80%,rgba(22,191,214,.18),transparent 35%),
+linear-gradient(135deg,#050812,#0d1727 55%,#03151b);color:var(--text)}
+a{color:inherit;text-decoration:none}.app{min-height:100vh;display:grid;grid-template-columns:290px 1fr}
+.side{position:sticky;top:0;height:100vh;padding:28px 22px;background:rgba(5,8,18,.76);border-right:1px solid var(--line);backdrop-filter:blur(20px)}
+.brand{display:flex;gap:14px;align-items:center;margin-bottom:28px}.brand img{width:48px;height:48px;object-fit:contain}.brand b{display:block}.brand span{font-size:13px;color:var(--muted)}
+.nav{display:grid;gap:8px}.nav a{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;border-radius:14px;color:#cfd5e6;font-weight:700}
+.nav a.active,.nav a:hover{background:linear-gradient(135deg,rgba(139,92,246,.42),rgba(91,33,182,.35));color:white;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.main{padding:30px 34px 60px}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:22px}
+h1{font-size:38px;line-height:1;margin:0 0 8px}p{color:var(--muted);line-height:1.5}.actions{display:flex;gap:10px}.btn{border:0;border-radius:14px;padding:12px 16px;color:white;font-weight:800;background:linear-gradient(135deg,var(--purple),var(--purple2));box-shadow:0 16px 40px rgba(139,92,246,.28);cursor:pointer}
+.btn.secondary{background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px var(--line)}.grid{display:grid;gap:16px}.kpis{grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:18px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 20px 80px rgba(0,0,0,.26)}
+.kpi small,.muted{color:var(--muted)}.kpi strong{display:block;font-size:28px;margin:8px 0}.delta{font-size:13px;color:var(--green);font-weight:800}
+.two{grid-template-columns:1.25fr .75fr}.three{grid-template-columns:repeat(3,1fr)}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.table{width:100%;border-collapse:collapse}.table th,.table td{padding:13px;border-bottom:1px solid var(--line);text-align:left;color:#dbe2f1}.table th{color:#8f9ab3;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.badge{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(139,92,246,.16);color:#c4a8ff;font-size:12px;font-weight:800}.green{background:rgba(57,217,138,.14);color:#72f0a9}.orange{background:rgba(255,159,67,.15);color:#ffc16f}.red{background:rgba(255,91,110,.15);color:#ff8998}.blue{background:rgba(72,168,255,.15);color:#8dccff}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.animal{overflow:hidden;padding:0}.animal img{width:100%;height:128px;object-fit:cover;display:block}.animal div{padding:14px}.searchbar{display:flex;gap:10px;margin:10px 0 18px}.searchbar input,.searchbar select,.field{width:100%;border:1px solid var(--line);background:rgba(255,255,255,.06);color:white;border-radius:14px;padding:12px 14px}
+.editor{display:grid;grid-template-columns:320px 1fr 360px;gap:16px}.list{display:grid;gap:10px}.list button{text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.05);color:white;border-radius:14px;padding:13px;cursor:pointer}.preview{min-height:520px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:20px;padding:18px}
+.task{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;border-bottom:1px solid var(--line);padding:14px 0}.task:last-child{border-bottom:0}
+.notice{border:1px solid rgba(255,159,67,.35);background:rgba(255,159,67,.09);border-radius:18px;padding:14px;color:#ffd39b;margin-bottom:16px}
+@media(max-width:1050px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.kpis,.two,.three,.cards,.editor{grid-template-columns:1fr}.main{padding:22px}}
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="side">
- <div class="brand"><img src="/logo.png"><div><b>Companions of CPAS</b><span>Rescue Operations OS</span></div></div>
- <nav class="nav" id="nav"></nav>
-</aside>
-<main class="main">
- <div class="top"><div><h1 id="title">Dashboard</h1><p id="subtitle">Live nonprofit operations demo</p></div><div class="actions"><button class="btn secondary" onclick="openCalendar()">Calendar</button><button class="btn">New Record</button></div></div>
- <section id="view"><div class="card">Loading dashboard...</div></section>
-</main>
+  <aside class="side">
+    <div class="brand"><img src="/logo.png"/><div><b>Companions of CPAS</b><span>Rescue Operations OS</span></div></div>
+    <nav id="nav" class="nav"></nav>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <div><h1 id="title">Dashboard</h1><p id="subtitle">Live nonprofit operations command center.</p></div>
+      <div class="actions"><button class="btn secondary">Calendar</button><button class="btn">Add New</button></div>
+    </div>
+    <section id="view"><div class="card">Loading...</div></section>
+  </main>
 </div>
-<div class="modal" id="calendarModal"><div class="modalbox"><div class="top"><div><h1>Calendar + Social Scheduler</h1><p>Schedule events, volunteer shifts, donor pushes, and posts.</p></div><button class="btn secondary" onclick="closeCalendar()">Close</button></div><div class="formgrid"><input placeholder="Title"><select><option>Volunteer Event</option><option>Fundraiser</option><option>Facebook Post</option><option>Instagram Post</option><option>YouTube Upload</option></select><input type="datetime-local"><select><option>Facebook + Instagram</option><option>Email</option><option>Internal Volunteers</option></select><textarea style="grid-column:1/-1" placeholder="Caption, invite, notes, or event details"></textarea><button class="btn">Schedule</button><button class="btn secondary">Generate with Agent Sam</button></div><br><div class="calendar" id="cal"></div></div></div>
+
 <script>
 const routes=[
-["/admin/dashboard","Overview"],["/admin/dashboard/animals","Animals"],["/admin/dashboard/fosters","Fosters"],["/admin/dashboard/adoptions","Adoptions"],["/admin/dashboard/intakes","Intakes"],["/admin/dashboard/medical","Medical"],["/admin/dashboard/daily-care","Daily Care"],["/admin/dashboard/volunteers","Volunteers"],["/admin/dashboard/applications","Applications"],["/admin/dashboard/donations","Donations"],["/admin/dashboard/donations/campaigns","Campaigns"],["/admin/dashboard/cms","CMS Website"],["/admin/dashboard/reports","Reports"],["/admin/dashboard/settings","Settings"],["/admin/dashboard/tasks","Tasks"]
+["/admin/dashboard","Overview"],["/admin/dashboard/animals","Animals"],["/admin/dashboard/fosters","Fosters"],
+["/admin/dashboard/adoptions","Adoptions"],["/admin/dashboard/intakes","Intakes"],["/admin/dashboard/medical","Medical"],
+["/admin/dashboard/daily-care","Daily Care"],["/admin/dashboard/volunteers","Volunteers"],["/admin/dashboard/applications","Applications"],
+["/admin/dashboard/donations","Donations"],["/admin/dashboard/donations/campaigns","Campaigns"],["/admin/dashboard/cms","CMS Website"],
+["/admin/dashboard/reports","Reports"],["/admin/dashboard/settings","Settings"],["/admin/dashboard/tasks","Tasks"]
 ];
-const path=location.pathname, nav=document.getElementById("nav"), view=document.getElementById("view"), title=document.getElementById("title");
-nav.innerHTML=routes.map(([href,label])=>`<a href="${href}" class="${path===href?'active':''}"><span>${label}</span><span>›</span></a>`).join("");
-function money(c){return "$"+(Number(c||0)/100).toLocaleString(undefined,{maximumFractionDigits:0})}
-function bars(vals){return `<div class="chart">${vals.map(v=>`<div class="bar" style="height:${v}%"></div>`).join("")}</div>`}
-function table(headers,rows){return `<table class="table"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table>`}
-async function get(p){return fetch(p).then(r=>r.json())}
-function openCalendar(){document.getElementById("calendarModal").classList.add("open")} function closeCalendar(){document.getElementById("calendarModal").classList.remove("open")}
-async function render(){
- const data=await get("/api/dashboard/overview");
- const page=routes.find(r=>r[0]===path)?.[1]||"Overview"; title.textContent=page;
- const k=`<div class="grid kpis"><div class="card kpi"><b>${data.kpis.animals}</b><span>Animals in care</span></div><div class="card kpi"><b>${data.kpis.applications}</b><span>Applications</span></div><div class="card kpi"><b>${data.kpis.volunteers}</b><span>Team members</span></div><div class="card kpi"><b>${money(data.kpis.raised_cents)}</b><span>Raised</span></div></div><br>`;
- if(page==="Overview") view.innerHTML=k+`<div class="grid two"><div class="card"><h2>Fundraising Momentum</h2>${bars([38,44,56,48,72,65,88,80])}</div><div class="card"><h2>Upcoming</h2>${data.events.map(e=>`<div class=row><b>${e.title}</b><span class=badge>${e.event_type}</span></div>`).join("")}</div></div>`;
- else if(page==="Animals") view.innerHTML=k+`<div class=card><h2>Animal Registry</h2>${table(["Name","Species","Breed","Status","Location"],data.animals.map(a=>`<tr><td>${a.name}</td><td>${a.species}</td><td>${a.breed||""}</td><td><span class=badge>${a.status}</span></td><td>${a.location||""}</td></tr>`))}</div>`;
- else if(page==="Applications"||page==="Adoptions") view.innerHTML=`<div class=card><h2>Applications Pipeline</h2>${table(["Applicant","Animal","Status","Submitted"],data.applications.map(a=>`<tr><td>${a.applicant_name}</td><td>${a.animal_name}</td><td><span class=badge>${a.status}</span></td><td>${(a.submitted_at||"").slice(0,10)}</td></tr>`))}</div>`;
- else if(page==="Donations"||page==="Campaigns") view.innerHTML=`<div class="grid three">${data.campaigns.map(c=>`<div class=card><h2>${c.title}</h2><p>${money(c.raised_cents)} raised of ${money(c.goal_cents)}</p><div class=progress><i style="width:${Math.min(100,Math.round((c.raised_cents/c.goal_cents)*100))}%"></i></div><br><span class=badge>${c.status}</span></div>`).join("")}</div>`;
- else if(page==="Volunteers"||page==="Team") view.innerHTML=`<div class=card><h2>Volunteer + Board Team</h2>${table(["Name","Email","Role","Hours"],data.volunteers.map(v=>`<tr><td>${v.full_name}</td><td>${v.email||""}</td><td><span class=badge>${v.role}</span></td><td>${v.hours_month}</td></tr>`))}</div>`;
- else if(page==="Settings") view.innerHTML=`<div class="grid two"><div class=card><h2>Password Management</h2><p>Users can securely reset their own password. Owners can invite or disable accounts.</p><input placeholder="Current password"><br><br><input placeholder="New password"><br><br><button class=btn>Update Password</button></div><div class=card><h2>Secrets Vault</h2><p>Masked and scoped secret management for platform integrations.</p><div class=row><b>RESEND_API_KEY</b><span class=badge>masked</span></div><div class=row><b>STRIPE_SECRET_KEY</b><span class=badge>disabled demo</span></div><div class=row><b>AGENTSAM_BRIDGE_TOKEN</b><span class=badge>owner only</span></div></div></div>`;
- else view.innerHTML=k+`<div class=card><h2>${page}</h2><p>This route is fully staged for Thursday demo. Data layer exists and this page is ready for real API binding after approval.</p>${bars([22,58,44,68,84])}</div>`;
- document.getElementById("cal").innerHTML=Array.from({length:35},(_,i)=>`<div class=day><b>${i+1}</b>${data.events[i%data.events.length]?`<div class=event>${data.events[i%data.events.length].title}</div>`:""}</div>`).join("");
+const path=location.pathname.replace(/\/$/,"");
+const active=routes.find(r=>r[0]===path)||routes[0];
+nav.innerHTML=routes.map(([href,label])=>`<a href="${href}" class="${href===path?'active':''}"><span>${label}</span><span>›</span></a>`).join("");
+title.textContent=active[1];
+
+async function api(p){
+  const r=await fetch(p);
+  const text=await r.text();
+  try{return JSON.parse(text)}catch(e){throw new Error(`${r.status} ${p}: ${text.slice(0,120)}`)}
 }
-render().catch(e=>view.innerHTML=`<div class=card><h2>Dashboard API Error</h2><p>${e.message}</p></div>`);
+const money=c=>"$"+((Number(c||0))/100).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0});
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+
+function kpi(label,value,delta,cls=""){
+  return `<div class="card kpi"><small>${label}</small><strong>${value}</strong><span class="delta ${cls}">${delta}</span></div>`;
+}
+function table(rows,cols){
+ return `<table class="table"><thead><tr>${cols.map(c=>`<th>${c[0]}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td>${c[1](r)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+}
+
+async function overview(){
+ const d=await api("/api/dashboard/overview");
+ const animals=d.animals||[], apps=d.applications||[], vols=d.volunteers||[], campaigns=d.campaigns||[];
+ view.innerHTML=`
+ <div class="notice">Quality focus: dashboard shell is now connected. Next pass upgrades CRUD, CMS publishing, Stripe/Resend activation, and route-level polish.</div>
+ <div class="grid kpis">
+ ${kpi("Total Animals",d.kpis?.animals||animals.length,"live from D1")}
+ ${kpi("Applications",d.kpis?.applications||apps.length,"needs workflow")}
+ ${kpi("Volunteers",d.kpis?.volunteers||vols.length,"team ready")}
+ ${kpi("Raised",money(d.kpis?.raised_cents),"campaigns")}
+ ${kpi("Goal",money(d.kpis?.goal_cents),"fundraising")}
+ </div>
+ <div class="grid two">
+  <div class="card"><div class="section-title"><h2>Recent Animals</h2><a href="/admin/dashboard/animals">View all</a></div>
+  <div class="cards">${animals.slice(0,4).map(a=>`<div class="card animal"><img src="${esc(a.image_url||a.photo_url||'/logo.png')}"><div><b>${esc(a.name)}</b><p>${esc(a.species||'Animal')} • ${esc(a.breed||'Companion')}</p><span class="badge green">${esc(a.status||'Available')}</span></div></div>`).join("")}</div></div>
+  <div class="card"><h2>Tasks & Followups</h2>${(d.events||[]).slice(0,6).map(e=>`<div class="task"><div><b>${esc(e.title||'Event')}</b><p>${esc(e.starts_at||'')}</p></div><span class="badge blue">scheduled</span></div>`).join("")||"<p>No events yet.</p>"}</div>
+ </div>`;
+}
+
+async function animalsPage(){
+ const d=await api("/api/dashboard/animals"); const rows=d.animals||[];
+ view.innerHTML=`<div class="card"><div class="section-title"><div><h2>Animal Management</h2><p>Search, filter, intake, foster, medical, and adoption status.</p></div><button class="btn">Add Animal</button></div>
+ <div class="searchbar"><input placeholder="Search animals, IDs, breeds..."><select><option>Status: All</option></select><select><option>Species: All</option></select></div>
+ ${table(rows,[
+ ["Name",r=>`<b>${esc(r.name)}</b><br><span class="muted">${esc(r.id||r.animal_id||"")}</span>`],
+ ["Species / Breed",r=>`${esc(r.species||"")}<br><span class="muted">${esc(r.breed||"")}</span>`],
+ ["Status",r=>`<span class="badge green">${esc(r.status||"Available")}</span>`],
+ ["Location",r=>esc(r.location||r.current_location||"Shelter")],
+ ["Actions",r=>`<button class="btn secondary">View</button>`]
+ ])}</div>`;
+}
+
+async function genericPage(label,endpoint,empty){
+ let d={}; try{d=await api(endpoint)}catch(e){d={error:e.message}}
+ const rows=Object.values(d).find(Array.isArray)||[];
+ view.innerHTML=`<div class="card"><div class="section-title"><div><h2>${label}</h2><p>${empty}</p></div><button class="btn">New Record</button></div>
+ ${rows.length?table(rows.slice(0,50),Object.keys(rows[0]).slice(0,5).map(k=>[k,r=>esc(r[k])])):`<p class="muted">No records shown yet. Backend route is staged and this view is ready for wiring.</p>`}</div>`;
+}
+
+async function cmsPage(){
+ const d=await api("/api/dashboard/cms");
+ const pages=d.pages||[], assets=d.assets||[], themes=d.themes||[];
+ view.innerHTML=`<div class="editor">
+ <div class="card"><h2>CMS Pages</h2><div class="list">${pages.map(p=>`<button><b>${esc(p.title||p.slug)}</b><br><span class="muted">${esc(p.route_path||p.slug)} • ${esc(p.status||'draft')}</span></button>`).join("")||"<p>No CMS pages found.</p>"}</div></div>
+ <div class="card"><h2>Live Editor</h2><input class="field" value="${esc(pages[0]?.title||'Homepage')}"><br><br><textarea class="field" style="min-height:260px">Beginner-friendly content editor foundation. Next pass adds image picker, section ordering, draft/publish, and live preview writeback.</textarea><br><br><button class="btn">Save Draft</button> <button class="btn secondary">Preview</button></div>
+ <div class="card"><h2>Theme + Assets</h2><p>${themes.length} theme records • ${assets.length} assets</p><div class="preview"><b>Website Preview</b><p class="muted">Shopify-level CMS foundation: pages, sections, assets, navigation, and theme tokens will be surfaced here for Lori/team use.</p></div></div>
+ </div>`;
+}
+
+async function tasksPage(){
+ const d=await api("/api/dashboard/tasks"); const rows=d.todos||[];
+ view.innerHTML=`<div class="card"><div class="section-title"><div><h2>AgentSam Todo Backlog</h2><p>Incremental execution queue for UI, backend, QA, CMS, Stripe, Resend, Workers AI, OpenAI, and Ollama.</p></div><button class="btn">Run Next</button></div>
+ ${rows.map(t=>`<div class="task"><div><b>${esc(t.title)}</b><p>${esc(t.description)}</p><span class="badge">${esc(t.category)}</span> <span class="badge orange">${esc(t.priority)}</span></div><span class="badge blue">${esc(t.status)}</span></div>`).join("")}</div>`;
+}
+
+async function render(){
+ const p=path;
+ if(p==="/admin/dashboard") return overview();
+ if(p.endsWith("/animals")) return animalsPage();
+ if(p.endsWith("/cms")) return cmsPage();
+ if(p.endsWith("/tasks")) return tasksPage();
+ if(p.endsWith("/applications")) return genericPage("Applications","/api/dashboard/applications","Review adoption and foster applications.");
+ if(p.endsWith("/donations")) return genericPage("Donations","/api/admin/donations","Donation records, donor history, and payment status.");
+ if(p.endsWith("/campaigns")) return genericPage("Campaigns","/api/dashboard/fundraising","Fundraising campaigns and progress.");
+ if(p.endsWith("/volunteers")) return genericPage("Volunteers","/api/dashboard/team","Volunteer records and hours.");
+ if(p.endsWith("/fosters")) return genericPage("Fosters","/api/dashboard/fosters","Foster homes, placements, and check-ins.");
+ if(p.endsWith("/adoptions")) return genericPage("Adoptions","/api/dashboard/adoptions","Adoption pipeline and approvals.");
+ if(p.endsWith("/intakes")) return genericPage("Intakes","/api/dashboard/intakes","New animal intake workflow.");
+ if(p.endsWith("/medical")) return genericPage("Medical","/api/dashboard/medical","Vaccines, meds, and urgent care.");
+ if(p.endsWith("/daily-care")) return genericPage("Daily Care","/api/dashboard/daily-care","Feeding, walks, meds, and care tasks.");
+ if(p.endsWith("/reports")) return genericPage("Reports","/api/dashboard/reports","Operational and fundraising reports.");
+ if(p.endsWith("/settings")) return genericPage("Settings","/api/integrations/status","Users, integrations, theme, auth, Stripe, Resend.");
+}
+render().catch(e=>view.innerHTML=`<div class="card"><h2>Dashboard API Error</h2><p>${esc(e.message)}</p></div>`);
 </script>
 </body>
 </html>

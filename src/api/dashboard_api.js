@@ -60,5 +60,51 @@ export async function dashboardApiRoutes(request, env, url) {
     return json({ events: rows.results || [] });
   }
 
+
+  if (path === "/api/dashboard/cms") {
+    const pages = await env.DB.prepare("SELECT * FROM cms_pages ORDER BY sort_order, updated_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    const assets = await env.DB.prepare("SELECT * FROM cms_assets ORDER BY created_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    const themes = await env.DB.prepare("SELECT * FROM cms_themes ORDER BY updated_at DESC LIMIT 20").all().catch(() => ({ results: [] }));
+    const nav = await env.DB.prepare("SELECT * FROM cms_navigation_items ORDER BY sort_order LIMIT 100").all().catch(() => ({ results: [] }));
+    return json({ pages: pages.results || [], assets: assets.results || [], themes: themes.results || [], navigation: nav.results || [] });
+  }
+
+  if (path === "/api/dashboard/tasks") {
+    const rows = await env.DB.prepare("SELECT * FROM agentsam_todo ORDER BY sort_order, created_at").all().catch(() => ({ results: [] }));
+    return json({ todos: rows.results || [] });
+  }
+
+  if (path === "/api/dashboard/fosters") {
+    const rows = await env.DB.prepare("SELECT * FROM foster_records ORDER BY created_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    return json({ fosters: rows.results || [] });
+  }
+
+  if (path === "/api/dashboard/adoptions") {
+    const rows = await env.DB.prepare("SELECT * FROM applications ORDER BY created_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    return json({ adoptions: rows.results || [] });
+  }
+
+  if (path === "/api/dashboard/intakes") {
+    const rows = await env.DB.prepare("SELECT * FROM animals ORDER BY created_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    return json({ intakes: rows.results || [] });
+  }
+
+  if (path === "/api/dashboard/medical") {
+    const rows = await env.DB.prepare("SELECT * FROM care_tasks WHERE lower(category) LIKE '%medical%' OR lower(title) LIKE '%vaccine%' OR lower(title) LIKE '%med%' ORDER BY created_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    return json({ medical: rows.results || [] });
+  }
+
+  if (path === "/api/dashboard/daily-care") {
+    const rows = await env.DB.prepare("SELECT * FROM care_tasks ORDER BY created_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    return json({ care_tasks: rows.results || [] });
+  }
+
+  if (path === "/api/dashboard/reports") {
+    const donations = await env.DB.prepare("SELECT * FROM donations ORDER BY created_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    const animals = await env.DB.prepare("SELECT * FROM animals ORDER BY created_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    const apps = await env.DB.prepare("SELECT * FROM applications ORDER BY created_at DESC LIMIT 100").all().catch(() => ({ results: [] }));
+    return json({ donations: donations.results || [], animals: animals.results || [], applications: apps.results || [] });
+  }
+
   return null;
 }
