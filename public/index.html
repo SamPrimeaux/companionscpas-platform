@@ -1,2203 +1,305 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Companions of CPAS - your community Pet Assistance</title>
-  <meta name="description"
-    content="Compassionate help for your community pet owners. Spay/neuter, vaccinations, and pet food assistance.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="/_shared.css?v=3" />
-  <script src="https://js.stripe.com/v3/"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Companions of CPAS — Second Chances for Caddo Dogs</title>
+  <meta name="description" content="Companions of CPAS helps dogs at Caddo Parish Animal Services receive medical care, transport support, foster placement, and second chances." />
+
+  <!-- CMS EDIT CONTRACT
+    Fonts: Satoshi headlines, Inter body.
+    Header logo size: --logo-size / --logo-size-mobile.
+    CTA shape: --radius-cta.
+    Campaign image behavior: object-fit: contain so rescue images are never cropped.
+    Donation modal: compact no-scroll layout with newsletter opt-in.
+    Foster modal: step-based, no page scroll, D1-driven field groups.
+  -->
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     :root {
-      --primary: #dc2626;
-      --primary-dark: #991b1b;
-      --primary-light: #fca5a5;
-      --secondary: #f59e0b;
-      --success: #10b981;
-      --dark: #1e293b;
-      --light: #f8fafc;
-      --gray: #64748b;
-      --border: #e2e8f0;
+      color-scheme: light dark;
+      --font-display: "Satoshi", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg: #f8f3ee;
+      --bg-soft: #fffaf6;
+      --surface: rgba(255,255,255,.78);
+      --surface-strong: #ffffff;
+      --ink: #172033;
+      --muted: #5e697b;
+      --line: rgba(23,32,51,.12);
+      --dark: #050a12;
+      --dark-soft: #0b1420;
+      --purple: #8664b7;
+      --purple-strong: #7654aa;
+      --rose: #f04e65;
+      --gold: #d6b24a;
+      --green: #194e36;
+      --nav-h: 112px;
+      --logo-size: 130px;
+      --logo-size-mobile: 116px;
+      --container: 1180px;
+      --radius-xl: 36px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-cta: 18px;
+      --shadow-soft: 0 24px 70px rgba(15, 23, 42, .13);
+      --shadow-dark: 0 28px 90px rgba(0,0,0,.36);
     }
 
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #050a12;
+        --bg-soft: #07111d;
+        --surface: rgba(12,20,32,.72);
+        --surface-strong: #0c1420;
+        --ink: #f6f2ec;
+        --muted: #b7c0cf;
+        --line: rgba(255,255,255,.13);
+        --shadow-soft: 0 28px 90px rgba(0,0,0,.38);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-      min-height: 100vh;
-      color: var(--dark);
-      line-height: 1.6;
-      padding-top: 80px;
+      margin: 0;
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(134,100,183,.18), transparent 32rem),
+        radial-gradient(circle at 86% 22%, rgba(25,78,54,.20), transparent 34rem),
+        linear-gradient(180deg, var(--bg), var(--bg-soft));
+      color: var(--ink);
+      overflow-x: hidden;
     }
 
-    /* Header styles now use _shared.css */
-
-    /* Hero - Split-screen layout */
-    .hero {
-      margin: 80px 0 120px;
-      padding: 0;
-      min-height: 0;
-    }
-
-    .hero-split {
-      display: grid;
-      grid-template-columns: 40% 60%;
-      min-height: 550px;
-      max-height: 550px;
-      background: linear-gradient(100deg, #ffffff 0%, #fffdfc 20%, #fefaf9 40%, #fef8f7 60%, #fef5f4 80%, #fef3f2 100%);
-    }
-
-    .hero-text-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem) clamp(2.5rem, 5vw, 5rem);
-      background: transparent;
-    }
-
-    .hero-headline {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(2rem, 4vw, 3.25rem);
-      font-weight: 800;
-      color: var(--dark);
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-subheadline {
-      font-size: clamp(1rem, 1.5vw, 1.35rem);
-      font-weight: 500;
-      color: var(--gray);
-      line-height: 1.6;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-ctas .btn {
-      padding: 1rem 1.75rem;
-      font-size: 1rem;
-      text-decoration: none;
-      text-align: center;
-    }
-
-    .hero-image-panel.hero-media {
-      position: relative;
-      overflow: hidden;
-      min-height: 550px;
-      height: 550px;
-      border-radius: 8px 0 0 8px;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-image-panel.hero-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      display: block;
-    }
-
-    /* Mobile hero - no crop, flush with header */
-    @media (max-width: 768px) {
-      body {
-        padding-top: 88px;
-      }
-
-      .hero {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-      }
-
-      .hero-split {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        max-height: none;
-        gap: 0;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-      }
-
-      .hero-image-panel.hero-media {
-        order: 1;
-        min-height: 0;
-        height: auto;
-        aspect-ratio: 16 / 9;
-        border-radius: 0;
-        display: block;
-        background: transparent;
-        width: 100%;
-        overflow: hidden;
-        padding: 0;
-        margin: 0;
-      }
-
-      .hero-image-panel.hero-media img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        object-position: top center;
-        display: block;
-        vertical-align: top;
-      }
-
-      .hero-text-panel {
-        order: 2;
-        padding: 1.5rem 1.5rem 2rem;
-        text-align: center;
-        box-shadow: none;
-        background: linear-gradient(180deg, rgba(254, 243, 242, 0.98) 0%, #fef3f2 5%, #fef2f2 40%, #fef2f2 100%);
-      }
-
-      .hero-headline {
-        font-size: clamp(1.75rem, 6vw, 2.25rem);
-      }
-
-      .hero-subheadline {
-        font-size: 1rem;
-        margin-bottom: 2rem;
-      }
-
-      .hero-ctas {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .hero-ctas .btn {
-        width: 100%;
-      }
-
-      .hero-story-teaser {
-        font-size: 0.95rem;
-        color: var(--gray);
-        line-height: 1.6;
-        margin-top: 1.75rem;
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-
-    .hero-story-teaser {
-      font-size: 1rem;
-      color: var(--gray);
-      line-height: 1.65;
-      margin-top: 2rem;
-    }
-
-    /* Tablet */
-    @media (min-width: 769px) and (max-width: 1200px) {
-      .hero-split {
-        grid-template-columns: 45% 55%;
-        min-height: 550px;
-        max-height: 550px;
-      }
-
-      .hero-text-panel {
-        padding: 3rem 2rem;
-      }
-    }
-
-    /* Adoptable pets gallery - one card per animal, natural aspect ratios */
-    .adopt-gallery-section {
-      padding: 4rem 0 5rem;
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.02) 0%, rgba(234, 88, 12, 0.02) 100%);
-    }
-
-    .adopt-gallery-header {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 3rem;
-      padding: 0 20px;
-    }
-
-    .adopt-gallery-section .section-label {
-      color: var(--primary);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .adopt-gallery-header h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-
-    .adopt-gallery-section .section-subtitle {
-      color: var(--gray);
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    .adopt-gallery-section .section-subtitle a {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    .adopt-gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 300px;
-      gap: 1.25rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .adopt-gallery-item {
-      position: relative;
-      cursor: pointer;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .adopt-gallery-item:hover {
-      transform: scale(1.02);
-      opacity: 0.95;
-    }
-
-    .adopt-gallery-item.tall {
-      grid-row: span 2;
-    }
-
-    .adopt-gallery-item.wide {
-      grid-column: span 2;
-    }
-
-    .adopt-gallery-item.tall.wide {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
-
-    .adopt-gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      display: block;
-      border-radius: 8px;
-    }
-
-    .adopt-gallery-item .item-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 0.75rem 1rem;
-      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
-      color: #fff;
-      font-size: 0.95rem;
-      font-weight: 600;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .adopt-gallery-item:hover .item-caption {
-      opacity: 1;
-    }
-
-    @media (max-width: 768px) {
-      .adopt-gallery {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 260px;
-        gap: 0.75rem;
-        padding: 0 1rem;
-      }
-
-      .adopt-gallery-item.wide {
-        grid-column: span 1;
-      }
-
-      .adopt-gallery-item.tall.wide {
-        grid-column: span 1;
-        grid-row: span 1;
-      }
-    }
-
-    /* Pet lightbox */
-    .pet-lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      background: rgba(0, 0, 0, 0.9);
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    .pet-lightbox.active {
-      display: flex;
-    }
-
-    .pet-lightbox-inner {
-      max-width: 900px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .pet-lightbox-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 40px;
-      height: 40px;
-      border: none;
-      background: rgba(0,0,0,0.5);
-      color: #fff;
-      font-size: 1.5rem;
-      cursor: pointer;
-      border-radius: 50%;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-    }
-
-    .pet-lightbox-close:hover {
-      background: rgba(0,0,0,0.8);
-    }
-
-    .pet-lightbox-images {
-      display: flex;
-      gap: 0.5rem;
-      padding: 1rem;
-      overflow-x: auto;
-      background: #f8fafc;
-    }
-
-    .pet-lightbox-images img {
-      height: 120px;
-      width: auto;
-      object-fit: contain;
-      border-radius: 8px;
-      cursor: pointer;
-      flex-shrink: 0;
-      background: #f8fafc;
-    }
-
-    .pet-lightbox-images img.active {
-      outline: 3px solid var(--primary);
-    }
-
-    .pet-lightbox-main {
-      padding: 1.5rem 1.5rem 2rem;
-      min-height: 200px;
-    }
-
-    .pet-lightbox-main img {
-      width: 100%;
-      max-width: 500px;
-      max-height: 420px;
-      object-fit: contain;
-      border-radius: 8px;
-      display: block;
-      margin: 0 auto 1.5rem;
-    }
-
-    .pet-lightbox-name {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 0.5rem;
-    }
-
-    .pet-lightbox-meta {
-      font-size: 0.95rem;
-      color: var(--gray);
-      margin-bottom: 1rem;
-    }
-
-    .pet-lightbox-bio {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: var(--dark);
-      margin-bottom: 1rem;
-    }
-
-    .pet-lightbox-badges {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .pet-lightbox-badges span {
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .pet-lightbox-cta {
-      margin-top: 1.5rem;
-      padding-bottom: 0.5rem;
-    }
-
-    .pet-lightbox-cta .btn {
-      padding: 14px 24px;
-      font-size: 1rem;
-      display: inline-block;
-      width: 100%;
-      max-width: 320px;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    .hero-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2.5rem 2rem 3rem;
-    }
-
-    .hero-content .hero-text h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 2.6rem;
-      color: var(--dark);
-      margin-bottom: 0.75rem;
-    }
-
-    .hero-content .hero-text p {
-      font-size: 1.1rem;
-      color: var(--gray);
-      margin-bottom: 1.75rem;
-      max-width: 620px;
-    }
-
-    .badges {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.75rem;
-    }
-
-    .badge {
-      background: white;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--primary);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 1rem 2.5rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(220, 38, 38, 0.4);
-    }
-
-    .btn-secondary {
-      background: white;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-
-    .btn-secondary:hover {
-      background: var(--primary);
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    /* Modal Overlay */
-    .modal-overlay {
-      display: none;
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(var(--container), calc(100vw - 40px)); margin: 0 auto; }
+
+    .site-header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      z-index: 1000;
-      animation: fadeIn 0.3s ease;
-      padding: 1rem;
-      overflow-y: auto;
-    }
-
-    .modal-overlay.active {
+      z-index: 60;
+      height: var(--nav-h);
       display: flex;
       align-items: center;
-      justify-content: center;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* Claymorphism Modal */
-    .modal {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border-radius: 32px;
-      max-width: 600px;
-      width: 100%;
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-      animation: slideUp 0.4s ease;
-      position: relative;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .modal-header {
-      padding: 2rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      position: relative;
-    }
-
-    .modal-header h3 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.75rem;
-      color: var(--dark);
-      margin-bottom: 0.5rem;
-    }
-
-    .modal-header p {
-      color: var(--gray);
-      font-size: 0.95rem;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      background: rgba(0, 0, 0, 0.05);
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--dark);
-      font-size: 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .close-btn:hover {
-      background: rgba(0, 0, 0, 0.1);
-      transform: rotate(90deg);
-    }
-
-    .modal-body {
-      padding: 2rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-      color: var(--dark);
-      font-size: 0.95rem;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 0.875rem 1rem;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      font-size: 1rem;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.3s ease;
-      background: white;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 1.125rem;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 1rem;
-    }
-
-    .submit-btn:hover:not(:disabled) {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
-    }
-
-    .submit-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    /* Success Message */
-    .success-message {
-      display: none;
-      text-align: center;
-      padding: 3rem 2rem;
-    }
-
-    .success-message.active {
-      display: block;
-    }
-
-    .success-icon {
-      width: 80px;
-      height: 80px;
-      background: var(--success);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      font-size: 3rem;
-      color: white;
-      animation: scaleIn 0.5s ease;
-    }
-
-    @keyframes scaleIn {
-      from {
-        transform: scale(0);
-      }
-
-      to {
-        transform: scale(1);
-      }
-    }
-
-    .success-message h3 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.75rem;
-      color: var(--dark);
-      margin-bottom: 0.75rem;
-    }
-
-    .success-message p {
-      color: var(--gray);
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    /* Stripe Payment */
-    #card-element {
-      min-height: 44px;
-      padding: 1rem;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      background: white;
-    }
-    .payment-amount {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-    .amount-option {
-      padding: 1rem;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background: white;
-      font-weight: 600;
-      color: var(--dark);
-    }
-    .amount-option:hover { border-color: var(--primary); }
-    .amount-option.selected {
-      border-color: var(--primary);
-      background: rgba(220, 38, 38, 0.05);
-      color: var(--primary);
-    }
-    #donationAmountOther:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
-    }
-
-    /* Footer */
-    footer {
-      background: white;
-      margin-top: 4rem;
-      padding: 2rem 2rem 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .footer-section h4 {
-      font-family: 'Outfit', sans-serif;
-      color: var(--primary);
-      margin-bottom: 0.75rem;
-      font-size: 1rem;
-    }
-
-    .footer-section p,
-    .footer-section a {
-      color: var(--gray);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 0.375rem;
-      font-size: 0.875rem;
-      line-height: 1.5;
-    }
-
-    .footer-section a:hover {
-      color: var(--primary);
-    }
-
-    .footer-bottom {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .copyright {
-      color: var(--gray);
-      font-size: 0.8125rem;
-    }
-
-    .signature {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--gray);
-      font-size: 0.8125rem;
-    }
-
-    .signature-svg,
-    .signature-logo {
-      height: 72px;
-      width: auto;
-      opacity: 0.9;
-      display: block;
-    }
-
-    .home-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem 4rem;
-    }
-
-    .home-section-our-story {
-      text-align: center;
-      padding-top: 2rem;
-      padding-bottom: 5rem;
-    }
-
-    .home-section-our-story .home-story-layout {
-      max-width: 720px;
-      margin: 0 auto;
-      grid-template-columns: 1fr;
-    }
-
-    .home-section-our-story .home-section-title {
-      font-size: 2.1rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .home-section-our-story .home-section-lead {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .home-section-our-story .home-story-points {
-      text-align: left;
-      margin-top: 1.5rem;
-    }
-
-    .home-kicker {
-      color: var(--primary);
-      text-transform: uppercase;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.16em;
-      margin-bottom: 0.5rem;
-    }
-
-    .home-section-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.9rem;
-      margin-bottom: 1rem;
-      color: var(--dark);
-    }
-
-    .home-section-lead {
-      color: var(--gray);
-      font-size: 1.05rem;
-      max-width: 720px;
-      margin-bottom: 2rem;
-      line-height: 1.65;
-    }
-
-    .home-story-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 2.5rem;
-      align-items: flex-start;
-    }
-
-    .home-story-points {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .home-story-points li {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 14px;
-      padding: 0.75rem 1rem;
-      font-size: 0.95rem;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
-    }
-
-    .home-story-points strong {
-      color: var(--dark);
-    }
-
-    .home-animals-staggered {
-      margin-top: 4rem;
-    }
-
-    .home-animal-item {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-      margin-bottom: 5rem;
-      min-height: 350px;
-    }
-
-    .home-animal-item:nth-child(even) {
-      direction: rtl;
-    }
-
-    .home-animal-item:nth-child(even)>* {
-      direction: ltr;
-    }
-
-    .home-animal-image-wrapper {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .home-animal-image-wrapper img {
-      width: 100%;
-      max-width: 400px;
-      height: auto;
-      object-fit: contain;
-      display: block;
-    }
-
-    .home-animal-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .home-animal-tag {
-      display: inline-block;
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      background: rgba(220, 38, 38, 0.1);
-      color: var(--primary);
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 1rem;
-      width: fit-content;
-    }
-
-    .home-animal-name {
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      font-size: 2rem;
-      color: var(--dark);
-      line-height: 1.2;
-    }
-
-    .home-animal-meta {
-      font-size: 0.95rem;
-      color: var(--gray);
-      margin-bottom: 1rem;
-    }
-
-    .home-animal-story {
-      font-size: 1rem;
-      color: var(--gray);
-      line-height: 1.6;
-      font-style: italic;
-    }
-
-    .home-section-cta {
-      margin-top: 2.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-    }
-
-    .home-section-cta span {
-      font-size: 0.9rem;
-      color: var(--gray);
-    }
-
-    .spinner {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-ctas .btn {
-        width: 100%;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .home-story-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .home-section-our-story .home-section-title {
-        font-size: 1.75rem;
-      }
-
-      .home-animal-item {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        margin-bottom: 3rem;
-        min-height: auto;
-        direction: ltr !important;
-      }
-
-      .home-animal-item:nth-child(even) {
-        direction: ltr;
-      }
-
-      .home-animal-image-wrapper {
-        order: -1;
-      }
-
-      .home-animal-name {
-        font-size: 1.75rem;
-      }
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      background: rgba(5,10,18,.62);
+      backdrop-filter: blur(26px) saturate(135%);
+      transition: transform .34s ease, background .24s ease, box-shadow .24s ease;
+    }
+    .site-header.header-hidden { transform: translateY(-115%); }
+    .site-header.header-scrolled { background: rgba(5,10,18,.48); box-shadow: 0 16px 50px rgba(0,0,0,.20); }
+    main { padding-top: var(--nav-h); }
+
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand img { width: var(--logo-size); height: var(--logo-size); object-fit: contain; filter: drop-shadow(0 10px 24px rgba(0,0,0,.26)); }
+
+    .desktop-links { display: flex; align-items: center; gap: 34px; color: #c5cedc; font-weight: 700; }
+    .desktop-links a { opacity: .72; transition: .22s ease; }
+    .desktop-links a:hover, .desktop-links a.active { opacity: 1; color: #f7f1ff; text-shadow: 0 0 22px rgba(134,100,183,.9); }
+    .desktop-links .donate-link { color: #fff; background: rgba(134,100,183,.26); border: 1px solid rgba(134,100,183,.35); padding: 12px 18px; border-radius: var(--radius-cta); opacity: 1; }
+
+    .hamburger { width: 54px; height: 54px; border: 0; background: transparent; display: none; place-items: center; cursor: pointer; position: relative; }
+    .hamburger span { position: absolute; width: 34px; height: 3px; border-radius: 999px; background: var(--purple); transition: transform .28s ease, opacity .2s ease, top .28s ease; }
+    .hamburger span:nth-child(1) { top: 16px; } .hamburger span:nth-child(2) { top: 25px; } .hamburger span:nth-child(3) { top: 34px; }
+    body.menu-open .hamburger span:nth-child(1) { top: 25px; transform: rotate(45deg); }
+    body.menu-open .hamburger span:nth-child(2) { opacity: 0; transform: translateX(10px); }
+    body.menu-open .hamburger span:nth-child(3) { top: 25px; transform: rotate(-45deg); }
+
+    .side-nav { position: fixed; top: var(--nav-h); right: 0; bottom: 0; width: min(50vw, 380px); min-width: 270px; z-index: 59; padding: 34px 28px; background: rgba(5,10,18,.88); border-left: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(28px); transform: translateX(110%); transition: transform .32s ease; box-shadow: -24px 0 80px rgba(0,0,0,.42); }
+    body.menu-open .side-nav { transform: translateX(0); }
+    .side-nav a { display: block; padding: 18px 0; color: #f6f2ec; font-weight: 800; border-bottom: 1px solid rgba(255,255,255,.1); }
+
+    .hero { position: relative; padding: 44px 0 74px; }
+    .hero-grid { display: grid; grid-template-columns: .93fr 1.07fr; min-height: 680px; border: 1px solid var(--line); border-radius: var(--radius-xl); overflow: hidden; background: linear-gradient(135deg, rgba(255,255,255,.82), rgba(255,255,255,.38)); box-shadow: var(--shadow-soft); }
+    .hero-copy { padding: clamp(34px, 6vw, 78px); display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { color: var(--rose); letter-spacing: .22em; text-transform: uppercase; font-weight: 900; font-size: 13px; }
+    h1, h2, h3 { font-family: var(--font-display); letter-spacing: -.055em; margin: 0; }
+    h1 { font-size: clamp(52px, 7.5vw, 104px); line-height: .9; max-width: 720px; }
+    h2 { font-size: clamp(38px, 5vw, 72px); line-height: .94; }
+    h3 { font-size: clamp(24px, 2.5vw, 36px); line-height: 1.02; }
+    p { color: var(--muted); line-height: 1.75; font-size: 18px; }
+    .hero-copy p { max-width: 550px; font-size: 20px; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 30px; }
+    .btn { border: 1px solid var(--line); border-radius: var(--radius-cta); min-height: 58px; padding: 0 26px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-weight: 900; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(135deg, var(--purple), var(--purple-strong)); color: #fff; box-shadow: 0 18px 42px rgba(134,100,183,.34); }
+    .btn-secondary { background: var(--surface); color: var(--ink); }
+
+    .hero-media { min-height: 680px; position: relative; background: #0a111d; overflow: hidden; }
+    .hero-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); }
+    .hero-card { position: absolute; left: 28px; right: 28px; bottom: 28px; padding: 22px; border-radius: 22px; color: #fff; background: rgba(5,10,18,.66); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(22px); }
+    .hero-card strong { display: block; font-size: 18px; margin-bottom: 6px; }
+    .hero-card span { color: rgba(255,255,255,.72); line-height: 1.55; }
+
+    .section { padding: 84px 0; }
+    .dark-band { background: radial-gradient(circle at 70% 12%, rgba(35,94,114,.32), transparent 32rem), linear-gradient(180deg, #07111d, #050a12); color: #f6f2ec; border-block: 1px solid rgba(255,255,255,.08); }
+    .dark-band p { color: #c8d1df; }
+    .story-grid { display: grid; grid-template-columns: .86fr 1.14fr; gap: 36px; align-items: center; }
+    .rounded-photo { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-soft); border: 1px solid var(--line); }
+    .rounded-photo img { aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+    .pill-list { display: grid; gap: 14px; margin-top: 28px; }
+    .pill { padding: 18px 20px; border-radius: 16px; background: rgba(255,255,255,.92); color: #172033; font-weight: 800; border: 1px solid rgba(255,255,255,.22); }
+    .pill span { color: #657083; font-weight: 600; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 34px; }
+    .card { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-soft); }
+    .card img { width: 100%; aspect-ratio: 1.1/1; object-fit: cover; }
+    .card-body { padding: 22px; }
+    .card-body p { font-size: 16px; }
+
+    .campaigns { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 34px; }
+    .campaign { min-height: 500px; position: relative; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(255,255,255,.18); box-shadow: var(--shadow-dark); display: flex; align-items: flex-end; background: #08111d; cursor: pointer; }
+    .campaign img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 14px; background: radial-gradient(circle at center, rgba(255,255,255,.08), rgba(0,0,0,.18)); transition: transform .3s ease; }
+    .campaign:hover img { transform: scale(1.025); }
+    .campaign::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.24) 45%, rgba(0,0,0,.92)); }
+    .campaign-content { position: relative; z-index: 1; padding: 28px; color: #fff; }
+    .campaign-content p { color: rgba(255,255,255,.78); }
+    .meter { height: 10px; background: rgba(255,255,255,.2); border-radius: 999px; overflow: hidden; margin: 16px 0; }
+    .meter span { display: block; height: 100%; width: 8%; background: var(--gold); }
+
+    .testimonial { border-radius: var(--radius-xl); padding: clamp(30px, 5vw, 58px); background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,255,255,.54)); border: 1px solid var(--line); box-shadow: var(--shadow-soft); }
+    .testimonial blockquote { margin: 0; font-size: clamp(24px, 3vw, 42px); line-height: 1.22; letter-spacing: -.04em; font-family: var(--font-display); font-weight: 800; }
+    .testimonial cite { display: block; margin-top: 20px; color: var(--muted); font-style: normal; font-weight: 800; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .info-box { padding: 28px; border-radius: var(--radius-lg); background: var(--surface); border: 1px solid var(--line); }
+    .info-box dl { display: grid; gap: 14px; margin: 0; }
+    .info-box div { display: flex; justify-content: space-between; gap: 18px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+    .info-box dt { color: var(--muted); font-weight: 700; }
+    .info-box dd { margin: 0; font-weight: 900; text-align: right; }
+
+    footer { padding: 56px 0; background: #050a12; color: #f6f2ec; }
+    .footer-grid { display: grid; grid-template-columns: 1.2fr .75fr .75fr .8fr; gap: 28px; align-items: start; }
+    .footer-logo { width: 150px; height: auto; margin-bottom: 18px; }
+    .footer-links a { display: block; color: rgba(255,255,255,.72); margin: 10px 0; font-weight: 700; }
+    .socials { display: flex; gap: 12px; margin-top: 18px; }
+    .socials a { width: 44px; height: 44px; border-radius: 16px; display: grid; place-items: center; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); }
+    .socials svg { width: 20px; height: 20px; fill: #f6f2ec; }
+    .developer { display: flex; align-items: center; justify-content: flex-end; gap: 12px; color: rgba(255,255,255,.62); }
+    .developer img { width: 52px; height: 52px; object-fit: contain; border-radius: 999px; }
+
+    .modal-backdrop { position: fixed; inset: 0; z-index: 90; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,.68); backdrop-filter: blur(18px); }
+    .modal-backdrop.open { display: flex; }
+    .modal { width: min(780px, 100%); max-height: calc(100dvh - 40px); background: linear-gradient(180deg, #fff, #f5f0fb); color: #172033; border-radius: 30px; box-shadow: 0 40px 120px rgba(0,0,0,.48); position: relative; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+    .modal-compact { width: min(740px, 100%); }
+    .modal-head { padding: 28px 30px 18px; text-align: center; border-bottom: 1px solid rgba(23,32,51,.1); }
+    .modal-head h3 { font-size: clamp(28px, 4vw, 38px); }
+    .modal-head p { margin: 10px auto 0; font-size: 16px; max-width: 560px; }
+    .modal-body { padding: 22px 28px 28px; }
+    .close-modal { position: absolute; top: 18px; right: 18px; width: 46px; height: 46px; border-radius: 16px; border: 0; color: #fff; background: var(--purple); font-size: 28px; cursor: pointer; z-index: 2; }
+    label { font-weight: 900; letter-spacing: .08em; text-transform: uppercase; font-size: 13px; }
+    input, textarea { width: 100%; min-height: 54px; border-radius: 14px; border: 1px solid #d8dde8; padding: 0 16px; background: #fff; color: #172033; }
+    textarea { padding-top: 14px; min-height: 110px; resize: vertical; }
+    .form-grid { display: grid; gap: 14px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .choice-row { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+    .choice { padding: 14px; border-radius: 16px; background: var(--purple); color: #fff; border: 0; font-weight: 900; cursor: pointer; }
+    .amounts { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+    .amounts button { min-height: 54px; border-radius: 14px; background: #fff; border: 2px solid #dbe1ea; font-weight: 900; color: #172033; }
+    .amounts button.active { border-color: #e22d3b; color: #e22d3b; background: #fff6f8; }
+    .checkline { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: #506078; }
+    .checkline input { width: 18px; min-height: 18px; margin-top: 2px; }
+
+    .foster-progress { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; padding: 0 28px 16px; }
+    .step-dot { height: 6px; border-radius: 999px; background: #d9d2e7; }
+    .step-dot.active { background: var(--purple); }
+    .foster-step { display: none; min-height: 360px; align-content: start; }
+    .foster-step.active { display: grid; }
+    .modal-actions { display: flex; gap: 12px; margin-top: 18px; }
+    .modal-actions .btn { flex: 1; }
+
+    @media (max-width: 880px) {
+      :root { --nav-h: 104px; }
+      .desktop-links { display: none; }
+      .hamburger { display: grid; }
+      .brand img { width: var(--logo-size-mobile); height: var(--logo-size-mobile); }
+      .hero { padding-top: 0; }
+      .hero-grid { grid-template-columns: 1fr; border-radius: 0; width: 100vw; margin-left: calc(50% - 50vw); min-height: 0; border-inline: 0; }
+      .hero-media { order: -1; min-height: 390px; }
+      .hero-copy { text-align: center; align-items: center; padding: 42px 24px 56px; }
+      .hero-actions, .btn { width: 100%; }
+      .story-grid, .info-grid, .footer-grid { grid-template-columns: 1fr; }
+      .cards, .campaigns { grid-template-columns: 1fr; }
+      .campaign { min-height: 460px; }
+      .side-nav { width: 50vw; min-width: 260px; }
+      .amounts { grid-template-columns: repeat(2,1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+      .developer { justify-content: flex-start; }
+      .modal { max-height: calc(100dvh - 24px); }
+      .modal-body { padding: 18px; }
+      .modal-head { padding: 24px 58px 16px 18px; }
     }
   </style>
-
-<style id="cpas-public-dark-glass-theme">
-:root{
-  --cpas-bg:#05080D;
-  --cpas-bg-alt:#101927;
-  --cpas-surface:rgba(18,25,36,.72);
-  --cpas-surface-soft:rgba(255,255,255,.055);
-  --cpas-border:rgba(255,255,255,.12);
-  --cpas-text:#F8F7FF;
-  --cpas-muted:rgba(248,247,255,.68);
-  --cpas-purple:#6D5593;
-  --cpas-purple-2:#8B74B7;
-  --cpas-cyan:#16BFD6;
-}
-body{
-  background:
-    radial-gradient(circle at 20% 0%,rgba(109,85,147,.24),transparent 32%),
-    radial-gradient(circle at 86% 18%,rgba(22,191,214,.15),transparent 34%),
-    linear-gradient(135deg,var(--cpas-bg),var(--cpas-bg-alt) 52%,#04060A) !important;
-  color:var(--cpas-text) !important;
-}
-.header-wrap,
-.nav,
-header{
-  background:rgba(5,8,13,.72) !important;
-  border-bottom:1px solid var(--cpas-border) !important;
-  backdrop-filter:blur(22px) saturate(135%) !important;
-}
-section,
-.home-section,
-.about-section,
-.services-section,
-.donate-section,
-.adopt-section{
-  background:transparent !important;
-}
-.card,
-.service-card,
-.animal-card,
-.donation-card,
-.story-card,
-.value-card,
-.form-card,
-.info-card{
-  background:var(--cpas-surface) !important;
-  border:1px solid var(--cpas-border) !important;
-  box-shadow:0 24px 80px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.07) !important;
-  backdrop-filter:blur(18px) saturate(130%) !important;
-}
-h1,h2,h3,h4,p,li,label{color:inherit}
-p,.subheadline,.muted{color:var(--cpas-muted) !important}
-a{color:inherit}
-.btn,
-button,
-.btn-primary,
-.hero-cta-primary{
-  background:linear-gradient(135deg,var(--cpas-purple),var(--cpas-purple-2)) !important;
-  border:1px solid rgba(255,255,255,.14) !important;
-  color:white !important;
-  box-shadow:0 18px 42px rgba(109,85,147,.30) !important;
-}
-.btn-secondary,
-.hero-cta-secondary{
-  background:rgba(255,255,255,.055) !important;
-  border:1px solid rgba(255,255,255,.14) !important;
-  color:white !important;
-}
-img{
-  border-radius:18px;
-}
-.logo,
-.footer-logo,
-.brand img,
-header img{
-  border-radius:0 !important;
-}
-</style>
-
-
-<style id="cpas-public-polish-v2">
-:root{
-  --cpas-purple:#6D5593;
-  --cpas-purple-light:#C7A7FF;
-  --cpas-cyan:#16BFD6;
-  --cpas-dark:#05080D;
-  --cpas-navy:#101927;
-}
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-  background:
-    radial-gradient(circle at 18% calc(10% + var(--scrollY,0px)), rgba(109,85,147,.34), transparent 32%),
-    radial-gradient(circle at 88% calc(28% + var(--scrollY,0px)), rgba(22,191,214,.18), transparent 34%),
-    linear-gradient(135deg,#05080D,#101927 52%,#04060A);
-  transition:background .2s linear;
-}
-.header-wrap .nav a,
-.nav a,
-.mobile-nav a{
-  position:relative;
-}
-.header-wrap .nav a.active,
-.nav a.active,
-.header-wrap .nav a[aria-current="page"],
-.nav a[aria-current="page"]{
-  color:var(--cpas-purple-light)!important;
-  text-shadow:0 0 18px rgba(199,167,255,.68),0 0 36px rgba(109,85,147,.38);
-}
-.header-wrap .nav a.active::after,
-.nav a.active::after,
-.header-wrap .nav a[aria-current="page"]::after,
-.nav a[aria-current="page"]::after{
-  background:linear-gradient(90deg,transparent,var(--cpas-purple-light),transparent)!important;
-  box-shadow:0 0 18px rgba(199,167,255,.75);
-}
-.hero,
-.hero-split,
-.home-section,
-section{
-  transition:background .8s ease, color .8s ease, border-color .8s ease;
-}
-.hero-split{
-  background:
-    linear-gradient(90deg,rgba(255,255,255,.94),rgba(255,255,255,.82) 44%,rgba(16,25,39,.30) 100%)!important;
-}
-.home-section,
-.story-section,
-.about-section{
-  background:
-    radial-gradient(circle at 78% 10%,rgba(22,191,214,.14),transparent 34%),
-    linear-gradient(180deg,rgba(16,25,39,.20),rgba(5,8,13,.92))!important;
-}
-.cpas-contact-modal{
-  position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:22px;
-  background:rgba(0,0,0,.68);backdrop-filter:blur(18px);
-}
-.cpas-contact-modal.open{display:flex}
-.cpas-contact-panel{
-  width:min(760px,96vw);max-height:90vh;overflow:auto;border-radius:30px;
-  background:rgba(13,20,33,.86);border:1px solid rgba(255,255,255,.13);
-  box-shadow:0 40px 140px rgba(0,0,0,.56), inset 0 1px 0 rgba(255,255,255,.08);
-  color:#F8F7FF;padding:28px;position:relative;
-}
-.cpas-contact-panel::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:140px;pointer-events:none;opacity:.5;
-  background:radial-gradient(70% 70% at 20% 100%,rgba(109,85,147,.55),transparent 62%),
-             radial-gradient(70% 70% at 80% 100%,rgba(22,191,214,.42),transparent 60%);
-  filter:blur(16px);transform:translateY(45%);
-}
-.cpas-contact-head,.cpas-contact-form{position:relative;z-index:1}
-.cpas-contact-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:20px}
-.cpas-contact-head h2{margin:0 0 8px;font-size:30px;color:white}
-.cpas-contact-head p{margin:0;color:rgba(255,255,255,.66)}
-.cpas-close{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:white;border-radius:14px;padding:10px 12px;cursor:pointer}
-.cpas-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.cpas-contact-grid .full{grid-column:1/-1}
-.cpas-contact-form input,.cpas-contact-form select,.cpas-contact-form textarea{
-  width:100%;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:rgba(255,255,255,.07);
-  color:white;padding:14px;font:inherit;outline:none;
-}
-.cpas-contact-form textarea{min-height:130px;resize:vertical}
-.cpas-contact-form input:focus,.cpas-contact-form select:focus,.cpas-contact-form textarea:focus{
-  border-color:rgba(199,167,255,.75);box-shadow:0 0 0 4px rgba(109,85,147,.24);
-}
-.cpas-submit{margin-top:14px;width:100%;border:0;border-radius:16px;padding:15px;background:linear-gradient(135deg,#6D5593,#8B74B7);color:white;font-weight:900;cursor:pointer}
-.cpas-form-msg{margin-top:12px;color:#C7A7FF;font-weight:800}
-@media(max-width:720px){.cpas-contact-grid{grid-template-columns:1fr}.hero-split{background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(16,25,39,.25),rgba(5,8,13,.92))!important}}
-@media(prefers-reduced-motion:reduce){body::before{transition:none}}
-</style>
-
-
-<style id="cpas-extra-gallery-style">
-.cpas-extra-gallery{padding:80px 22px;background:linear-gradient(180deg,rgba(5,8,13,.92),rgba(16,25,39,.88))!important}
-.cpas-extra-gallery .section-inner{max-width:1180px;margin:auto;text-align:center}
-.cpas-extra-gallery h2{font-size:clamp(32px,5vw,58px);margin:10px 0;color:#fff}
-.cpas-extra-gallery .section-eyebrow{color:#C7A7FF!important;letter-spacing:.16em;text-transform:uppercase;font-weight:900}
-.cpas-extra-gallery .section-copy{max-width:680px;margin:0 auto 30px;color:rgba(255,255,255,.68)!important}
-.cpas-gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.cpas-gallery-grid img{width:100%;height:290px;object-fit:cover;border-radius:26px;border:1px solid rgba(255,255,255,.12);box-shadow:0 24px 80px rgba(0,0,0,.34)}
-@media(max-width:900px){.cpas-gallery-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.cpas-gallery-grid{grid-template-columns:1fr}.cpas-gallery-grid img{height:340px}}
-</style>
-
-
-<style id="cpas-sitewide-donation-modal-contrast-v1">
-.cpas-donate-modal,
-.donation-modal,
-#donateModal {
-  color: #111827 !important;
-}
-
-.cpas-donate-panel,
-.donation-modal .modal-content,
-#donateModal .modal-content,
-#donateModal form {
-  background: #F8F7FF !important;
-  color: #111827 !important;
-  border: 1px solid rgba(15,23,42,.12) !important;
-  box-shadow: 0 40px 140px rgba(0,0,0,.58) !important;
-}
-
-.cpas-donate-panel h1,
-.cpas-donate-panel h2,
-.cpas-donate-panel h3,
-.cpas-donate-panel label,
-.donation-modal h1,
-.donation-modal h2,
-.donation-modal h3,
-.donation-modal label,
-#donateModal h1,
-#donateModal h2,
-#donateModal h3,
-#donateModal label {
-  color: #111827 !important;
-}
-
-.cpas-donate-panel p,
-.cpas-donate-panel span,
-.cpas-donate-panel small,
-.donation-modal p,
-.donation-modal span,
-.donation-modal small,
-#donateModal p,
-#donateModal span,
-#donateModal small {
-  color: #475569 !important;
-}
-
-.cpas-donate-form input,
-.cpas-donate-form select,
-.cpas-donate-form textarea,
-#donateModal input,
-#donateModal select,
-#donateModal textarea {
-  background: #FFFFFF !important;
-  color: #111827 !important;
-  border: 1px solid rgba(15,23,42,.16) !important;
-}
-
-.cpas-donate-form input::placeholder,
-.cpas-donate-form textarea::placeholder,
-#donateModal input::placeholder,
-#donateModal textarea::placeholder {
-  color: #64748B !important;
-}
-
-.cpas-amounts button,
-.amount-button,
-#donateModal .amount-btn {
-  background: #FFFFFF !important;
-  color: #111827 !important;
-  border: 1px solid rgba(15,23,42,.16) !important;
-}
-
-.cpas-amounts button.active,
-.amount-button.active,
-#donateModal .amount-btn.active {
-  background: #6D5593 !important;
-  color: #FFFFFF !important;
-  border-color: #6D5593 !important;
-}
-
-.cpas-donate-submit,
-#donateModal button[type="submit"],
-#donateModal .donate-submit {
-  background: #6D5593 !important;
-  color: #FFFFFF !important;
-  border: 1px solid rgba(15,23,42,.08) !important;
-}
-
-.cpas-donate-close,
-#donateModal .close,
-#donateModal .modal-close {
-  background: #6D5593 !important;
-  color: #FFFFFF !important;
-}
-
-.cpas-donate-msg {
-  color: #6D5593 !important;
-}
-</style>
-
 </head>
-
 <body>
-  <!-- Header -->
-  <header class="header-wrap">
-    <nav class="nav">
-      <a class="brand" href="/admin/login" aria-label="Companions of CPAS – Dashboard login">
-        <img data-brand-logo alt="Companions of CPAS logo"
-          src="/logo.png" />
-        <div>
-          <div class="name">Companions of CPAS</div>
-          <div class="tag">Established 2025 · Saving Lives Since 2014</div>
-        </div>
-      </a>
-
-      <div class="links" aria-label="Primary navigation">
-        <a data-nav href="/" class="active">Home</a>
-        <a data-nav href="/about">About</a>
-        <a data-nav href="/adopt">Adopt</a>
-        <a data-nav href="/services">Services</a>
-        <a data-nav href="/donate">Donate</a>
-      </div>
-
-      <button class="mobile-menu-btn" aria-label="Toggle menu">
-        <span class="icon-hamburger" aria-hidden="true">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </span>
-        <span class="icon-close" aria-hidden="true">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </span>
-      </button>
-    </nav>
+  <header class="site-header" id="siteHeader">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Companions of CPAS home"><img src="https://companionscpas-platform.samprimeauxwork.workers.dev/logo.png" alt="Companions of CPAS logo" /></a>
+      <nav class="desktop-links" aria-label="Primary navigation"><a class="active" href="#top">Home</a><a href="#mission">Mission</a><a href="#campaigns">Campaigns</a><a href="#foster">Foster</a><a href="#contact">Contact</a><a class="donate-link" href="#donate" data-open-modal="donate">Donate</a></nav>
+      <button class="hamburger" type="button" aria-label="Open navigation" aria-controls="sideNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </header>
 
-  <!-- Mobile Navigation -->
-  <div class="mobile-nav-overlay"></div>
-  <nav class="mobile-nav">
-    <button class="mobile-nav-close" aria-label="Close menu">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
-    <div class="mobile-nav-links">
-      <a data-nav-mobile href="/">Home</a>
-      <a data-nav-mobile href="/about">About</a>
-      <a data-nav-mobile href="/adopt">Adopt</a>
-      <a data-nav-mobile href="/services">Services</a>
-      <a data-nav-mobile href="/donate">Donate</a>
-    </div>
-  </nav>
+  <aside class="side-nav" id="sideNav" aria-label="Mobile navigation"><a href="#top">Home</a><a href="#mission">Mission</a><a href="#campaigns">Campaigns</a><a href="#foster">Apply to Foster</a><a href="#contact">Contact</a><a href="#donate" data-open-modal="donate">Donate</a></aside>
 
-  <!-- Hero Section - Split-screen layout -->
-  <section class="hero" aria-label="Hero">
-    <div class="hero-split">
-      <div class="hero-text-panel">
-        <h1 class="hero-headline">Striving to keep family and pets together</h1>
-        <p class="hero-subheadline">your community's trusted resource for pet support services.</p>
-        <div class="hero-ctas">
-          <a href="#" class="btn btn-primary" onclick="window.openContactModal && window.openContactModal(); return false;">Get Connected</a>
-          <a href="#" class="btn btn-secondary" onclick="openDonateModal(); return false;">Support Our Mission</a>
-        </div>
-        <p class="hero-story-teaser">Companions of CPAS walks alongside local families with practical help and deep compassion—so pets can stay healthy, safe, and at home where they belong.</p>
-      </div>
-      <div class="hero-image-panel hero-media">
-        <img
-          src="/assets/animals/thefounders.webp"
-          srcset="/assets/animals/hungryboy.webp 640w,
-                  /assets/animals/awwmaaann-(1).webp 1024w,
-                  /assets/animals/pup.webp 1920w"
-          sizes="(max-width: 768px) 100vw, 60vw"
-          alt="A person and dog walking together in a creek - Companions of CPAS keeps families and pets together"
-          loading="eager">
-      </div>
-    </div>
-  </section>
+  <main id="top">
+    <section class="hero"><div class="container hero-grid"><div class="hero-copy"><div class="eyebrow">Caddo Parish • Volunteer Powered</div><h1>Every dog deserves a way out.</h1><p>Companions of CPAS funds critical care, opens transport pathways, and helps dogs at Caddo Parish Animal Services reach the families waiting for them.</p><div class="hero-actions"><button class="btn btn-primary" data-open-modal="foster">Apply to Foster</button><button class="btn btn-secondary" data-open-modal="donate">Support Our Mission</button></div></div><div class="hero-media"><img src="https://companionscpas-platform.samprimeauxwork.workers.dev/assets/animals/upclose.webp" alt="Happy rescued dog close up" /><div class="hero-card"><strong>Up close, every rescue becomes personal.</strong><span>Your support turns limited time and limited space into medical care, transport, foster homes, and second chances.</span></div></div></div></section>
 
-  <!-- Our Story & Approach -->
-  <section class="home-section home-section-our-story">
-    <div class="home-kicker">Our Story</div>
-    <h3 class="home-section-title">A small rescue with big-heart impact in your community.</h3>
-    <div class="home-story-layout">
-      <div>
-        <p class="home-section-lead">
-          Companions of CPAS walks alongside local families with practical help, clear guidance, and deep
-          compassion—so pets can stay healthy, safe, and at home where they belong.
-        </p>
-        <ul class="home-story-points">
-          <li><strong>Compassion first</strong> — no judgment, just real support when things get hard.</li>
-          <li><strong>Prevention over crisis</strong> — spay/neuter, vaccines, and food assistance before it becomes an
-            emergency.</li>
-          <li><strong>Rooted in your community</strong> — we know the roads, the families, and the stories behind every
-            call for help.</li>
-          <li><strong>Transparent 501(c)(3)</strong> — careful, local stewardship of every donation (EIN: 93‑2791656).
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    <section id="mission" class="section dark-band"><div class="container story-grid"><div class="rounded-photo"><img src="https://companionscpas-platform.samprimeauxwork.workers.dev/assets/animals/pup.webp" alt="Young puppy looking up" /></div><div><div class="eyebrow">Our Mission</div><h2>We step in where the second chance starts.</h2><p>Companions of CPAS exists to give dogs at Caddo Parish Animal Services the opportunity they may not get otherwise. As a 100% volunteer-based nonprofit, every dollar is directed toward helping animals who need care, transport, visibility, and a safe path forward.</p><div class="pill-list"><div class="pill">Critical medical care <span>— heartworm treatment, surgery, urgent needs, and recovery support.</span></div><div class="pill">Transport access <span>— helping dogs reach no-kill rescue partners where adoption demand is stronger.</span></div><div class="pill">Foster pathways <span>— giving families an easy, supported way to say yes.</span></div></div></div></div></section>
 
-  <!-- Adoptable pets gallery - one card per animal -->
-  <section class="adopt-gallery-section">
-    <div class="adopt-gallery-header">
-      <p class="section-label">Available for Adoption</p>
-      <h2>Each one waiting for a family to call their own</h2>
-      <p class="section-subtitle">Hover over any photo to learn more. <a href="/adopt">View all adoptable pets</a></p>
-    </div>
-    <div class="adopt-gallery" id="adoptGallery">
-      <!-- Populated by JS - staggered layout, one per animal -->
-    </div>
-  </section>
+    <section id="foster" class="section"><div class="container"><div class="eyebrow">Open Your Home</div><h2>Meet your family’s next best friend.</h2><p style="max-width:760px">Fostering gives a dog safety, stability, and the time they need to be seen. It is one of the fastest ways to create space, save lives, and help a dog become ready for forever.</p><div class="cards"><article class="card"><img src="https://companionscpas-platform.samprimeauxwork.workers.dev/assets/animals/2cute.webp" alt="Two rescued dogs together" /><div class="card-body"><h3>Family-ready moments</h3><p>Some dogs just need a loving bridge between the shelter and the home they were meant to find.</p></div></article><article class="card"><img src="https://companionscpas-platform.samprimeauxwork.workers.dev/assets/animals/sus.webp" alt="Mischievous dog making a funny face" /><div class="card-body"><h3>Big personalities</h3><p>Behind every silly face is a dog waiting for someone to notice their spark.</p></div></article><article class="card"><img src="https://companionscpas-platform.samprimeauxwork.workers.dev/assets/animals/bluepit.webp" alt="Smiling rescue dog outside" /><div class="card-body"><h3>Joy worth fighting for</h3><p>Every adoption story starts with someone willing to take the first step.</p></div></article></div><div style="margin-top:30px"><button class="btn btn-primary" data-open-modal="foster">Start Foster Application</button></div></div></section>
 
-  <!-- Pet lightbox -->
-  <div class="pet-lightbox" id="petLightbox" aria-hidden="true">
-    <div class="pet-lightbox-inner">
-      <button class="pet-lightbox-close" id="petLightboxClose" aria-label="Close">&times;</button>
-      <div class="pet-lightbox-images" id="petLightboxThumbs"></div>
-      <div class="pet-lightbox-main" id="petLightboxMain"></div>
-    </div>
-  </div>
+    <section id="campaigns" class="section dark-band"><div class="container"><div class="eyebrow">Featured Campaigns</div><h2>Two direct ways your gift saves lives.</h2><div class="campaigns"><article class="campaign" data-open-modal="donate"><img src="https://companionscpas-platform.samprimeauxwork.workers.dev/assets/animals/thinboy.webp" alt="Malnourished rescued dog receiving care" /><div class="campaign-content"><div class="eyebrow">Fundraiser</div><h3>Medical Support</h3><p>Heartworm treatment, surgery, diagnostics, and urgent care can be the difference between a dog being passed over and a family being able to say yes.</p><div class="meter"><span></span></div><strong>$0 raised • Click to support</strong></div></article><article class="campaign" data-open-modal="donate"><img src="https://companionscpas-platform.samprimeauxwork.workers.dev/assets/animals/conehead.webp" alt="Dog recovering after treatment with cone" /><div class="campaign-content"><div class="eyebrow">Fundraiser</div><h3>Transport Costs</h3><p>When local space runs out, transport connects Caddo dogs with rescue partners and communities where they have a stronger chance to be adopted.</p><div class="meter"><span></span></div><strong>$0 raised • Click to support</strong></div></article></div></div></section>
 
-  <!-- Featured Animals Snapshot -->
-  <section class="home-section">
-    <div class="home-kicker">Real animals. Real stories.</div>
-    <h3 class="home-section-title">Why we do this work.</h3>
-    <p class="home-section-lead">
-      Every dog you see here has been rescued, cared for, and given the chance to start over. Now they're waiting for
-      families to call their own.
-    </p>
-    <div class="home-animals-staggered">
-      <article class="home-animal-item">
-        <div class="home-animal-image-wrapper">
-          <img src="/assets/animals/bluepit.webp"
-            alt="Savannah the dog">
-        </div>
-        <div class="home-animal-content">
-          <div class="home-animal-tag">Featured</div>
-          <h4 class="home-animal-name">Savannah</h4>
-          <div class="home-animal-meta">Dog • Mixed Breed • Gentle soul</div>
-          <p class="home-animal-story">
-            "Once overlooked and unsure, Savannah reminds us that when a family gets just a little bit of help at the
-            right time, a good dog gets to stay home and safe."
-          </p>
-        </div>
-      </article>
-      <article class="home-animal-item">
-        <div class="home-animal-image-wrapper">
-          <img src="/assets/animals/thinboy.webp"
-            alt="Bandit the dog">
-        </div>
-        <div class="home-animal-content">
-          <div class="home-animal-tag">Best friend energy</div>
-          <h4 class="home-animal-name">Bandit</h4>
-          <div class="home-animal-meta">Dog • Mixed Breed • Playful</div>
-          <p class="home-animal-story">
-            "Bandit is the goofy, loyal best friend you picture when you think “family dog” — and the reason we work so
-            hard to keep dogs out of the shelter system."
-          </p>
-        </div>
-      </article>
-      <article class="home-animal-item">
-        <div class="home-animal-image-wrapper">
-          <img src="/assets/animals/conehead.webp"
-            alt="Cayenne the dog">
-        </div>
-        <div class="home-animal-content">
-          <div class="home-animal-tag">Community support</div>
-          <h4 class="home-animal-name">Cayenne</h4>
-          <div class="home-animal-meta">Dog • Mixed Breed • Shy but sweet</div>
-          <p class="home-animal-story">
-            "Cayenne came to us shy and unsure. With basic vet care, a steady food source, and patient people, she’s a
-            living reminder that scared dogs aren’t “lost causes” — they just need a chance."
-          </p>
-        </div>
-      </article>
-    </div>
-    <div class="home-section-cta">
-      <a href="/adopt" class="btn btn-primary">Meet our adoptable pets</a>
-      <span>Or <a href="/about" style="color: var(--primary); font-weight: 600;">learn more about our story</a>.</span>
-    </div>
-  </section>
+    <section class="section"><div class="container testimonial"><div class="eyebrow">Real Impact</div><blockquote>“Companions gave me the chance to say yes — and to fight for her.”</blockquote><cite>Brittany Ramsey, foster and board member</cite></div></section>
 
-  <!-- Request Help Modal -->
-  <div class="modal-overlay" id="helpModal">
-    <div class="modal">
-      <div class="modal-header">
-        <button class="close-btn" onclick="closeHelpModal()">&times;</button>
-        <h3>Request Assistance</h3>
-        <p>Tell us how we can help you and your pet</p>
-      </div>
+    <section class="section dark-band"><div class="container story-grid"><div><div class="eyebrow">From Crisis to Care</div><h2>Some dogs arrive with stories they cannot tell.</h2><p>Road rash, illness, neglect, and urgent medical needs can make a dog easy to overlook in an overcrowded shelter. Companions of CPAS helps turn those moments into treatment, recovery, and a future.</p><button class="btn btn-primary" data-open-modal="donate">Help Fund Recovery</button></div><div class="rounded-photo"><img src="https://companionscpas-platform.samprimeauxwork.workers.dev/assets/animals/miniscoobydoo.webp" alt="Small rescued dog recovering from injury" /></div></div></section>
 
-      <div class="modal-body">
-        <form id="helpForm">
-          <div class="form-group">
-            <label for="name">Your Name *</label>
-            <input type="text" id="name" name="name" required placeholder="John Doe" autocomplete="name">
-          </div>
+    <section class="section" id="contact"><div class="container info-grid"><div class="info-box"><div class="eyebrow">Organization Data</div><h3>Companions of CPAS</h3><dl><div><dt>Tax status</dt><dd>501(c)(3)</dd></div><div><dt>EIN</dt><dd>88-4156327</dd></div><div><dt>Parish served</dt><dd>Caddo</dd></div><div><dt>Operating budget</dt><dd>Under $100,000</dd></div><div><dt>Sector</dt><dd>Animals</dd></div></dl></div><div class="info-box"><div class="eyebrow">Contact</div><h3>Shreveport, LA 71106</h3><p>Email: <a href="mailto:companionsCPAS@gmail.com"><strong>companionsCPAS@gmail.com</strong></a></p><p>Follow along for adoptable dogs, urgent needs, transport wins, and stories from the volunteers making it happen.</p><div class="socials" aria-label="Social media links"><a href="https://www.facebook.com/people/Companions-of-CPAS/100069291576354/?mibextid=hu50Ix" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.48 17.52 2 11.94 2S2 6.48 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.62.77-1.62 1.56v1.9h2.76l-.44 2.91h-2.32V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg></a><a href="https://www.instagram.com/companionscpas" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8zm8.7 1.8a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg></a></div></div></div></section>
+  </main>
 
-          <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email" required placeholder="john@example.com" autocomplete="email">
-          </div>
+  <footer><div class="container footer-grid"><div><img class="footer-logo" src="https://companionscpas-platform.samprimeauxwork.workers.dev/logo.png" alt="Companions of CPAS logo" /><p>Companions of CPAS is a volunteer-run nonprofit helping dogs at Caddo Parish Animal Services receive medical care, transport support, and second chances.</p></div><nav class="footer-links" aria-label="Footer pages"><h3>Pages</h3><a href="#top">Home</a><a href="#mission">Mission</a><a href="#campaigns">Campaigns</a><a href="#foster">Foster</a><a href="#contact">Contact</a><a href="#donate" data-open-modal="donate">Donate</a></nav><div><h3>Nonprofit Info</h3><p>501(c)(3) Tax-Exempt<br/>EIN: 88-4156327<br/>Shreveport, LA 71106</p></div><div class="developer"><span>Developed by</span><img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/238de9d1-a470-4fe5-5424-9182f4bc0500/small" alt="InnerAnimalMedia" /></div></div></footer>
 
-          <div class="form-group">
-            <label for="phone">Phone Number *</label>
-            <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567" autocomplete="tel">
-          </div>
+  <div class="modal-backdrop" id="donateModal" role="dialog" aria-modal="true" aria-label="Donation modal"><div class="modal modal-compact"><button class="close-modal" data-close-modal aria-label="Close donation modal">×</button><div class="modal-head"><h3>Support Our Mission</h3><p>Your donation helps Caddo dogs receive care, transport, and time.</p></div><div class="modal-body form-grid"><label>Donation Type</label><div class="choice-row"><button class="choice">One-Time<br/><small>Single donation</small></button><button class="choice">Monthly<br/><small>Recurring support</small></button></div><label>Select Amount</label><div class="amounts"><button>$25</button><button class="active">$50</button><button>$100</button><button>$250</button></div><div class="two-col"><div><label>Your Name *</label><input placeholder="John Doe" /></div><div><label>Email Address *</label><input type="email" placeholder="john@example.com" /></div></div><label>Card Information *</label><input placeholder="Stripe Payment Element mounts here" /><label class="checkline"><input type="checkbox" /> Keep me updated with rescue stories, campaign progress, and ways to help.</label><button class="btn btn-primary" style="width:100%;">Donate Now</button></div></div></div>
 
-          <div class="form-group">
-            <label for="requestType">Type of Assistance Needed *</label>
-            <select id="requestType" name="requestType" required>
-              <option value="">Select...</option>
-              <option value="spay-neuter">Spay/Neuter Assistance</option>
-              <option value="vaccination">Vaccination Help</option>
-              <option value="pet-food">Pet Food Assistance</option>
-              <option value="emergency">Emergency Care</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="petInfo">Pet Information *</label>
-            <textarea id="petInfo" name="petInfo" required
-              placeholder="Tell us about your pet (type, age, breed, etc.)"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="message">Additional Details *</label>
-            <textarea id="message" name="message" required
-              placeholder="Please provide details about your situation and how we can help..."></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn" id="submitBtn">
-            <span id="btnText">Submit Request</span>
-          </button>
-        </form>
-
-        <div class="success-message" id="successMessage">
-          <div class="success-icon">✓</div>
-          <h3>Request Received!</h3>
-          <p>Thank you for reaching out. We'll review your request and contact you within 24-48 hours.</p>
-          <button class="btn btn-primary" onclick="closeHelpModal()">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Donate Modal -->
-  <div class="modal-overlay" id="donateModal">
-    <div class="modal">
-      <div class="modal-header">
-        <button class="close-btn" onclick="closeDonateModal()">&times;</button>
-        <h3>Support Our Mission</h3>
-        <p>Your donation helps your community pets in need</p>
-      </div>
-      <div class="modal-body">
-        <form id="donateForm">
-          <div class="form-group">
-            <label>Donation Type</label>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-              <button type="button" id="donationTypeOneTime" class="donation-type-btn active" onclick="selectDonationType('one-time')">
-                <div style="font-weight: 600; margin-bottom: 4px;">One-Time</div>
-                <div style="font-size: 12px; opacity: 0.8;">Single donation</div>
-              </button>
-              <button type="button" id="donationTypeRecurring" class="donation-type-btn" onclick="selectDonationType('recurring')">
-                <div style="font-weight: 600; margin-bottom: 4px;">Monthly</div>
-                <div style="font-size: 12px; opacity: 0.8;">Recurring support</div>
-              </button>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Select Amount</label>
-            <div class="payment-amount">
-              <div class="amount-option" data-amount="25" onclick="selectAmount(25)">$25</div>
-              <div class="amount-option" data-amount="50" onclick="selectAmount(50)">$50</div>
-              <div class="amount-option" data-amount="100" onclick="selectAmount(100)">$100</div>
-              <div class="amount-option" data-amount="250" onclick="selectAmount(250)">$250</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 12px;">
-              <label for="donationAmountOther" style="margin: 0; font-size: 14px; color: #64748b;">Or enter amount:</label>
-              <span style="font-weight: 600; color: var(--dark);">$</span>
-              <input type="number" id="donationAmountOther" min="1" max="99999" step="1" placeholder="Any amount" autocomplete="off"
-                style="width: 120px; padding: 10px 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; font-weight: 600;"
-                oninput="onHomeDonationOtherAmount()">
-            </div>
-            <input type="hidden" id="donationAmount" value="50">
-          </div>
-          <div class="form-group">
-            <label for="donorName">Your Name *</label>
-            <input type="text" id="donorName" required placeholder="John Doe" autocomplete="name">
-          </div>
-          <div class="form-group">
-            <label for="donorEmail">Email Address *</label>
-            <input type="email" id="donorEmail" required placeholder="john@example.com" autocomplete="email">
-          </div>
-          <div class="form-group">
-            <label>Card Information *</label>
-            <div id="card-element"></div>
-            <div id="card-errors" role="alert" style="color: #dc2626; font-size: 14px; margin-top: 8px;"></div>
-          </div>
-          <button type="submit" class="submit-btn" id="donateBtn">
-            <span id="donateBtnText">Donate Now</span>
-          </button>
-          <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; padding: 12px; background: #f8fafc; border-radius: 8px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#635BFF" />
-              <path d="M2 17L12 22L22 17" stroke="#635BFF" stroke-width="2" />
-              <path d="M2 12L12 17L22 12" stroke="#635BFF" stroke-width="2" />
-            </svg>
-            <span style="font-size: 12px; color: #64748b; font-weight: 500;">Secured by Stripe</span>
-          </div>
-        </form>
-        <div class="success-message" id="donateSuccessMessage">
-          <div class="success-icon">✓</div>
-          <h3>Thank You!</h3>
-          <p>Your generous donation will help pets in need. A receipt has been sent to your email.</p>
-          <button class="btn btn-primary" onclick="closeDonateModal()">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer (sitewide component injected by _shared.js) -->
-  
-<section class="home-section cpas-extra-gallery" id="community-gallery">
-  <div class="section-inner">
-    <p class="section-eyebrow">Community Gallery</p>
-    <h2>Faces of the mission</h2>
-    <p class="section-copy">A few of the dogs and community moments that help tell the Companions of CPAS story.</p>
-    <div class="cpas-gallery-grid">
-      <img src="/assets/animals/2cute.webp" alt="Two companion dogs" loading="lazy">
-      <img src="/assets/animals/miniscoobydoo.webp" alt="Small rescue dog outside" loading="lazy">
-      <img src="/assets/animals/sus.webp" alt="Black rescue dog standing outside" loading="lazy">
-      <img src="/assets/animals/upclose.webp" alt="Close up smiling dog" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<footer id="site-footer"></footer>
+  <div class="modal-backdrop" id="fosterModal" role="dialog" aria-modal="true" aria-label="Foster application modal"><div class="modal"><button class="close-modal" data-close-modal aria-label="Close foster application modal">×</button><div class="modal-head"><h3>Apply to Foster</h3><p>A quick guided application. Your answers help the team match dogs with safe, supported foster homes.</p></div><div class="foster-progress"><span class="step-dot active"></span><span class="step-dot"></span><span class="step-dot"></span><span class="step-dot"></span></div><div class="modal-body"><div class="foster-step active form-grid" data-step="0"><div class="two-col"><div><label>First Name *</label><input placeholder="First name" /></div><div><label>Last Name *</label><input placeholder="Last name" /></div></div><label>Email Address *</label><input type="email" placeholder="you@example.com" /><label>Cell Number *</label><input placeholder="(318) 555-5555" /></div><div class="foster-step form-grid" data-step="1"><label>Where do you live? *</label><div class="choice-row"><button class="choice">Own Home</button><button class="choice">Rent</button></div><label>Adults in Household *</label><input placeholder="Number of adults" /><label>Do all household members support fostering? *</label><div class="choice-row"><button class="choice">Yes</button><button class="choice">No</button></div></div><div class="foster-step form-grid" data-step="2"><label>Current Pets</label><div class="two-col"><input placeholder="How many dogs?" /><input placeholder="How many cats?" /></div><label>Are pets vaccinated and on prevention?</label><div class="choice-row"><button class="choice">Yes</button><button class="choice">No / Unsure</button></div><label>Veterinarian Name and Phone</label><input placeholder="Vet contact" /></div><div class="foster-step form-grid" data-step="3"><label>Foster Preferences</label><textarea placeholder="Tell us what size, energy level, or foster situation works best for your home."></textarea><label class="checkline"><input type="checkbox" /> I confirm the information provided is truthful and accurate.</label><label class="checkline"><input type="checkbox" /> I understand submitting this application does not guarantee approval.</label></div><div class="modal-actions"><button class="btn btn-secondary" id="fosterPrev" type="button">Back</button><button class="btn btn-primary" id="fosterNext" type="button">Continue</button></div></div></div></div>
 
   <script>
-    // Stripe / Donate Modal (same pattern as donate/adopt/services pages)
-    const stripe = Stripe('pk_live_51SuGjiRi9zMPk3BPrxYMelFIUFUKfaAyB4AyihsoX4JtVQcOahYLkq7r9fqOc9L36bj4qZLzA3MojyVSsWdu7LKh008ImEpNvR');
-    let cardElement;
-    let selectedAmount = 50;
-    let donationType = 'one-time';
+    const body = document.body;
+    const header = document.getElementById('siteHeader');
+    const hamburger = document.querySelector('.hamburger');
+    let lastY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      header.classList.toggle('header-scrolled', y > 20);
+      header.classList.toggle('header-hidden', y > lastY && y > 140 && !body.classList.contains('menu-open'));
+      lastY = y;
+    }, { passive: true });
 
-    function initializeStripe() {
-      const container = document.getElementById('card-element');
-      if (!container || !container.offsetParent) return;
-      if (cardElement) return;
-      const elements = stripe.elements();
-      cardElement = elements.create('card', {
-        style: { base: { fontSize: '16px', color: '#1e293b', '::placeholder': { color: '#64748b' } } },
-      });
-      cardElement.mount('#card-element');
-      cardElement.on('change', ({ error }) => {
-        const el = document.getElementById('card-errors');
-        if (el) el.textContent = error ? error.message : '';
-      });
-    }
+    hamburger?.addEventListener('click', () => { const open = body.classList.toggle('menu-open'); hamburger.setAttribute('aria-expanded', String(open)); });
+    document.querySelectorAll('.side-nav a').forEach(a => a.addEventListener('click', () => { body.classList.remove('menu-open'); hamburger?.setAttribute('aria-expanded', 'false'); }));
 
-    function unmountStripe() {
-      if (cardElement) {
-        try { cardElement.unmount(); } catch (e) {}
-        cardElement = null;
-      }
-    }
+    const donateModal = document.getElementById('donateModal');
+    const fosterModal = document.getElementById('fosterModal');
+    document.querySelectorAll('[data-open-modal]').forEach(btn => btn.addEventListener('click', (event) => { event.preventDefault(); (btn.getAttribute('data-open-modal') === 'donate' ? donateModal : fosterModal)?.classList.add('open'); }));
+    document.querySelectorAll('[data-close-modal], .modal-backdrop').forEach(el => el.addEventListener('click', (event) => { if (event.target === el || el.hasAttribute('data-close-modal')) { donateModal?.classList.remove('open'); fosterModal?.classList.remove('open'); } }));
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') { donateModal?.classList.remove('open'); fosterModal?.classList.remove('open'); body.classList.remove('menu-open'); } });
 
-    function openDonateModal() {
-      document.getElementById('donateModal').classList.add('active');
-      document.body.style.overflow = 'hidden';
-      selectAmount(50);
-      const o = document.getElementById('donationAmountOther');
-      if (o) o.value = '';
-      // Homepage: defer Stripe mount until modal has layout (fixes card input not rendering)
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setTimeout(() => initializeStripe(), 100);
-        });
-      });
-    }
-
-    function closeDonateModal() {
-      unmountStripe();
-      document.getElementById('donateModal').classList.remove('active');
-      document.body.style.overflow = '';
-      resetDonateForm();
-    }
-
-    function resetDonateForm() {
-      document.getElementById('donateForm').reset();
-      document.getElementById('donateForm').style.display = 'block';
-      document.getElementById('donateSuccessMessage').classList.remove('active');
-    }
-
-    function getDonationAmountCents() {
-      const o = document.getElementById('donationAmountOther');
-      if (o && o.value.trim() !== '') {
-        const v = parseFloat(o.value);
-        if (!isNaN(v) && v >= 1) return Math.round(v * 100);
-      }
-      return Math.round(selectedAmount * 100);
-    }
-
-    function onHomeDonationOtherAmount() {
-      const o = document.getElementById('donationAmountOther');
-      if (!o) return;
-      const v = parseFloat(o.value);
-      if (!isNaN(v) && v >= 1) {
-        selectedAmount = v;
-        document.getElementById('donationAmount').value = v;
-        document.querySelectorAll('.amount-option').forEach(opt => opt.classList.remove('selected'));
-      }
-    }
-
-    function selectAmount(amount) {
-      selectedAmount = amount;
-      document.getElementById('donationAmount').value = amount;
-      const o = document.getElementById('donationAmountOther');
-      if (o) o.value = '';
-      document.querySelectorAll('.amount-option').forEach(opt => opt.classList.remove('selected'));
-      const sel = document.querySelector(`[data-amount="${amount}"]`);
-      if (sel) sel.classList.add('selected');
-    }
-
-    function selectDonationType(type) {
-      donationType = type;
-      document.getElementById('donationTypeOneTime').classList.toggle('active', type === 'one-time');
-      document.getElementById('donationTypeRecurring').classList.toggle('active', type === 'recurring');
-      const bt = document.getElementById('donateBtnText');
-      if (bt) bt.textContent = type === 'recurring' ? 'Start Monthly Donation' : 'Donate Now';
-    }
-
-    document.getElementById('donateForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const donateBtn = document.getElementById('donateBtn');
-      const btnText = document.getElementById('donateBtnText');
-      const cardErrors = document.getElementById('card-errors');
-      if (cardErrors) cardErrors.textContent = '';
-      donateBtn.disabled = true;
-      btnText.innerHTML = '<span class="spinner"></span>';
-      const cents = getDonationAmountCents();
-      if (cents < 100) {
-        if (cardErrors) cardErrors.textContent = 'Please enter at least $1.';
-        donateBtn.disabled = false;
-        btnText.textContent = donationType === 'recurring' ? 'Start Monthly Donation' : 'Donate Now';
-        return;
-      }
-      try {
-        const res = await fetch('/api/create-payment-intent', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            amount: cents,
-            name: document.getElementById('donorName').value,
-            email: document.getElementById('donorEmail').value,
-            type: donationType
-          })
-        });
-        const result = await res.json();
-        if (!res.ok) {
-          if (cardErrors) cardErrors.textContent = result.error || 'Failed to create payment intent.';
-          donateBtn.disabled = false;
-          btnText.textContent = donationType === 'recurring' ? 'Start Monthly Donation' : 'Donate Now';
-          return;
-        }
-        const { error } = await stripe.confirmCardPayment(result.clientSecret, {
-          payment_method: {
-            card: cardElement,
-            billing_details: {
-              name: document.getElementById('donorName').value,
-              email: document.getElementById('donorEmail').value,
-            },
-          },
-        });
-        if (error) {
-          if (cardErrors) cardErrors.textContent = error.message;
-          donateBtn.disabled = false;
-          btnText.textContent = donationType === 'recurring' ? 'Start Monthly Donation' : 'Donate Now';
-        } else {
-          document.getElementById('donateForm').style.display = 'none';
-          document.getElementById('donateSuccessMessage').classList.add('active');
-        }
-      } catch (err) {
-        console.error('Payment error:', err);
-        if (cardErrors) cardErrors.textContent = err.message || 'Payment failed. Please try again.';
-        donateBtn.disabled = false;
-        btnText.textContent = donationType === 'recurring' ? 'Start Monthly Donation' : 'Donate Now';
-      }
-    });
-
-    document.getElementById('donateModal').addEventListener('click', (e) => {
-      if (e.target.id === 'donateModal') closeDonateModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') { closeHelpModal(); closeDonateModal(); }
-    });
-
-    // Help Modal Functions
-    function openHelpModal() {
-      document.getElementById('helpModal').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeHelpModal() {
-      document.getElementById('helpModal').classList.remove('active');
-      document.body.style.overflow = '';
-      resetHelpForm();
-    }
-
-    function resetHelpForm() {
-      document.getElementById('helpForm').reset();
-      document.getElementById('helpForm').style.display = 'block';
-      document.getElementById('successMessage').classList.remove('active');
-    }
-
-    // Help Form Submission
-    document.getElementById('helpForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const submitBtn = document.getElementById('submitBtn');
-      const btnText = document.getElementById('btnText');
-
-      submitBtn.disabled = true;
-      btnText.innerHTML = '<span class="spinner"></span>';
-
-      const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        requestType: document.getElementById('requestType').value,
-        petInfo: document.getElementById('petInfo').value,
-        message: document.getElementById('message').value
-      };
-
-      try {
-        const response = await fetch('/api/help-request', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          document.getElementById('helpForm').style.display = 'none';
-          document.getElementById('successMessage').classList.add('active');
-        } else {
-          alert('Error: ' + (result.error || 'Failed to submit request'));
-          submitBtn.disabled = false;
-          btnText.textContent = 'Submit Request';
-        }
-      } catch (error) {
-        console.error('Submission error:', error);
-        alert('Failed to submit request. Please try again.');
-        submitBtn.disabled = false;
-        btnText.textContent = 'Submit Request';
-      }
-    });
-
-    // Close modals on overlay click
-    document.getElementById('helpModal').addEventListener('click', (e) => {
-      if (e.target.id === 'helpModal') closeHelpModal();
-    });
-
-    // Close modals on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeHelpModal();
-    });
-
-    // Contact modal functions are now in _shared.js
-    // Use window.openContactModal() and window.closeContactModal() from _shared.js
-
-    // Ensure footer CTA works after _shared.js loads
-    document.addEventListener('DOMContentLoaded', function () {
-      const footerButton = document.querySelector('footer button[onclick*="openContactModal"]');
-      if (footerButton) {
-        footerButton.setAttribute('onclick', 'window.openContactModal && window.openContactModal(); return false;');
-      }
-    });
-
-    // Adoptable pets gallery - load from API (dashboard is source of truth; Sarge removed when removed in dashboard)
-    document.addEventListener('DOMContentLoaded', function () {
-      const gallery = document.getElementById('adoptGallery');
-      const lightbox = document.getElementById('petLightbox');
-      const lightboxClose = document.getElementById('petLightboxClose');
-      const lightboxThumbs = document.getElementById('petLightboxThumbs');
-      const lightboxMain = document.getElementById('petLightboxMain');
-      var adoptPets = [];
-      var currentPet = null;
-      if (!gallery || !lightbox) return;
-
-      function petFromApi(a, index) {
-        var imgList = (a.images && a.images.length) ? a.images.map(function (i) { return i.large || i.medium || i.small; }) : (a.image_url ? [a.image_url] : []);
-        var sizeOpts = ['tall', 'wide', 'tall wide'];
-        return {
-          name: a.name,
-          age: a.age || 'Unknown age',
-          weight: a.weight ? (typeof a.weight === 'number' ? a.weight + ' lbs' : String(a.weight)) : '',
-          bio: a.description || '',
-          health: a.personality || '',
-          foster: Boolean(a.available_for_foster),
-          images: imgList.length ? imgList : ['/placeholder-dog.png'],
-          size: sizeOpts[index % 3]
-        };
-      }
-
-      function openLightbox(pet) {
-        currentPet = pet;
-        lightboxThumbs.innerHTML = pet.images.map(function (img, i) {
-          return '<img src="' + img + '" alt="' + pet.name + ' photo ' + (i + 1) + '" data-index="' + i + '"' + (i === 0 ? ' class="active"' : '') + '>';
-        }).join('');
-        lightboxMain.innerHTML = '<img src="' + pet.images[0] + '" alt="' + pet.name + '" id="petLightboxMainImg">' +
-          '<div class="pet-lightbox-name">' + pet.name + '</div>' +
-          '<div class="pet-lightbox-meta">' + pet.age + (pet.weight ? ' &bull; ' + pet.weight : '') + '</div>' +
-          '<div class="pet-lightbox-bio">' + pet.bio + '</div>' +
-          (pet.health ? '<div class="pet-lightbox-meta" style="font-style:italic;margin-bottom:1rem;">' + pet.health + '</div>' : '') +
-          '<div class="pet-lightbox-badges">' +
-          (pet.foster ? '<span style="background:rgba(59,130,246,0.9);color:#fff;">Foster</span>' : '') +
-          '<span style="background:rgba(220,38,38,0.9);color:#fff;">Adoptable</span>' +
-          '</div>' +
-          '<div class="pet-lightbox-cta"><a href="/adopt?apply=' + encodeURIComponent(pet.name) + '" class="btn btn-primary">Apply to adopt ' + pet.name + '</a></div>';
-        lightbox.classList.add('active');
-        lightbox.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeLightbox() {
-        lightbox.classList.remove('active');
-        lightbox.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        currentPet = null;
-      }
-
-      lightboxThumbs.addEventListener('click', function (e) {
-        var img = e.target.closest('img');
-        if (!img || !currentPet) return;
-        var idx = parseInt(img.dataset.index, 10);
-        lightboxThumbs.querySelectorAll('img').forEach(function (i) { i.classList.remove('active'); });
-        img.classList.add('active');
-        var mainImg = document.getElementById('petLightboxMainImg');
-        if (mainImg) mainImg.src = currentPet.images[idx];
-      });
-
-      lightboxClose.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', function (e) {
-        if (e.target === lightbox) closeLightbox();
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
-      });
-
-      function renderGallery(pets) {
-        adoptPets = pets;
-        if (!adoptPets.length) {
-          gallery.innerHTML = '<p class="section-subtitle" style="grid-column:1/-1;">No adoptable pets at the moment. <a href="/adopt">View adopt page</a> for updates.</p>';
-          return;
-        }
-        gallery.innerHTML = adoptPets.map(function (pet, i) {
-          var sizeClass = pet.size ? ' ' + pet.size : '';
-          return '<div class="adopt-gallery-item' + sizeClass + '" role="button" tabindex="0" data-index="' + i + '" aria-label="View ' + pet.name + '">' +
-            '<img src="' + pet.images[0] + '" alt="' + pet.name + '" loading="lazy">' +
-            '<span class="item-caption">' + pet.name + ' &bull; ' + pet.age + '</span></div>';
-        }).join('');
-        gallery.querySelectorAll('.adopt-gallery-item').forEach(function (el) {
-          el.addEventListener('click', function () {
-            var idx = parseInt(el.dataset.index, 10);
-            var pet = adoptPets[idx];
-            if (pet) openLightbox(pet);
-          });
-          el.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              el.click();
-            }
-          });
-        });
-      }
-
-      gallery.innerHTML = '<p class="section-subtitle" style="grid-column:1/-1;">Loading adoptable pets…</p>';
-      fetch('/api/animals').then(function (r) { return r.ok ? r.json() : []; }).then(function (list) {
-        var pets = (Array.isArray(list) ? list : []).map(function (a, i) { return petFromApi(a, i); });
-        renderGallery(pets);
-      }).catch(function () {
-        gallery.innerHTML = '<p class="section-subtitle" style="grid-column:1/-1;">Unable to load adoptable pets. <a href="/adopt">View adopt page</a>.</p>';
-      });
-    });
-
-    // Add donation type button styling
-    const style = document.createElement('style');
-    style.textContent = `
-      .donation-type-btn {
-        padding: 16px;
-        border: 2px solid rgba(20,20,30,.12);
-        border-radius: 12px;
-        background: white;
-        cursor: pointer;
-        transition: all 0.2s;
-        text-align: center;
-      }
-      .donation-type-btn:hover {
-        border-color: #dc2626;
-        background: #fef2f2;
-      }
-      .donation-type-btn.active {
-        border-color: #dc2626;
-        background: #dc2626;
-        color: white;
-      }
-    `;
-    document.head.appendChild(style);
+    let fosterStep = 0;
+    const steps = [...document.querySelectorAll('.foster-step')];
+    const dots = [...document.querySelectorAll('.step-dot')];
+    const prev = document.getElementById('fosterPrev');
+    const next = document.getElementById('fosterNext');
+    function renderFosterStep(){ steps.forEach((s,i)=>s.classList.toggle('active', i===fosterStep)); dots.forEach((d,i)=>d.classList.toggle('active', i<=fosterStep)); prev.style.visibility = fosterStep === 0 ? 'hidden' : 'visible'; next.textContent = fosterStep === steps.length - 1 ? 'Submit Application' : 'Continue'; }
+    prev?.addEventListener('click', () => { fosterStep = Math.max(0, fosterStep - 1); renderFosterStep(); });
+    next?.addEventListener('click', () => { if (fosterStep < steps.length - 1) { fosterStep += 1; renderFosterStep(); } else { next.textContent = 'Ready for D1 Submit'; } });
+    renderFosterStep();
   </script>
-  <script src="/_shared.js?v=4"></script>
-
-<script id="cpas-public-contact-v2">
-(function(){
-  function setActiveNav(){
-    const path = location.pathname === "/" ? "/" : location.pathname.replace(/\/$/,"");
-    document.querySelectorAll("nav a,.nav a,.mobile-nav a").forEach(a=>{
-      const href = a.getAttribute("href");
-      if(!href) return;
-      const normalized = href === "/" ? "/" : href.replace(/\/$/,"");
-      if(normalized === path){ a.classList.add("active"); a.setAttribute("aria-current","page"); }
-    });
-  }
-  function setParallax(){
-    const y = Math.round(window.scrollY * 0.08);
-    document.documentElement.style.setProperty("--scrollY", y + "px");
-  }
-  function modalHtml(){
-    return `<div class="cpas-contact-modal" id="cpasContactModal" aria-hidden="true">
-      <div class="cpas-contact-panel" role="dialog" aria-modal="true" aria-labelledby="cpasContactTitle">
-        <div class="cpas-contact-head">
-          <div>
-            <h2 id="cpasContactTitle">Get Connected</h2>
-            <p>Tell Companions of CPAS how we can help. This is wired for D1 logging and demo-safe email prep.</p>
-          </div>
-          <button class="cpas-close" type="button" data-cpas-close>Close</button>
-        </div>
-        <form class="cpas-contact-form" id="cpasContactForm">
-          <div class="cpas-contact-grid">
-            <input name="name" placeholder="Full name" required>
-            <input name="email" type="email" placeholder="Email address" required>
-            <input name="phone" placeholder="Phone">
-            <select name="request_type">
-              <option value="general">General Help</option>
-              <option value="adoption">Adoption</option>
-              <option value="foster">Foster / Volunteer</option>
-              <option value="donation">Donation / Fundraising</option>
-              <option value="medical_support">Medical Support</option>
-            </select>
-            <textarea class="full" name="message" placeholder="How can we help?" required></textarea>
-          </div>
-          <button class="cpas-submit" type="submit">Send Request</button>
-          <div class="cpas-form-msg" id="cpasContactMsg"></div>
-        </form>
-      </div>
-    </div>`;
-  }
-  function openModal(){
-    document.getElementById("cpasContactModal").classList.add("open");
-    document.getElementById("cpasContactModal").setAttribute("aria-hidden","false");
-  }
-  function closeModal(){
-    document.getElementById("cpasContactModal").classList.remove("open");
-    document.getElementById("cpasContactModal").setAttribute("aria-hidden","true");
-  }
-  document.addEventListener("DOMContentLoaded",()=>{
-    setActiveNav(); setParallax();
-    if(!document.getElementById("cpasContactModal")) document.body.insertAdjacentHTML("beforeend", modalHtml());
-    window.addEventListener("scroll", setParallax, {passive:true});
-    document.querySelectorAll('a[href="#contact"],button[data-contact],.hero-cta-primary,.btn-primary').forEach(el=>{
-      if((el.textContent||"").toLowerCase().includes("get connected") || el.getAttribute("href")==="#contact"){
-        el.addEventListener("click", e=>{e.preventDefault(); openModal();});
-      }
-    });
-    document.addEventListener("click",e=>{
-      if(e.target.matches("[data-cpas-close]") || e.target.id==="cpasContactModal") closeModal();
-    });
-    document.getElementById("cpasContactForm").addEventListener("submit",async e=>{
-      e.preventDefault();
-      const msg=document.getElementById("cpasContactMsg");
-      msg.textContent="Sending...";
-      const payload=Object.fromEntries(new FormData(e.currentTarget).entries());
-      const res=await fetch("/api/contact/request",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-      const data=await res.json().catch(()=>({}));
-      msg.textContent=data.message || (res.ok ? "Request saved. We will follow up soon." : "Could not send request.");
-      if(res.ok) e.currentTarget.reset();
-    });
-  });
-})();
-</script>
-
 </body>
-
 </html>
