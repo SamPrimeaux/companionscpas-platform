@@ -1,6 +1,7 @@
 import { authRoutes } from './api/auth_login.js';
 import { sessionRoutes } from './api/session_api.js';
 import { agentsamRoutes } from './api/agentsam_api.js';
+import { cmsRoutes } from './api/cms_api.js';
 import { passwordResetRoutes } from './api/password_reset.js';
 import { dashboardApiRoutes } from './api/dashboard_api.js';
 import { contactApiRoutes } from './api/contact_api.js';
