@@ -15,6 +15,7 @@ function App() {
           setLiveUser(user);
           // Patch CPAS user to match real session
           if (user) {
+            window.CPAS_USER = user;
             window.CPAS.user = {
               name:     user.full_name || user.email,
               role:     user.role ? (user.role.charAt(0).toUpperCase() + user.role.slice(1)) : "Staff",

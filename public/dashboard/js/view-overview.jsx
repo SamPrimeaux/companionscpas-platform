@@ -70,7 +70,7 @@ function OverviewView({ onNavigate }) {
       // Header
       React.createElement("div", { style:{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:24, flexWrap:"wrap", gap:12 } },
         React.createElement("div", null,
-          React.createElement("h1", { style:{ fontSize:26, fontWeight:700, color:C.text, margin:0 } }, `Welcome back, ${(window.CPAS_USER?.full_name || "Team").split(" ")[0]}`),
+          React.createElement("h1", { style:{ fontSize:26, fontWeight:700, color:C.text, margin:0 } }, `Welcome back, ${(window.CPAS?.user?.name || window.CPAS_USER?.full_name || "Team").split(" ")[0]}`),
           React.createElement("p", { style:{ fontSize:13, color:C.textSec, margin:"4px 0 0" } }, "Here's what's happening at Companions of CPAS today.")
         ),
         React.createElement("div", { style:{ display:"flex", alignItems:"center", gap:8 } },
