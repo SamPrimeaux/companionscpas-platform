@@ -1,7 +1,7 @@
 
 function AgentSamDrawer() {
   const [open, setOpen] = React.useState(true);
-  const [mode, setMode] = React.useState("ask");
+  const [mode] = React.useState("auto");
   const [prompt, setPrompt] = React.useState("");
   const [messages, setMessages] = React.useState([
     { role:"assistant", content:"Agent Sam is ready. I can help review applications, draft donor updates, improve animal bios, plan campaigns, and guide CMS edits." }
@@ -101,27 +101,19 @@ function AgentSamDrawer() {
   return React.createElement("aside", { style:{ width:330, borderLeft:`1px solid ${C.border}`, background:C.bg2, display:"flex", flexDirection:"column", minHeight:0 } },
     React.createElement("div", { style:{ padding:16, borderBottom:`1px solid ${C.border}`, display:"flex", alignItems:"center", justifyContent:"space-between", gap:10 } },
       React.createElement("div", { style:{ display:"flex", alignItems:"center", gap:10 } },
-        React.createElement("div", { style:{ width:34, height:34, borderRadius:12, background:"linear-gradient(135deg,#7c3aed,#a78bfa)", display:"grid", placeItems:"center", color:"#fff" } },
-          React.createElement(Icon, { name:"sparkles", size:17 })
+        React.createElement("button", {
+          onClick:()=>setOpen(false),
+          title:"Collapse Agent Sam",
+          style:{ width:34, height:34, borderRadius:12, border:`1px solid ${C.border}`, background:C.raised, color:C.textSec, display:"grid", placeItems:"center", cursor:"pointer" }
+        },
+          React.createElement(Icon, { name:"panel-right-close", size:17 })
         ),
         React.createElement("div", null,
           React.createElement("div", { style:{ fontWeight:800, color:C.text } }, "Agent Sam"),
           React.createElement("div", { style:{ fontSize:11, color:C.textSec } }, busy ? "Working..." : "Dashboard assistant")
         )
       ),
-      React.createElement("button", { onClick:()=>setOpen(false), style:{ background:"transparent", border:"none", color:C.textSec, cursor:"pointer" } },
-        React.createElement(Icon, { name:"panel-right-close", size:18 })
-      )
-    ),
-
-    React.createElement("div", { style:{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:6, padding:12, borderBottom:`1px solid ${C.border}` } },
-      ["ask","plan","agent","debug"].map(m =>
-        React.createElement("button", {
-          key:m,
-          onClick:()=>setMode(m),
-          style:{ padding:"8px 0", borderRadius:10, border:`1px solid ${mode===m ? C.purple : C.border}`, background:mode===m ? "rgba(124,58,237,.18)" : C.raised, color:mode===m ? C.text : C.textSec, textTransform:"capitalize", cursor:"pointer", fontSize:12, fontWeight:700 }
-        }, m)
-      )
+      null
     ),
 
     React.createElement("div", { style:{ flex:1, overflow:"auto", padding:14, display:"flex", flexDirection:"column", gap:10 } },

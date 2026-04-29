@@ -344,13 +344,17 @@ function Sidebar({ view, onNavigate, notifCount }) {
     style:{ width:220, flexShrink:0, background:C.surface, borderRight:`1px solid ${C.border}`, display:"flex", flexDirection:"column", height:"100vh", position:"sticky", top:0, overflow:"hidden" }
   },
     // Logo
-    React.createElement("div", { style:{ padding:"20px 20px 16px", borderBottom:`1px solid ${C.border}`, flexShrink:0 } },
-      React.createElement("div", { style:{ display:"flex", alignItems:"center", gap:10 } },
-        React.createElement("div", { dangerouslySetInnerHTML:{ __html:`<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="36" height="36" rx="10" fill="#2d1b5e"/><circle cx="14" cy="11" r="2.5" fill="#a78bfa"/><circle cx="22" cy="11" r="2.5" fill="#a78bfa"/><circle cx="10" cy="17" r="2" fill="#a78bfa"/><circle cx="26" cy="17" r="2" fill="#a78bfa"/><path d="M18 15c-4 0-8 3.2-8 8 0 2.4 1.6 4 3.2 4 1 0 2.4-.8 3.2-.8h3.2c.8 0 2.2.8 3.2.8 1.6 0 3.2-1.6 3.2-4 0-4.8-4-8-8-8z" fill="#7c3aed"/></svg>` } }),
-        React.createElement("div", null,
-          React.createElement("div", { style:{ fontSize:13, fontWeight:700, color:"#f0f0f5", lineHeight:1 } }, "Companions"),
-          React.createElement("div", { style:{ fontSize:10, color:"#a78bfa", letterSpacing:"0.08em", textTransform:"uppercase" } }, "of CPAS")
-        )
+    React.createElement("div", { style:{ padding:"18px 18px 14px", borderBottom:`1px solid ${C.border}`, flexShrink:0 } },
+      React.createElement("a", {
+        href:"/dashboard?view=overview",
+        title:"Companions of CPAS Dashboard",
+        style:{ display:"flex", alignItems:"center", textDecoration:"none" }
+      },
+        React.createElement("img", {
+          src:"https://companionscpas-platform.samprimeauxwork.workers.dev/logo.png",
+          alt:"Companions of CPAS",
+          style:{ width:108, height:"auto", display:"block", objectFit:"contain" }
+        })
       )
     ),
     // Nav
@@ -409,16 +413,15 @@ function TopBar({ onNavigate, notifCount }) {
         onClick: () => window.dispatchEvent(new Event("agentsam:open")),
         title: "Open Agent Sam",
         style: {
-          width:40,
-          height:40,
-          borderRadius:14,
-          border:`1px solid ${C.border}`,
-          background:"linear-gradient(135deg,#7c3aed,#a78bfa)",
-          color:"#fff",
+          width:34,
+          height:34,
+          borderRadius:12,
+          border:"none",
+          background:"transparent",
+          color:C.purpleL,
           display:"grid",
           placeItems:"center",
-          cursor:"pointer",
-          boxShadow:"0 10px 26px rgba(124,58,237,.24)"
+          cursor:"pointer"
         }
       }, React.createElement(Icon, { name:"bot", size:19 }))
     )
