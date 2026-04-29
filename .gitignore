@@ -7,3 +7,4 @@ dist
 r2-source
 companionscpas-platform.env
 cf.sh
+.local.env
