@@ -1,5 +1,6 @@
 import { authRoutes } from './api/auth_login.js';
 import { sessionRoutes } from './api/session_api.js';
+import { agentsamRoutes } from './api/agentsam_api.js';
 import { passwordResetRoutes } from './api/password_reset.js';
 import { dashboardApiRoutes } from './api/dashboard_api.js';
 import { contactApiRoutes } from './api/contact_api.js';
@@ -39,6 +40,13 @@ async function getSession(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (url.pathname.startsWith("/api/agentsam/")) {
+      const session = await getSession(request, env);
+      if (!session) return new Response(JSON.stringify({ error:"Not authenticated" }), { status:401, headers:{ "Content-Type":"application/json" } });
+      const agentResult = await agentsamRoutes(request, env, url, session);
+      if (agentResult) return agentResult;
+    }
 
     // ── API routes ────────────────────────────────────────────────────────────
     if (url.pathname.startsWith("/api/")) {

@@ -202,69 +202,7 @@ function OverviewView({ onNavigate }) {
     ),
 
     // Right panel
-    React.createElement("aside", { style:{ width:280, flexShrink:0, borderLeft:`1px solid ${C.border}`, display:"flex", flexDirection:"column", overflowY:"auto" } },
-      // Tasks
-      React.createElement("div", { style:{ padding:"20px 20px 4px", borderBottom:`1px solid ${C.border}` } },
-        React.createElement("div", { style:{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 } },
-          React.createElement("h3", { style:{ margin:0, fontSize:14, fontWeight:600, color:C.text } }, "My Tasks"),
-          React.createElement("button", { style:{ background:"none", border:"none", color:C.purpleL, fontSize:12, cursor:"pointer" } }, "View all")
-        ),
-        tasks.map(t =>
-          React.createElement("div", {
-            key:t.id,
-            onClick:()=>onNavigate(t.link),
-            style:{ display:"flex", alignItems:"center", gap:10, padding:"10px 0", borderBottom:`1px solid ${C.border}`, cursor:"pointer" }
-          },
-            React.createElement("div", { style:{ width:28, height:28, borderRadius:"50%", background: t.urgent ? C.redDim : C.raised, border:`1px solid ${t.urgent ? "#7f1d1d" : C.border}`, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0 } },
-              React.createElement(Icon, { name: t.urgent ? "warning" : "check", size:13, style:{ color: t.urgent ? "#f87171" : C.textSec } })
-            ),
-            React.createElement("div", { style:{ flex:1, minWidth:0 } },
-              React.createElement("div", { style:{ fontSize:12, fontWeight:600, color: t.urgent ? "#f87171" : C.text, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" } }, t.title),
-              React.createElement("div", { style:{ fontSize:10, color:C.textSec, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" } }, t.sub)
-            ),
-            t.time && React.createElement("span", { style:{ fontSize:10, color:C.purpleL, whiteSpace:"nowrap" } }, t.time)
-          )
-        )
-      ),
-      // Recent activity
-      React.createElement("div", { style:{ padding:"16px 20px 4px", borderBottom:`1px solid ${C.border}` } },
-        React.createElement("div", { style:{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:12 } },
-          React.createElement("h3", { style:{ margin:0, fontSize:14, fontWeight:600, color:C.text } }, "Recent Activity"),
-          React.createElement("button", { onClick:()=>onNavigate("notifications"), style:{ background:"none", border:"none", color:C.purpleL, fontSize:12, cursor:"pointer" } }, "View all")
-        ),
-        recentActivity.map(a =>
-          React.createElement("div", { key:a.id, style:{ display:"flex", alignItems:"flex-start", gap:10, padding:"8px 0", borderBottom:`1px solid ${C.border}` } },
-            React.createElement("div", { style:{ width:28, height:28, borderRadius:"50%", background:C.raised, border:`1px solid ${C.border}`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, flexShrink:0 } }, React.createElement(Icon, { name: activityIcon[a.type] || "dot", size:12 })),
-            React.createElement("div", { style:{ flex:1 } },
-              React.createElement("div", { style:{ fontSize:11, color:C.text } }, a.text),
-              React.createElement("div", { style:{ fontSize:10, color:C.textMut, marginTop:2 } }, a.time)
-            )
-          )
-        )
-      ),
-      // Quick actions
-      React.createElement("div", { style:{ padding:"16px 20px" } },
-        React.createElement("h3", { style:{ margin:"0 0 12px", fontSize:14, fontWeight:600, color:C.text } }, "Quick Actions"),
-        [
-          { label:"Add New Animal",   icon:"paw",   view:"animals" },
-          { label:"New Intake",        icon:"intake",view:"intakes" },
-          { label:"New Application",   icon:"docs",  view:"applications" },
-          { label:"Record Donation",   icon:"dollar",view:"donations" },
-        ].map(q =>
-          React.createElement("button", {
-            key:q.label, onClick:()=>onNavigate(q.view),
-            style:{ width:"100%", display:"flex", alignItems:"center", gap:10, padding:"10px 12px", borderRadius:8, border:`1px solid ${C.border}`, background:"none", color:C.text, fontSize:13, cursor:"pointer", marginBottom:6, transition:"background .12s", textAlign:"left" },
-            onMouseEnter:e=>e.currentTarget.style.background=C.raised,
-            onMouseLeave:e=>e.currentTarget.style.background="none"
-          },
-            React.createElement(Icon, { name:q.icon, size:15, style:{ color:C.purpleL } }),
-            q.label,
-            React.createElement(Icon, { name:"chevR", size:14, style:{ marginLeft:"auto", color:C.textMut } })
-          )
-        )
-      )
-    )
-  );
+    React.createElement(AgentSamDrawer, null)
 }
 
 Object.assign(window, { OverviewView });
