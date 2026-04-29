@@ -28,6 +28,10 @@ function AgentSamDrawer() {
     const openDrawer = () => setOpen(true);
     const closeDrawer = () => setOpen(false);
     const toggleDrawer = () => setOpen(v => !v);
+
+    window.__openAgentSam = openDrawer;
+    window.__closeAgentSam = closeDrawer;
+    window.__toggleAgentSam = toggleDrawer;
     window.addEventListener("agentsam:open", openDrawer);
     window.addEventListener("agentsam:close", closeDrawer);
     window.addEventListener("agentsam:toggle", toggleDrawer);
@@ -35,6 +39,9 @@ function AgentSamDrawer() {
       window.removeEventListener("agentsam:open", openDrawer);
       window.removeEventListener("agentsam:close", closeDrawer);
       window.removeEventListener("agentsam:toggle", toggleDrawer);
+      delete window.__openAgentSam;
+      delete window.__closeAgentSam;
+      delete window.__toggleAgentSam;
     };
   }, []);
 

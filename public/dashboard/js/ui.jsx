@@ -410,12 +410,15 @@ function TopBar({ onNavigate, notifCount }) {
         style:{ background:"none", border:"none", color:C.textSec, cursor:"pointer", display:"flex", padding:8, borderRadius:8 }
       }, React.createElement(Icon, { name:"mail", size:20 })),
       React.createElement("button", {
-        onClick: () => window.dispatchEvent(new Event("agentsam:toggle")),
+        onClick: () => {
+          if (typeof window.__toggleAgentSam === "function") window.__toggleAgentSam();
+          else window.dispatchEvent(new Event("agentsam:toggle"));
+        },
         title: "Toggle Agent Sam",
         className:"agentsam-launcher",
         style: {
-          width:34,
-          height:34,
+          width:38,
+          height:38,
           borderRadius:10,
           border:"none",
           background:"transparent",
@@ -425,7 +428,7 @@ function TopBar({ onNavigate, notifCount }) {
           cursor:"pointer",
           padding:0
         }
-      }, React.createElement(Icon, { name:"bot", size:18 }))
+      }, React.createElement(Icon, { name:"bot", size:22 }))
     )
   );
 }
