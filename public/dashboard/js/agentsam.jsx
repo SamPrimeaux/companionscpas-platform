@@ -29,6 +29,7 @@ function AgentSamDrawer() {
     const closeDrawer = () => setOpen(false);
     const toggleDrawer = () => setOpen(v => !v);
 
+    window.__agentSamMounted = true;
     window.__openAgentSam = openDrawer;
     window.__closeAgentSam = closeDrawer;
     window.__toggleAgentSam = toggleDrawer;
@@ -39,6 +40,7 @@ function AgentSamDrawer() {
       window.removeEventListener("agentsam:open", openDrawer);
       window.removeEventListener("agentsam:close", closeDrawer);
       window.removeEventListener("agentsam:toggle", toggleDrawer);
+      delete window.__agentSamMounted;
       delete window.__openAgentSam;
       delete window.__closeAgentSam;
       delete window.__toggleAgentSam;

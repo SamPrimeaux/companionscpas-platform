@@ -92,8 +92,7 @@ function App() {
           <circle cx="26" cy="17" r="2" fill="#a78bfa"/>
           <path d="M18 15c-4 0-8 3.2-8 8 0 2.4 1.6 4 3.2 4 1 0 2.4-.8 3.2-.8h3.2c.8 0 2.2.8 3.2.8 1.6 0 3.2-1.6 3.2-4 0-4.8-4-8-8-8z" fill="#7c3aed"/>
         </svg>` } }),
-      React.createElement("div", { style:{ color:"#8888aa", fontSize:13 } }, "Loading dashboard…"),
-    React.createElement(AgentSamDrawer, null)
+      React.createElement("div", { style:{ color:"#8888aa", fontSize:13 } }, "Loading dashboard…")
     );
   }
 
@@ -131,7 +130,8 @@ function App() {
       React.createElement("main", { id:"main-scroll", style:{ flex:1, overflowY:"auto", display:"flex", flexDirection:"column", minHeight:0 } },
         renderView()
       )
-    )
+    ),
+    React.createElement(AgentSamDrawer, null)
   );
 }
 

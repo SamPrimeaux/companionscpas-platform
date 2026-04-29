@@ -411,8 +411,11 @@ function TopBar({ onNavigate, notifCount }) {
       }, React.createElement(Icon, { name:"mail", size:20 })),
       React.createElement("button", {
         onClick: () => {
-          if (typeof window.__toggleAgentSam === "function") window.__toggleAgentSam();
-          else window.dispatchEvent(new Event("agentsam:toggle"));
+          if (typeof window.__toggleAgentSam === "function") {
+            window.__toggleAgentSam();
+          } else {
+            window.dispatchEvent(new Event("agentsam:toggle"));
+          }
         },
         title: "Toggle Agent Sam",
         className:"agentsam-launcher",
