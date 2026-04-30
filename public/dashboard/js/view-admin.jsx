@@ -1,7 +1,7 @@
 // ─── Admin Views: CMS, Reports, Settings, Notifications ──────────────────────
 
 // ─── CMS ─────────────────────────────────────────────────────────────────────
-function CMSView() {
+function AdminCMSView() {
   const [activePage, setActivePage] = useState("homepage");
   const [editing, setEditing] = useState(null);
   const pages = [
