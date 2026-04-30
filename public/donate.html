@@ -391,159 +391,42 @@ h1, h2, h3 {
 }
 </style>
 
-<style id="global-cpas-shell-v1">
-html,body{margin:0!important;padding:0!important}
-body[data-theme="light"]{background:#fbf7f1!important}
-body[data-theme="dark"]{background:#050a12!important}
 
-main{padding-top:0!important}
-main.about-page{padding-top:0!important}
-
-.site-header.scrolled{
-  background:rgba(5,10,18,.76)!important;
-  backdrop-filter:blur(18px)!important;
-  box-shadow:0 18px 70px rgba(0,0,0,.24)!important;
-}
-
-body[data-theme="light"] .site-header .desktop-links a{
-  color:#121826!important;
-  opacity:.78!important;
-}
-
-body[data-theme="light"] .site-header .desktop-links a.active{
-  color:#121826!important;
-  opacity:1!important;
-}
-
-body[data-theme="light"] .site-header .desktop-links .donate-link{
-  color:#121826!important;
-  background:rgba(255,255,255,.52)!important;
-  border:1px solid rgba(18,24,38,.14)!important;
-}
-
-.site-header.scrolled .desktop-links a,
-.site-header.scrolled .desktop-links a.active{
-  color:#f7f1ff!important;
-}
-
-.logo-wrap{
-  position:relative!important;
-  display:inline-grid!important;
-  place-items:center!important;
-  width:var(--logo-size,72px)!important;
-  height:var(--logo-size,72px)!important;
-}
-
-.logo{
-  grid-area:1 / 1!important;
-  width:var(--logo-size,72px)!important;
-  height:var(--logo-size,72px)!important;
-  object-fit:contain!important;
-  transition:opacity .22s ease!important;
-}
-
-.logo-dark{opacity:0}
-.logo-light{opacity:1}
-
-body[data-theme="light"] .logo-dark{opacity:1}
-body[data-theme="light"] .logo-light{opacity:0}
-
-.site-header.scrolled .logo-dark{opacity:0!important}
-.site-header.scrolled .logo-light{opacity:1!important}
-
-footer,.site-footer{
-  background:#f8f1e9!important;
-  color:#172033!important;
-  border-top:0!important;
-}
-
-footer p,footer a,footer span,
-.site-footer p,.site-footer a,.site-footer span{
-  color:rgba(23,32,51,.72)!important;
-}
-
-footer h3,.site-footer h3{color:#172033!important}
-
-footer .footer-logo,.site-footer .footer-logo{
-  width:150px!important;
-  height:auto!important;
-}
-
-footer .developer img,.site-footer .developer img{
-  max-width:110px!important;
-  opacity:.82!important;
-  filter:none!important;
-}
-
-.about-hero,.hero{
-  padding-top:140px!important;
-}
-</style>
-
-<style id="cpas-hard-shell-modal-v1">
-html,body{margin:0!important;padding:0!important}
-body{overflow-x:hidden!important}
-
-.cpas-donate-modal{
-  position:fixed!important;
-  inset:0!important;
-  z-index:100000!important;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.68);
-  backdrop-filter:blur(14px);
-}
-
-.cpas-donate-modal.open{display:flex}
-
-.cpas-donate-panel{
-  width:min(560px,100%);
-  max-height:min(760px,92vh);
-  overflow:auto;
-  background:linear-gradient(180deg,#fff,#f8f6fb);
-  color:#172033;
-  border-radius:28px;
-  box-shadow:0 40px 140px rgba(0,0,0,.45);
-  border:1px solid rgba(23,32,51,.12);
-}
-
-.cpas-donate-head{
-  position:sticky;
-  top:0;
-  background:linear-gradient(180deg,#fff,#fbf9ff);
-  z-index:2;
-  padding:28px 28px 18px;
-  text-align:center;
-  border-bottom:1px solid rgba(23,32,51,.08);
-}
-
-.cpas-donate-head h3{margin:0;color:#172033;font-size:28px;letter-spacing:-.04em}
-.cpas-donate-head p{margin:10px 0 0;color:#526174;font-weight:700}
-.cpas-close{
-  position:absolute;right:20px;top:18px;
-  width:42px;height:42px;border:0;border-radius:50%;
-  background:#fff;color:#172033;font-size:22px;font-weight:900;
-  box-shadow:0 12px 30px rgba(23,32,51,.14);cursor:pointer;
-}
-
-.cpas-donate-body{padding:22px 28px 28px}
-.cpas-toggle,.cpas-amounts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.cpas-amounts{grid-template-columns:repeat(4,1fr);margin:18px 0}
-.cpas-pill{
-  border:1px solid rgba(23,32,51,.12);background:#fff;color:#172033;
-  border-radius:12px;padding:15px 12px;font-weight:900;cursor:pointer;
-}
-.cpas-pill.active{background:#7c3aed;color:#fff;border-color:#7c3aed}
-.cpas-label{display:block;margin:18px 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:900;color:#172033}
-.cpas-field{width:100%;height:52px;border-radius:12px;border:1px solid rgba(23,32,51,.12);background:#fff;color:#172033;padding:0 16px;font-weight:700;box-sizing:border-box}
-.cpas-card-field{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.cpas-submit{width:100%;height:58px;margin-top:22px;border:0;border-radius:14px;background:#7c3aed;color:#fff;font-weight:950;font-size:16px;cursor:pointer;box-shadow:0 18px 44px rgba(124,58,237,.24)}
-@media(max-width:760px){
+<style id="cpas-sitewide-shell-final-v1">
+:root{--shell-max:1160px;--shell-h:112px;--shell-dark:#050a12;--shell-light:#fbf7f1;--shell-text:#172033;--shell-muted:#526174;--shell-purple:#6d5593;--shell-radius:22px}
+.site-header{position:sticky;top:0;z-index:9999;width:100%;height:var(--shell-h);background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;transition:background .25s ease,box-shadow .25s ease,backdrop-filter .25s ease}
+.site-header.scrolled,body[data-theme="dark"] .site-header{background:rgba(5,10,18,.78)!important;border-bottom:1px solid rgba(255,255,255,.08)!important;box-shadow:0 18px 60px rgba(0,0,0,.34)!important;backdrop-filter:blur(22px)!important}
+.site-header .container.nav{width:min(var(--shell-max),calc(100% - 48px))!important;height:100%!important;margin:0 auto!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:28px!important}
+.site-header .brand{display:flex!important;align-items:center!important;width:122px!important;height:58px!important;text-decoration:none!important;flex:0 0 auto!important}
+.logo-wrap{position:relative!important;display:block!important;width:122px!important;height:58px!important}
+.site-header .logo{position:absolute!important;inset:0!important;width:122px!important;height:58px!important;object-fit:contain!important;transition:opacity .2s ease!important;filter:drop-shadow(0 10px 24px rgba(0,0,0,.18))!important}
+body[data-theme="light"] .site-header:not(.scrolled) .logo-dark{opacity:1!important}
+body[data-theme="light"] .site-header:not(.scrolled) .logo-light{opacity:0!important}
+body[data-theme="dark"] .site-header .logo-light,.site-header.scrolled .logo-light{opacity:1!important}
+body[data-theme="dark"] .site-header .logo-dark,.site-header.scrolled .logo-dark{opacity:0!important}
+.site-header .desktop-links{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:32px!important;margin:0!important;padding:0!important;font-weight:800!important;font-size:15px!important;line-height:1!important;white-space:nowrap!important}
+.site-header .desktop-links a{display:inline-flex!important;align-items:center!important;justify-content:center!important;color:#172033!important;text-decoration:none!important;opacity:.74!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important;transition:.2s ease!important}
+.site-header .desktop-links a:hover,.site-header .desktop-links a.active{opacity:1!important;color:#111827!important;text-shadow:0 0 22px rgba(109,85,147,.38)!important}
+body[data-theme="dark"] .site-header .desktop-links a,.site-header.scrolled .desktop-links a{color:#e9edf7!important;opacity:.72!important}
+body[data-theme="dark"] .site-header .desktop-links a:hover,body[data-theme="dark"] .site-header .desktop-links a.active,.site-header.scrolled .desktop-links a:hover,.site-header.scrolled .desktop-links a.active{opacity:1!important;color:#fff!important;text-shadow:0 0 24px rgba(139,116,183,.75)!important}
+.site-header .desktop-links .donate-link{opacity:1!important;padding:15px 22px!important;border-radius:18px!important;color:#fff!important;background:rgba(109,85,147,.9)!important;border:1px solid rgba(109,85,147,.28)!important;box-shadow:0 16px 38px rgba(109,85,147,.18)!important}
+body[data-theme="light"] .site-header:not(.scrolled) .desktop-links .donate-link{color:#172033!important;background:rgba(255,255,255,.72)!important;border:1px solid rgba(23,32,51,.11)!important}
+.site-header .hamburger{display:none!important}
+footer{background:#fbf7f1!important;color:#172033!important;border-top:1px solid rgba(23,32,51,.08)!important;padding:70px 0!important}
+footer .container.footer-grid{width:min(var(--shell-max),calc(100% - 48px))!important;margin:0 auto!important;display:grid!important;grid-template-columns:1.2fr .75fr .9fr .75fr!important;gap:34px!important;align-items:start!important}
+.footer-logo{width:150px!important;height:auto!important;object-fit:contain!important;margin-bottom:18px!important}
+.footer-links{display:flex!important;flex-direction:column!important;gap:10px!important}
+.footer-links a,footer p,footer span{color:#4b5563!important;text-decoration:none!important;font-weight:700!important;line-height:1.7!important}
+footer h3{color:#172033!important;font-size:28px!important;line-height:1!important;margin:0 0 14px!important}
+.developer{display:flex!important;gap:14px!important;align-items:center!important;justify-content:flex-end!important}
+.developer img{width:54px!important;height:auto!important;object-fit:contain!important}
+@media(max-width:820px){
+  .site-header{height:86px}
+  .site-header .container.nav{width:min(100% - 28px, var(--shell-max))!important}
   .site-header .desktop-links{display:none!important}
-  .site-header .hamburger{display:block!important}
-  .cpas-amounts{grid-template-columns:1fr 1fr}
+  .site-header .hamburger{display:flex!important}
+  footer .container.footer-grid{grid-template-columns:1fr!important}
+  .developer{justify-content:flex-start!important}
 }
 </style>
 
@@ -551,24 +434,23 @@ body{overflow-x:hidden!important}
 
 <body data-theme="dark" data-default-theme="dark">
 <header class="site-header" id="siteHeader">
-    <div class="container nav">
-      <a class="brand" href="/admin/login">
-  <span class="logo-wrap">
-    <img class="logo logo-light" src="/logo.png" alt="Companions of CPAS">
-    <img class="logo logo-dark" src="/assets/branding/logo-dark.webp" alt="Companions of CPAS">
-  </span>
-</a>
-      <nav class="desktop-links" aria-label="Primary navigation">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/adopt">Adopt</a>
-          <a href="/services">Services</a>
-          <a class="active donate-link" href="/donate">Donate</a>
-          
-        </nav>
-      <button class="hamburger" type="button" aria-label="Open navigation" aria-controls="sideNav" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
-  </header>
+  <div class="container nav">
+    <a class="brand" href="/admin/login" aria-label="Companions of CPAS admin login">
+      <span class="logo-wrap">
+        <img class="logo logo-light" src="/logo.png" alt="Companions of CPAS">
+        <img class="logo logo-dark" src="/assets/branding/logo-dark.webp" alt="Companions of CPAS">
+      </span>
+    </a>
+    <nav class="desktop-links" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/adopt">Adopt</a>
+      <a href="/services">Services</a>
+      <a class="active donate-link" href="/donate">Donate</a>
+    </nav>
+    <button class="hamburger" type="button" aria-label="Open navigation" aria-controls="sideNav" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
 
     
 
@@ -1213,15 +1095,6 @@ Email: companionsCPAS@gmail.com</p></div><div class="developer">
   <span>Developed by</span>
   <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/87aac7e9-d6c7-4a53-df89-605e8020e000/avatar" alt="InnerAnimalMedia">
 </div></div></footer>
-<script id="global-cpas-shell-js">
-(() => {
-  ;
-
-  sync();
-  window.addEventListener("scroll", sync, { passive: true });
-})();
-</script>
-
 <div class="cpas-donate-modal" id="cpasDonateModal" aria-hidden="true">
   <div class="cpas-donate-panel" role="dialog" aria-modal="true" aria-label="Donation form">
     <div class="cpas-donate-head">
@@ -1284,6 +1157,24 @@ Email: companionsCPAS@gmail.com</p></div><div class="developer">
       btn.classList.add("active");
     });
   });
+})();
+</script>
+
+
+<script id="cpas-sitewide-shell-final-js">
+(() => {
+  const body = document.body;
+  const header = document.getElementById("siteHeader") || document.querySelector(".site-header");
+  if (!header) return;
+  const defaultTheme = body.getAttribute("data-default-theme") || body.getAttribute("data-theme") || "light";
+  body.setAttribute("data-default-theme", defaultTheme);
+  function syncShell(){
+    const scrolled = window.scrollY > 24;
+    header.classList.toggle("scrolled", scrolled);
+    body.setAttribute("data-theme", scrolled ? "dark" : defaultTheme);
+  }
+  syncShell();
+  window.addEventListener("scroll", syncShell, {passive:true});
 })();
 </script>
 
