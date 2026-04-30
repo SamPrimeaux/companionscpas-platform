@@ -18,7 +18,15 @@ function json(data, status = 200) {
 
 async function asset(env, request, path) {
   const url = new URL(request.url);
-  return env.ASSETS.fetch(new Request(url.origin + path, request));
+  
+    // CMS + dashboard API routes must run before static/R2 HTML fallback.
+    const __cmsRouteResponse = await cmsRoutes(request, env, url);
+    if (__cmsRouteResponse) return __cmsRouteResponse;
+
+    const __dashboardRouteResponse = await dashboardApiRoutes(request, env, url);
+    if (__dashboardRouteResponse) return __dashboardRouteResponse;
+
+return env.ASSETS.fetch(new Request(url.origin + path, request));
 }
 
 // ── Validate session cookie → returns user row or null ────────────────────────
