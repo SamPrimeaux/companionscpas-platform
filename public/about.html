@@ -383,6 +383,199 @@ body[data-theme="light"] .logo-light {
 }
 </style>
 
+
+<style id="about-demo-polish-final">
+/* invisible header on light hero */
+body[data-theme="light"] .site-header {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  border-bottom: 0 !important;
+}
+
+body[data-theme="light"] .site-header .desktop-links a {
+  color: #121826 !important;
+  opacity: .78 !important;
+}
+
+body[data-theme="light"] .site-header .desktop-links a.active {
+  color: #121826 !important;
+  opacity: 1 !important;
+}
+
+body[data-theme="light"] .site-header .desktop-links .donate-link {
+  color: #121826 !important;
+  background: rgba(255,255,255,.48) !important;
+  border: 1px solid rgba(18,24,38,.14) !important;
+  box-shadow: 0 18px 50px rgba(18,24,38,.08) !important;
+}
+
+.site-header.scrolled {
+  background: rgba(5,10,18,.74) !important;
+  backdrop-filter: blur(18px) !important;
+  box-shadow: 0 18px 70px rgba(0,0,0,.22) !important;
+}
+
+/* remove carded hero feel */
+.about-hero {
+  padding-top: 120px !important;
+}
+
+.about-hero-grid {
+  align-items: center !important;
+}
+
+.about-team {
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  overflow: visible !important;
+}
+
+.about-team img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  border-radius: 28px !important;
+  display: block !important;
+}
+
+.about-hero-copy {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  padding: clamp(22px, 4vw, 54px) !important;
+}
+
+.about-hero-copy h1,
+.about-hero-copy p {
+  color: #111827 !important;
+}
+
+/* fix “why companions exists” text visibility and transition */
+.need-scene {
+  padding-top: 72px !important;
+  background:
+    linear-gradient(180deg,#fbf7f1 0%,#fbf7f1 24%,#07111d 24%,#050a12 100%) !important;
+}
+
+.need-scene:before {
+  display: none !important;
+}
+
+.need-copy {
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 34px 0 44px !important;
+}
+
+.need-copy .eyebrow,
+.need-copy h2,
+.need-copy > p {
+  color: #111827 !important;
+}
+
+.need-copy h2 {
+  max-width: 920px !important;
+}
+
+.path-list {
+  margin-top: 42px !important;
+}
+
+.path-item {
+  border-top-color: rgba(255,255,255,.16) !important;
+}
+
+.path-item h3,
+.path-item p {
+  color: #f7f1ff !important;
+}
+
+.need-photo {
+  margin-top: 80px !important;
+}
+
+/* fundraising section */
+.campaign-story {
+  margin-top: -1px !important;
+  padding-top: 90px !important;
+}
+
+.campaign-intro h2,
+.campaign-intro p {
+  color: #f7f1ff !important;
+}
+
+.campaign-card {
+  border-radius: 30px !important;
+}
+
+.campaign-card img {
+  height: 390px !important;
+  object-fit: cover !important;
+}
+
+/* testimonials on dark bg need light heading */
+.testimonials {
+  background: #050a12 !important;
+  color: #f7f1ff !important;
+}
+
+.testimonials h2 {
+  color: #f7f1ff !important;
+}
+
+.testimonials .eyebrow {
+  color: #ff4d5e !important;
+}
+
+/* stronger modal demo */
+.demo-modal.open {
+  display: flex !important;
+}
+
+.demo-panel {
+  border: 1px solid rgba(23,32,51,.12) !important;
+}
+
+.demo-full,
+.demo-grid button {
+  cursor: pointer !important;
+}
+
+/* light footer + org data belongs there */
+.connect-section {
+  padding-bottom: 0 !important;
+  background: #fbf7f1 !important;
+}
+
+.site-footer,
+footer {
+  background: #f8f1e9 !important;
+  color: #172033 !important;
+  border-top: 0 !important;
+}
+
+.site-footer .footer-grid,
+footer .footer-grid {
+  padding-top: 64px !important;
+}
+
+footer:before {
+  display: none !important;
+}
+
+@media(max-width:900px){
+  .about-hero { padding-top: 92px !important; }
+  .need-scene {
+    background: linear-gradient(180deg,#fbf7f1 0%,#fbf7f1 38%,#07111d 38%,#050a12 100%) !important;
+  }
+}
+</style>
+
 </head>
 
 <body data-theme="light">
@@ -399,7 +592,7 @@ body[data-theme="light"] .logo-light {
           <a class="active" href="/about">About</a>
           <a href="/adopt">Adopt</a>
           <a href="/services">Services</a>
-          <a href="/donate" class="donate-link">Donate</a>
+          <a href="javascript:void(0)" data-open-demo-donate class="donate-link">Donate</a>
           
         </nav>
       <button class="hamburger" type="button" aria-label="Open navigation" aria-controls="sideNav" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -420,7 +613,7 @@ body[data-theme="light"] .logo-light {
           <div class="about-stat"><b>100%</b><span>volunteer-based</span></div>
         </div>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="/donate" data-open-donation="true">Support the Mission</a>
+          <a class="btn btn-primary" href="javascript:void(0)" data-open-demo-donate>Support the Mission</a>
           <a class="btn btn-secondary" href="/adopt">Meet Adoptable Dogs</a>
         </div>
       </div>
@@ -493,7 +686,7 @@ body[data-theme="light"] .logo-light {
           <h3>Built for one-time gifts, monthly support, contact requests, and newsletter growth.</h3>
           <p>This demo is structured so Stripe, Resend, donor records, campaign tracking, and newsletter subscriptions can be fully wired after project approval.</p>
           <div class="cta-actions">
-            <a class="btn btn-primary" href="/donate" data-open-donation="true">One-Time Donation</a>
+            <a class="btn btn-primary" href="javascript:void(0)" data-open-demo-donate>One-Time Donation</a>
             <a class="btn btn-secondary" href="/donate?recurring=true" data-open-donation="monthly">Monthly Giving</a>
             <a class="btn btn-secondary" href="mailto:companionsCPAS@gmail.com" data-open-contact="true">Contact CPAS</a>
           </div>
@@ -515,10 +708,16 @@ body[data-theme="light"] .logo-light {
           <a href="/about">About</a>
           <a href="/adopt">Adopt</a>
           <a href="/services">Services</a>
-          <a href="/donate">Donate</a>
+          <a href="javascript:void(0)" data-open-demo-donate>Donate</a>
           
           <a href="/admin/dashboard">Admin Dashboard</a>
-        </nav><div><h3>Nonprofit Info</h3><p>501(c)(3) Tax-Exempt<br/>EIN: 88-4156327<br/>Shreveport, LA 71106</p></div><div class="developer">
+        </nav><div class="footer-org-data"><h3>Organization Data</h3>
+<p><strong>Companions of CPAS</strong><br/>
+Tax status: 501(c)(3)<br/>
+EIN: 88-4156327<br/>
+Parish served: Caddo<br/>
+Operating budget: Under $100,000<br/>
+Email: companionsCPAS@gmail.com</p></div><div class="developer">
   <span>Developed by</span>
   <img src="https://imagedelivery.net/g7wf09fCONpnidkRnR_5vw/87aac7e9-d6c7-4a53-df89-605e8020e000/avatar" alt="InnerAnimalMedia">
 </div></div></footer>
